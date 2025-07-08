@@ -1,4 +1,4 @@
-import React from 'react';
+import type React from 'react';
 import ReactDOM from 'react-dom';
 import { BulkImporter } from './components';
 import 'semantic-ui-css/semantic.min.css';

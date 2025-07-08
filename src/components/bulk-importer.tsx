@@ -1,4 +1,4 @@
-import React from 'react';
+import type React from 'react';
 import { OverridableContext } from 'react-overridable';
 import {
   EmptyResults,

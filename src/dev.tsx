@@ -7,7 +7,7 @@ const App: React.FC = () => {
   return (
     <div style={{ padding: '20px' }}>
       <h1>Development Environment</h1>
-      <BulkImporter onImport={(data) => console.log('Import data:', data)} />
+      <BulkImporter />
     </div>
   );
 };

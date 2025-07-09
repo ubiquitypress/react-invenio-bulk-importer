@@ -6,13 +6,11 @@ import {
   ItemHeader,
   ItemMeta
 } from 'semantic-ui-react';
+import { styles } from './result-item.styles';
 
 export const ResultItem = ({ result, index }) => {
   return (
-    <Item
-      key={index}
-      style={{ display: 'flex', flexDirection: 'column', marginBottom: '1em' }}
-    >
+    <Item key={index} className={styles.container}>
       <ItemHeader as='a' href={`/works/${result.id}`}>
         {result.metadata?.title || result.title || 'No title'}
       </ItemHeader>

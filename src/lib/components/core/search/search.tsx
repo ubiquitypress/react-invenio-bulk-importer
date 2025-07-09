@@ -1,5 +1,6 @@
 import React from 'react';
 import { OverridableContext } from 'react-overridable';
+// @ts-ignore - react-searchkit doesn't have types
 import {
   EmptyResults,
   InvenioSearchApi,
@@ -7,32 +8,69 @@ import {
   ReactSearchKit,
   ResultsList,
   ResultsLoader,
-  SearchBar
+  SearchBar,
+  Count,
+  Sort,
+  ActiveFilters
 } from 'react-searchkit';
 import { ResultItem } from './result-item';
 import type { SearchProps } from './search.types';
+import { defaultSearchConfig } from './search.config';
 
-const appName = 'invenio-bulk-importer-react';
+export const Search: React.FC<SearchProps> = ({
+  config: userConfig = {},
+  overriddenComponents: userOverrides = {}
+}) => {
+  // Deep merge configs
+  const config = {
+    ...defaultSearchConfig,
+    ...userConfig,
+    initialQueryState: {
+      ...defaultSearchConfig.initialQueryState,
+      ...userConfig.initialQueryState
+    },
+    layoutOptions: {
+      ...defaultSearchConfig.layoutOptions,
+      ...userConfig.layoutOptions
+    },
+    paginationOptions: {
+      ...defaultSearchConfig.paginationOptions,
+      ...userConfig.paginationOptions,
+      resultsPerPage:
+        userConfig.paginationOptions?.resultsPerPage ||
+        defaultSearchConfig.paginationOptions.resultsPerPage
+    },
+    searchApi: {
+      ...defaultSearchConfig.searchApi,
+      ...userConfig.searchApi,
+      axios: {
+        ...defaultSearchConfig.searchApi.axios,
+        ...userConfig.searchApi?.axios,
+        headers: {
+          ...defaultSearchConfig.searchApi.axios.headers,
+          ...userConfig.searchApi?.axios?.headers
+        }
+      },
+      invenio: {
+        ...defaultSearchConfig.searchApi.invenio,
+        ...userConfig.searchApi?.invenio
+      }
+    }
+  };
 
-const searchApi = new InvenioSearchApi({
-  axios: {
-    url: 'https://inveniordm.web.cern.ch/api/records',
-    headers: { Accept: 'application/vnd.inveniordm.v1+json' }
-  }
-});
+  const searchApi = new InvenioSearchApi(config.searchApi);
 
-const overriddenComponents = {
-  [`${appName}.ResultsList.item`]: ResultItem
-};
+  const overriddenComponents = {
+    [`${config.appId}.ResultsList.item`]: ResultItem,
+    ...userOverrides
+  };
 
-export const Search: React.FC<SearchProps> = () => {
   return (
     <OverridableContext.Provider value={overriddenComponents}>
       <ReactSearchKit
-        appName={appName}
-        urlHandlerApi={{ enabled: false }}
+        appName={config.appId}
         searchApi={searchApi}
-        initialQueryState={{ size: 5, page: 1 }}
+        initialQueryState={config.initialQueryState}
       >
         <div>
           <SearchBar
@@ -43,9 +81,12 @@ export const Search: React.FC<SearchProps> = () => {
               className: 'search',
               'aria-label': 'Search'
             }}
-            placeholder={'Search records...'}
+            placeholder='Search records...'
           />
           <ResultsLoader>
+            <Count label={(cmp: string) => <p>{cmp} results found</p>} />
+            <Sort values={config.sortOptions} />
+            <ActiveFilters />
             <EmptyResults />
             <ResultsList />
           </ResultsLoader>

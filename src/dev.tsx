@@ -1,12 +1,12 @@
-import type React from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
-import { BulkImporter } from './components';
 import 'semantic-ui-css/semantic.min.css';
+import { Header } from 'semantic-ui-react';
+import { BulkImporter } from './lib/components/core';
 
 const App: React.FC = () => {
   return (
-    <div style={{ padding: '20px' }}>
-      <h1>Development Environment</h1>
+    <div>
       <BulkImporter />
     </div>
   );

@@ -147,5 +147,13 @@
       "attributePosition": "auto",
       "bracketSpacing": true
     }
-  }
+  },
+  "overrides": [
+    {
+      "includes": ["**/*.ts", "**/*.tsx"],
+      "javascript": {
+        "jsxRuntime": "reactClassic"
+      }
+    }
+  ]
 }

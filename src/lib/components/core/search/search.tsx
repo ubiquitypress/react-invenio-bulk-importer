@@ -11,11 +11,13 @@ import {
   ResultsList,
   ResultsLoader,
   SearchBar,
+  ResultsPerPage,
   Sort
 } from 'react-searchkit';
 import { ResultItem } from './result-item';
 import { defaultSearchConfig } from './search.config';
 import type { SearchProps } from './search.types';
+import { Grid } from 'semantic-ui-react';
 
 export const Search: React.FC<SearchProps> = ({
   config: userConfig = {},
@@ -83,16 +85,38 @@ export const Search: React.FC<SearchProps> = ({
             }}
             placeholder='Search records...'
           />
+
+          <Grid>
+            <Grid.Row verticalAlign='middle'>
+              <Grid.Column width={8}>
+                <Count label={(cmp: string) => <p>{cmp} result(s) found</p>} />
+              </Grid.Column>
+              <Grid.Column width={8} textAlign='right'>
+                <span>Sort by: </span>
+                <Sort values={config.sortOptions} />
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>
+
           <ResultsLoader>
-            <Count label={(cmp: string) => <p>{cmp} results found</p>} />
-            <Sort values={config.sortOptions} />
             <ActiveFilters />
             <EmptyResults />
             <ResultsList />
           </ResultsLoader>
-          <div>
-            <Pagination />
-          </div>
+
+          <Grid>
+            <Grid.Row verticalAlign='middle'>
+              <Grid.Column width={8} textAlign='left'>
+                <Pagination />
+              </Grid.Column>
+              <Grid.Column width={8} textAlign='right'>
+                <ResultsPerPage
+                  values={config.paginationOptions.resultsPerPage}
+                  label={(cmp: string) => <p>{cmp} results per page</p>}
+                />
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>
         </div>
       </ReactSearchKit>
     </OverridableContext.Provider>

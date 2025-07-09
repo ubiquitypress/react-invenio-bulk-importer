@@ -7,18 +7,22 @@ import {
   ItemMeta
 } from 'semantic-ui-react';
 import { styles } from './result-item.styles';
+import type { InvenioTask } from '@/lib/types';
 
-export const ResultItem = ({ result, index }) => {
+export const ResultItem = ({
+  result,
+  index
+}: {
+  result: InvenioTask;
+  index: number;
+}) => {
   return (
     <Item key={index} className={styles.container}>
       <ItemHeader as='a' href={`/works/${result.id}`}>
-        {result.metadata?.title || result.title || 'No title'}
+        {result.title || result.title || 'No title'}
       </ItemHeader>
-      <ItemMeta as='a'>
-        {result.metadata?.creators?.map(c => c.person_or_org.name).join(', ')}
-      </ItemMeta>
       <ItemDescription>
-        {result.metadata?.description || result.description || 'No description'}
+        {result.description || result.description || 'No description'}
       </ItemDescription>
       <ItemExtra>Created: {result.created}</ItemExtra>
     </Item>

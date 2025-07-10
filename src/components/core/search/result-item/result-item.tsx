@@ -1,12 +1,6 @@
 import type { InvenioTask } from '@/types';
 import React from 'react';
-import {
-  Item,
-  ItemDescription,
-  ItemExtra,
-  ItemHeader
-} from 'semantic-ui-react';
-import { styles } from './result-item.styles';
+import { Button, Dropdown, Icon, TableCell, TableRow } from 'semantic-ui-react';
 
 export const ResultItem = ({
   result,
@@ -16,14 +10,42 @@ export const ResultItem = ({
   index: number;
 }) => {
   return (
-    <Item key={index} className={styles.container}>
-      <ItemHeader as='a' href={`/works/${result.id}`}>
-        {result.title || result.title || 'No title'}
-      </ItemHeader>
-      <ItemDescription>
-        {result.description || result.description || 'No description'}
-      </ItemDescription>
-      <ItemExtra>Created: {result.created}</ItemExtra>
-    </Item>
+    <TableRow key={index}>
+      <TableCell>{result.title || 'No title'}</TableCell>
+      <TableCell>{result.created}</TableCell>
+      <TableCell>{result.status}</TableCell>
+      <TableCell>999</TableCell>
+      <TableCell>999</TableCell>
+      <TableCell>{result.serializer}</TableCell>
+      <TableCell>{result.mode}</TableCell>
+      <TableCell style={{ width: '220px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <Dropdown
+            text='Select Action'
+            floating
+            labeled
+            className='icon'
+            options={[
+              {
+                key: 'download',
+                text: 'Download',
+                value: 'download',
+                disabled: true
+              },
+              {
+                key: 'delete',
+                text: 'Delete',
+                value: 'delete',
+                disabled: true
+              }
+            ]}
+          />
+          <Button basic size='tiny'>
+            <Icon name='eye' />
+            View
+          </Button>
+        </div>
+      </TableCell>
+    </TableRow>
   );
 };

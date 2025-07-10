@@ -9,12 +9,12 @@ import {
 } from 'react-searchkit';
 import { SearchProvider } from './provider';
 import { ResultItem } from './result-item';
+import { ResultsTable } from './results-table';
 import { defaultSearchConfig } from './search.config';
 import type { SearchProps } from './search.types';
 import { SearchBarRow } from './search-bar-row';
 import { SearchFacets } from './search-facets';
 import { SearchFooter } from './search-footer';
-import { SearchToolbar } from './search-toolbar';
 
 export const Search: React.FC<SearchProps> = ({
   config: userConfig = {},
@@ -61,6 +61,7 @@ export const Search: React.FC<SearchProps> = ({
 
   const overriddenComponents = {
     [`${config.appId}.ResultsList.item`]: ResultItem,
+    [`${config.appId}.ResultsList.container`]: ResultsTable,
     [`${config.appId}.SearchFacets`]: SearchFacets,
     ...userOverrides
   };
@@ -75,7 +76,6 @@ export const Search: React.FC<SearchProps> = ({
         <SearchProvider config={config}>
           <SearchBarRow />
           <ResultsLoader>
-            <SearchToolbar />
             <EmptyResults />
             <ResultsList />
           </ResultsLoader>

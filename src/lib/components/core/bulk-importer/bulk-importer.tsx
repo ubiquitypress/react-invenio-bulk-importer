@@ -8,7 +8,7 @@ export const BulkImporter: React.FC<BulkImporterProps> = () => {
   return (
     <div className={styles.bulkImporter}>
       <Header as='h1'>Bulk Importer</Header>
-      <p>Invenio-compatible bulk import component</p>
+      <p>A more modern approach for an invenio compatible bulk importer.</p>
       <Search />
     </div>
   );

@@ -1,13 +1,12 @@
+import type { InvenioTask } from '@/lib/types';
 import React from 'react';
 import {
   Item,
   ItemDescription,
   ItemExtra,
-  ItemHeader,
-  ItemMeta
+  ItemHeader
 } from 'semantic-ui-react';
 import { styles } from './result-item.styles';
-import type { InvenioTask } from '@/lib/types';
 
 export const ResultItem = ({
   result,

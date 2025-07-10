@@ -1,23 +1,20 @@
 import React from 'react';
 import { OverridableContext } from 'react-overridable';
-// @ts-ignore - react-searchkit doesn't have types
 import {
-  ActiveFilters,
-  Count,
   EmptyResults,
   InvenioSearchApi,
-  Pagination,
   ReactSearchKit,
   ResultsList,
-  ResultsLoader,
-  SearchBar,
-  ResultsPerPage,
-  Sort
+  ResultsLoader
 } from 'react-searchkit';
+import { SearchProvider } from './provider';
 import { ResultItem } from './result-item';
 import { defaultSearchConfig } from './search.config';
 import type { SearchProps } from './search.types';
-import { Grid } from 'semantic-ui-react';
+import { SearchBarRow } from './search-bar-row';
+import { SearchFacets } from './search-facets';
+import { SearchFooter } from './search-footer';
+import { SearchToolbar } from './search-toolbar';
 
 export const Search: React.FC<SearchProps> = ({
   config: userConfig = {},
@@ -64,6 +61,7 @@ export const Search: React.FC<SearchProps> = ({
 
   const overriddenComponents = {
     [`${config.appId}.ResultsList.item`]: ResultItem,
+    [`${config.appId}.SearchFacets`]: SearchFacets,
     ...userOverrides
   };
 
@@ -74,50 +72,16 @@ export const Search: React.FC<SearchProps> = ({
         searchApi={searchApi}
         initialQueryState={config.initialQueryState}
       >
-        <div>
-          <SearchBar
-            autofocus
-            actionProps={{
-              icon: 'search',
-              content: 'Search',
-              className: 'search',
-              'aria-label': 'Search'
-            }}
-            placeholder='Search records...'
-          />
-
-          <Grid>
-            <Grid.Row verticalAlign='middle'>
-              <Grid.Column width={8}>
-                <Count label={(cmp: string) => <p>{cmp} result(s) found</p>} />
-              </Grid.Column>
-              <Grid.Column width={8} textAlign='right'>
-                <span>Sort by: </span>
-                <Sort values={config.sortOptions} />
-              </Grid.Column>
-            </Grid.Row>
-          </Grid>
-
+        <SearchProvider config={config}>
+          <SearchBarRow />
           <ResultsLoader>
-            <ActiveFilters />
+            <SearchToolbar />
             <EmptyResults />
             <ResultsList />
           </ResultsLoader>
 
-          <Grid>
-            <Grid.Row verticalAlign='middle'>
-              <Grid.Column width={8} textAlign='left'>
-                <Pagination />
-              </Grid.Column>
-              <Grid.Column width={8} textAlign='right'>
-                <ResultsPerPage
-                  values={config.paginationOptions.resultsPerPage}
-                  label={(cmp: string) => <p>{cmp} results per page</p>}
-                />
-              </Grid.Column>
-            </Grid.Row>
-          </Grid>
-        </div>
+          <SearchFooter />
+        </SearchProvider>
       </ReactSearchKit>
     </OverridableContext.Provider>
   );

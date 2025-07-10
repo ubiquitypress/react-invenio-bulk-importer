@@ -7,14 +7,7 @@ import dts from 'vite-plugin-dts';
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
 
 export default defineConfig({
-  plugins: [
-    react({
-      jsxRuntime: 'classic'
-    }),
-    dts({
-      insertTypesEntry: true
-    })
-  ],
+  plugins: [react({ jsxRuntime: 'classic' }), dts({ insertTypesEntry: true })],
   resolve: {
     alias: {
       '@': resolve(__dirname, '.'),
@@ -34,12 +27,10 @@ export default defineConfig({
         globals: {
           react: 'React',
           'react-dom': 'ReactDOM'
-        },
-        // Extract CSS to separate file
-        assetFileNames: '[name][extname]'
+        }
       }
     },
-    // Important: Don't externalize CSS
+    // This will inline CSS into your JS bundle
     cssCodeSplit: false
   }
 });

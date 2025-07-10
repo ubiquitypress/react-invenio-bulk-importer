@@ -1,10 +1,10 @@
 export interface SearchApiConfig {
   axios: {
-    headers: Record<string, string>;
-    url: string;
-    withCredentials: boolean;
+    headers?: Record<string, string>;
+    url?: string;
+    withCredentials?: boolean;
   };
-  invenio: {
+  invenio?: {
     requestSerializer: string;
   };
 }

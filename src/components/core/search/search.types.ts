@@ -1,8 +1,4 @@
-import type {
-  BaseProps,
-  OverridableComponents,
-  SearchConfig
-} from '@/lib/types';
+import type { BaseProps, OverridableComponents, SearchConfig } from '@/types';
 
 export interface SearchProps extends BaseProps {
   config?: Partial<SearchConfig>;

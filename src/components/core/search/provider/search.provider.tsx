@@ -1,4 +1,4 @@
-import type { SearchConfig } from '@/lib/types';
+import type { SearchConfig } from '@/types';
 import React from 'react';
 
 export interface SearchContextProps {

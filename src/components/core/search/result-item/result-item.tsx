@@ -1,4 +1,4 @@
-import type { InvenioTask } from '@/lib/types';
+import type { InvenioTask } from '@/types';
 import React from 'react';
 import {
   Item,

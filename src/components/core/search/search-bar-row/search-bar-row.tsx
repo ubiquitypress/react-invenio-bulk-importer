@@ -27,7 +27,7 @@ export const SearchBarRow = () => {
           placeholder='Search records...'
           aria-describedby='search-instructions'
         />
-        <span id='search-instructions' className={styles.visuallyHidden}>
+        <span className={styles.visuallyHidden}>
           Type keywords to search through records. Press Enter to submit.
         </span>
       </div>

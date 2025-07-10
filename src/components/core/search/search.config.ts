@@ -1,4 +1,4 @@
-import type { SearchConfig } from '@/lib/types';
+import type { SearchConfig } from '@/types';
 
 export const defaultSearchConfig: SearchConfig = {
   aggs: [],

@@ -4,7 +4,6 @@ import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 import dts from 'vite-plugin-dts';
 
-// ES module equivalent of __dirname
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
 
 export default defineConfig({
@@ -35,8 +34,12 @@ export default defineConfig({
         globals: {
           react: 'React',
           'react-dom': 'ReactDOM'
-        }
+        },
+        // Extract CSS to separate file
+        assetFileNames: '[name][extname]'
       }
-    }
+    },
+    // Important: Don't externalize CSS
+    cssCodeSplit: false
   }
 });

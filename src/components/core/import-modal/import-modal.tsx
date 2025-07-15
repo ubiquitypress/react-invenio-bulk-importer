@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import {
   Button,
-  Header,
   Icon,
   Modal,
   ModalActions,
   ModalContent,
-  ModalDescription,
   ModalHeader
 } from 'semantic-ui-react';
+import { ImportContent } from './import-content';
 
 export const ImportModal = () => {
   const [open, setOpen] = useState(false);
@@ -25,36 +24,12 @@ export const ImportModal = () => {
         </Button>
       }
     >
-      <ModalHeader>
-        <Icon name='file alternate' />
-        New Import
-      </ModalHeader>
+      <ModalHeader>New Import Task</ModalHeader>
       <ModalContent>
-        <ModalDescription>
-          <Header>
-            <p>Upload a file to import records into the system.</p>
-            <p>
-              Supported formats include CSV, JSON, and XML. Ensure your file
-              adheres to the required schema for successful import.
-            </p>
-            <p>
-              After uploading, you can review and confirm the import details
-              before finalizing the process.
-            </p>
-          </Header>
-        </ModalDescription>
+        <ImportContent />
       </ModalContent>
       <ModalActions>
         <Button onClick={() => setOpen(false)}>Close</Button>
-        <Button
-          labelPosition='left'
-          icon
-          onClick={() => setOpen(false)}
-          positive
-        >
-          <Icon name='checkmark' />
-          Submit
-        </Button>
       </ModalActions>
     </Modal>
   );

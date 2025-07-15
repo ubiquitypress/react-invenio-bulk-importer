@@ -1298,6 +1298,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/js-cookie@npm:^2":
+  version: 2.2.7
+  resolution: "@types/js-cookie@npm:2.2.7"
+  checksum: 10c0/29196c6829982b5efa79117122a7d62cf4bc2f6397ce8eac1539319ff5dce3b44b2d86f2ac064f2ed3488fb24439358f24af6914fde5c5c4bab9a85728a13a6f
+  languageName: node
+  linkType: hard
+
 "@types/node@npm:^17.0.36":
   version: 17.0.45
   resolution: "@types/node@npm:17.0.45"
@@ -2614,16 +2621,18 @@ __metadata:
     "@babel/runtime": "npm:^7.9.0"
     "@biomejs/biome": "npm:2.1.1"
     "@pandacss/dev": "npm:^0.54.0"
+    "@types/js-cookie": "npm:^2"
     "@types/node": "npm:^24.0.11"
     "@types/react": "npm:^16.14.34"
     "@types/react-dom": "npm:^16.9.17"
     "@vitejs/plugin-react": "npm:^4.0.0"
     axios: "npm:^1.7.7"
+    js-cookie: "npm:2.2.1"
     lodash: "npm:^4.17.0"
     qs: "npm:^6.8.0"
     react: "npm:^16.13.0"
     react-dom: "npm:^16.13.0"
-    react-invenio-forms: "npm:^3.5.0"
+    react-invenio-forms: "npm:^4.0.0"
     react-overridable: "npm:^0.0.3"
     react-redux: "npm:^7.2.0"
     react-searchkit: "npm:^3.0.0"
@@ -2752,6 +2761,13 @@ __metadata:
   version: 3.7.1
   resolution: "jquery@npm:3.7.1"
   checksum: 10c0/808cfbfb758438560224bf26e17fcd5afc7419170230c810dd11f5c1792e2263e2970cca8d659eb84fcd9acc301edb6d310096e450277d54be4f57071b0c82d9
+  languageName: node
+  linkType: hard
+
+"js-cookie@npm:2.2.1":
+  version: 2.2.1
+  resolution: "js-cookie@npm:2.2.1"
+  checksum: 10c0/ee67fc0f8495d0800b851910b5eb5bf49d3033adff6493d55b5c097ca6da46f7fe666b10e2ecb13cfcaf5b88d71c205ce00a7e646de791689bfd053bbb36a376
   languageName: node
   linkType: hard
 
@@ -3680,9 +3696,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-invenio-forms@npm:^3.5.0":
-  version: 3.5.3
-  resolution: "react-invenio-forms@npm:3.5.3"
+"react-invenio-forms@npm:^4.0.0":
+  version: 4.10.0
+  resolution: "react-invenio-forms@npm:4.10.0"
   peerDependencies:
     "@babel/runtime": ^7.26.10
     "@semantic-ui-react/css-patch": ^1.0.0
@@ -3694,11 +3710,12 @@ __metadata:
     query-string: ^7.0.0
     react: ^16.13.0
     react-dom: ^16.13.0
+    react-overridable: ^0.0.3
     semantic-ui-css: ^2.4.0
     semantic-ui-react: ^2.1.0
     tinymce: ^6.7.2
     yup: ^0.32.11
-  checksum: 10c0/d543de1d2096f3406d88741451020b4f7023b4ab425c0cd3d8dec2349bee59af13761d6fe38d040bae4fa263ae1304ddc64055308d14d2f4ddcd295665f10836
+  checksum: 10c0/5f0859ce50712876cd94a963e559f29e58823449147e89b012a59cb65fbdffca0d62fdf296ce78be6dc281a464d8d39d02a7fcdfbd1bf58d6945e2c185bae552
   languageName: node
   linkType: hard
 

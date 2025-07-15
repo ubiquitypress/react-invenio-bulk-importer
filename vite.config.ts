@@ -20,10 +20,10 @@ export default defineConfig({
   },
   plugins: [react({ jsxRuntime: 'classic' }), dts({ insertTypesEntry: true })],
   resolve: {
-    alias: {
-      '@': resolve(__dirname, '.'),
-      '@/styled-system': resolve(__dirname, 'styled-system')
-    }
+    alias: [
+      { find: '@/styled-system', replacement: resolve(__dirname, 'styled-system') },
+      { find: '@', replacement: resolve(__dirname, 'src') }
+    ]
   },
   build: {
     lib: {

@@ -1,3 +1,4 @@
+import type { SearchConfig } from '@/types';
 import React from 'react';
 import { OverridableContext } from 'react-overridable';
 import {
@@ -21,7 +22,7 @@ export const Search: React.FC<SearchProps> = ({
   overriddenComponents: userOverrides = {}
 }) => {
   // Deep merge configs
-  const config = {
+  const config: SearchConfig = {
     ...defaultSearchConfig,
     ...userConfig,
     initialQueryState: {

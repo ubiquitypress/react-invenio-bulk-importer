@@ -5,7 +5,7 @@ export interface SearchApiConfig {
     withCredentials?: boolean;
   };
   invenio?: {
-    requestSerializer: string;
+    requestSerializer?: string;
   };
 }
 

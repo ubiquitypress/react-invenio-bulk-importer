@@ -1,5 +1,5 @@
+import type { SearchApiConfig } from '@/types';
 import { InvenioSearchApi } from 'react-searchkit';
-import type { SearchApiConfig } from '../types';
 
 export function createSearchApi(config: SearchApiConfig): unknown {
   return new InvenioSearchApi(config);

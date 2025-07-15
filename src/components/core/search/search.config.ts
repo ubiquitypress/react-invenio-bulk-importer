@@ -39,7 +39,7 @@ export const defaultSearchConfig: SearchConfig = {
       headers: {
         Accept: 'application/vnd.inveniordm.v1+json'
       },
-      url: 'https://127.0.0.1:5000/api/importer-tasks',
+      url: '/api/importer-tasks',
       withCredentials: true
     },
     invenio: {

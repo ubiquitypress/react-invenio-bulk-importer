@@ -7,6 +7,17 @@ import dts from 'vite-plugin-dts';
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
 
 export default defineConfig({
+  server: {
+    host: '127.0.0.1',
+    port: 3000,
+    proxy: {
+      '/api': {
+        target: 'https://127.0.0.1:5000',
+        changeOrigin: true,
+        secure: false
+      }
+    }
+  },
   plugins: [react({ jsxRuntime: 'classic' }), dts({ insertTypesEntry: true })],
   resolve: {
     alias: {

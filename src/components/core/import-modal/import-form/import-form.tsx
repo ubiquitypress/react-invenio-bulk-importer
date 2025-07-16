@@ -1,6 +1,7 @@
 import React from 'react';
-// import { BaseForm } from 'react-invenio-forms';
-// import { FormContent } from './form-content';
+import { BaseForm } from 'react-invenio-forms';
+import { object, string } from 'yup';
+import { FormContent } from './form-content';
 
 export interface ImportFormState {
   title: string;
@@ -24,15 +25,28 @@ const initialValues: ImportFormState = {
   serializer: ''
 };
 
+// Add validation schema
+const validationSchema = object({
+  title: string().required('Title is required'),
+  recordType: string().required('Record type is required'),
+  serializer: string().required('Serializer is required'),
+  mode: string().required('Mode is required')
+});
+
 export const ImportForm = () => {
   const handleSubmit = (values: ImportFormState) => {
-    // Handle form submission logic here
     console.log('Form submitted with values:', values);
   };
 
   return (
-    // <BaseForm formik={{ initialValues }} onSubmit={handleSubmit}>
-    <p>TEST</p>
-    // </BaseForm>
+    <BaseForm
+      formik={{
+        initialValues,
+        validationSchema,
+        onSubmit: handleSubmit
+      }}
+    >
+      <FormContent />
+    </BaseForm>
   );
 };

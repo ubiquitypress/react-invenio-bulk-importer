@@ -32,15 +32,31 @@ export default defineConfig({
     lib: {
       entry: resolve(__dirname, 'src/index.ts'),
       name: 'InvenioBulkImporter',
-      formats: ['es'],
-      fileName: 'index'
+      formats: ['es', 'cjs'],
+      fileName: format => `index.${format === 'es' ? 'es' : 'cjs'}.js`
     },
     rollupOptions: {
-      external: ['react', 'react-dom'],
+      external: [
+        'react',
+        'react-dom',
+        'react-invenio-forms',
+        'formik',
+        'semantic-ui-react',
+        'axios',
+        'lodash',
+        'qs',
+        'react-redux',
+        'redux',
+        'redux-thunk',
+        'react-overridable'
+      ],
       output: {
         globals: {
           react: 'React',
-          'react-dom': 'ReactDOM'
+          'react-dom': 'ReactDOM',
+          'react-invenio-forms': 'ReactInvenioForms',
+          formik: 'Formik',
+          'semantic-ui-react': 'SemanticUIReact'
         }
       }
     },

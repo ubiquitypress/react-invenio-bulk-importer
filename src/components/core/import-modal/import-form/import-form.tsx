@@ -1,5 +1,5 @@
 import React from 'react';
-import { BaseForm } from 'react-invenio-forms';
+// import { BaseForm } from 'react-invenio-forms';
 // import { FormContent } from './form-content';
 
 export interface ImportFormState {
@@ -31,8 +31,8 @@ export const ImportForm = () => {
   };
 
   return (
-    <BaseForm formik={{ initialValues }} onSubmit={handleSubmit}>
-      <p>TEST</p>
-    </BaseForm>
+    // <BaseForm formik={{ initialValues }} onSubmit={handleSubmit}>
+    <p>TEST</p>
+    // </BaseForm>
   );
 };

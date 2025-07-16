@@ -26,7 +26,7 @@ export const ImportModal = () => {
     >
       <ModalHeader>New Import Task</ModalHeader>
       <ModalContent>
-        <ImportForm />
+        <ImportForm onSubmit={() => setOpen(false)} />
       </ModalContent>
       <ModalActions>
         <Button onClick={() => setOpen(false)}>Close</Button>

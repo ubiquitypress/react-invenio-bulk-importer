@@ -2,23 +2,14 @@ import React from 'react';
 import { BaseForm } from 'react-invenio-forms';
 import { object, string } from 'yup';
 import { FormContent } from './form-content';
+import { createImporterTask } from '@/services';
+import { InvenioNewImportTask } from '@/types';
 
-export interface ImportFormState {
-  title: string;
-  description: string;
-  mode: 'import' | 'delete';
-  status: string;
-  startTime: null;
-  endTime: null;
-  recordType: string;
-  serializer: string;
-}
-
-const initialValues: ImportFormState = {
+const initialValues: InvenioNewImportTask = {
   title: '',
   description: '',
   mode: 'import',
-  status: '',
+  status: 'created',
   startTime: null,
   endTime: null,
   recordType: '',
@@ -33,9 +24,23 @@ const validationSchema = object({
   mode: string().required('Mode is required')
 });
 
-export const ImportForm = () => {
-  const handleSubmit = (values: ImportFormState) => {
-    console.log('Form submitted with values:', values);
+interface ImportFormProps {
+  onSubmit?: () => void;
+}
+
+export const ImportForm: React.FC<ImportFormProps> = ({ onSubmit }) => {
+  const handleSubmit = async (values: InvenioNewImportTask) => {
+    try {
+      const response = await createImporterTask(values);
+      onSubmit?.();
+      if (response) {
+        console.log('Import task created successfully:', response);
+      } else {
+        console.error('Failed to create import task');
+      }
+    } catch (error) {
+      console.error('Error creating import task:', error);
+    }
   };
 
   return (

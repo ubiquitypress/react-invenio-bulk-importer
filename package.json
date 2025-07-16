@@ -6,9 +6,9 @@
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "require": "./dist/index.cjs.js",
-      "import": "./dist/index.es.js",
-      "types": "./dist/index.d.ts"
+      "import": "./dist/index.es.js"
     },
     "./style.css": "./dist/style.css"
   },
@@ -51,6 +51,7 @@
     "@types/prop-types": "^15",
     "@types/react": "^16.14.34",
     "@types/react-dom": "^16.9.17",
+    "@vitejs/plugin-basic-ssl": "^2.1.0",
     "@vitejs/plugin-react": "^4.0.0",
     "axios": "^1.7.7",
     "formik": "^2.1.0",
@@ -77,6 +78,7 @@
     "yup": "^0.32.11"
   },
   "dependencies": {
+    "js-cookie": "2.2.1",
     "react-searchkit": "^3.0.0"
   },
   "packageManager": "yarn@4.9.2"

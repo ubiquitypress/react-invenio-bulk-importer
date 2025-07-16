@@ -3,11 +3,11 @@ import {
   getSerializers,
   type ImporterTaskConfig
 } from '@/services';
+import { InvenioNewImportTask } from '@/types';
 import { useFormikContext } from 'formik';
 import React, { useCallback, useEffect, useState } from 'react';
 import { SelectField, TextAreaField, TextField } from 'react-invenio-forms';
 import { Button, Form } from 'semantic-ui-react';
-import type { ImportFormState } from '../import-form';
 
 export const FormContent = () => {
   const [configs, setConfigs] = useState<Record<string, ImporterTaskConfig>>(
@@ -15,7 +15,7 @@ export const FormContent = () => {
   );
   const [loading, setLoading] = useState(true);
   const { values, submitForm, isSubmitting, isValid } =
-    useFormikContext<ImportFormState>();
+    useFormikContext<InvenioNewImportTask>();
 
   const fetchRecordTypes = useCallback(async () => {
     try {

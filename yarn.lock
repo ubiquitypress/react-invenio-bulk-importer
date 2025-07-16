@@ -1415,6 +1415,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@vitejs/plugin-basic-ssl@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "@vitejs/plugin-basic-ssl@npm:2.1.0"
+  peerDependencies:
+    vite: ^6.0.0 || ^7.0.0
+  checksum: 10c0/aa618be6bd915163aba27b2db780eab2f0e5d800fea48795f638fb6c1d098db8008ba7f84c708dc191159efecf6ec4e0191ebc5bb7a1a31779c01d0252bf56b0
+  languageName: node
+  linkType: hard
+
 "@vitejs/plugin-react@npm:^4.0.0":
   version: 4.6.0
   resolution: "@vitejs/plugin-react@npm:4.6.0"
@@ -2767,9 +2776,11 @@ __metadata:
     "@types/prop-types": "npm:^15"
     "@types/react": "npm:^16.14.34"
     "@types/react-dom": "npm:^16.9.17"
+    "@vitejs/plugin-basic-ssl": "npm:^2.1.0"
     "@vitejs/plugin-react": "npm:^4.0.0"
     axios: "npm:^1.7.7"
     formik: "npm:^2.1.0"
+    js-cookie: "npm:2.2.1"
     lodash: "npm:^4.17.0"
     luxon: "npm:^1.23.0"
     prop-types: "npm:^15.7.0"
@@ -2909,6 +2920,13 @@ __metadata:
   version: 3.7.1
   resolution: "jquery@npm:3.7.1"
   checksum: 10c0/808cfbfb758438560224bf26e17fcd5afc7419170230c810dd11f5c1792e2263e2970cca8d659eb84fcd9acc301edb6d310096e450277d54be4f57071b0c82d9
+  languageName: node
+  linkType: hard
+
+"js-cookie@npm:2.2.1":
+  version: 2.2.1
+  resolution: "js-cookie@npm:2.2.1"
+  checksum: 10c0/ee67fc0f8495d0800b851910b5eb5bf49d3033adff6493d55b5c097ca6da46f7fe666b10e2ecb13cfcaf5b88d71c205ce00a7e646de791689bfd053bbb36a376
   languageName: node
   linkType: hard
 

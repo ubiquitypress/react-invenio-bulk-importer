@@ -2798,6 +2798,7 @@ __metadata:
     qs: ^6.8.0
     react: ^16.13.0
     react-dom: ^16.13.0
+    react-invenio-forms: ^4.0.0
     react-overridable: ^0.0.3
     react-redux: ^7.2.0
     redux: ^4.0.0

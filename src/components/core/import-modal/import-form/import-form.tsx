@@ -1,6 +1,6 @@
 import React from 'react';
 import { BaseForm } from 'react-invenio-forms';
-import { FormContent } from './form-content';
+// import { FormContent } from './form-content';
 
 export interface ImportFormState {
   title: string;

@@ -57,7 +57,9 @@ export default defineConfig({
           'react-invenio-forms': 'ReactInvenioForms',
           formik: 'Formik',
           'semantic-ui-react': 'SemanticUIReact'
-        }
+        },
+        exports: 'named',
+        interop: 'auto'
       }
     },
     // This will inline CSS into your JS bundle

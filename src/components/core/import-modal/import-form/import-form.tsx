@@ -32,7 +32,7 @@ export const ImportForm = () => {
 
   return (
     <BaseForm formik={{ initialValues }} onSubmit={handleSubmit}>
-      <FormContent />
+      <p>TEST</p>
     </BaseForm>
   );
 };

@@ -7,7 +7,7 @@ import {
   ModalContent,
   ModalHeader
 } from 'semantic-ui-react';
-import { ImportContent } from './import-content';
+import { ImportForm } from './import-form';
 
 export const ImportModal = () => {
   const [open, setOpen] = useState(false);
@@ -26,7 +26,7 @@ export const ImportModal = () => {
     >
       <ModalHeader>New Import Task</ModalHeader>
       <ModalContent>
-        <ImportContent />
+        <ImportForm />
       </ModalContent>
       <ModalActions>
         <Button onClick={() => setOpen(false)}>Close</Button>

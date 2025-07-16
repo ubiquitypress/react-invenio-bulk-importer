@@ -1,5 +1,5 @@
 import { apiClient } from '@/api';
-import { InvenioNewImportTask } from '@/types';
+import type { InvenioNewImportTask } from '@/types';
 
 export const createImporterTask = async (task: InvenioNewImportTask) => {
   const payload = {

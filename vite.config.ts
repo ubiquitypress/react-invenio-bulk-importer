@@ -1,7 +1,7 @@
 import { resolve } from 'node:path';
 import { fileURLToPath, URL } from 'node:url';
-import react from '@vitejs/plugin-react';
 import basicSsl from '@vitejs/plugin-basic-ssl';
+import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 import dts from 'vite-plugin-dts';
 
@@ -19,7 +19,11 @@ export default defineConfig({
       }
     }
   },
-  plugins: [react({ jsxRuntime: 'classic' }), dts({ insertTypesEntry: true }), basicSsl()],
+  plugins: [
+    react({ jsxRuntime: 'classic' }),
+    dts({ insertTypesEntry: true }),
+    basicSsl()
+  ],
   resolve: {
     alias: [
       {

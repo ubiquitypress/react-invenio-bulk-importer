@@ -3,7 +3,7 @@ import {
   getSerializers,
   type ImporterTaskConfig
 } from '@/services';
-import { InvenioNewImportTask } from '@/types';
+import type { InvenioNewImportTask } from '@/types';
 import { useFormikContext } from 'formik';
 import React, { useCallback, useEffect, useState } from 'react';
 import { SelectField, TextAreaField, TextField } from 'react-invenio-forms';

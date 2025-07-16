@@ -1,13 +1,13 @@
 import { apiClient } from '@/api';
+import type { ImporterTaskConfig } from '@/types';
 
-export interface ImporterTaskConfig {
-  serializers: string[];
-  options: {
-    doi_minting: boolean;
-    publish: boolean;
-  };
-}
-
+/**
+ * Fetches serializer configuration for a specific record type from the API.
+ *
+ * @param recordType - The type of record to fetch serializers for
+ * @returns A promise that resolves to the importer task configuration containing serializers
+ * @throws When the API request fails or returns an unexpected status code
+ */
 export const getSerializers = async (
   recordType: string
 ): Promise<ImporterTaskConfig> => {

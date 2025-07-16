@@ -1,47 +1,13 @@
-import {
-  getRecordTypes,
-  getSerializers,
-  type ImporterTaskConfig
-} from '@/services';
-import type { InvenioNewImportTask } from '@/types';
-import { useFormikContext } from 'formik';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { Fragment } from 'react';
 import { SelectField, TextAreaField, TextField } from 'react-invenio-forms';
 import { Button, Form } from 'semantic-ui-react';
+import { useFormContent } from './hooks';
 
 export const FormContent = () => {
-  const [configs, setConfigs] = useState<Record<string, ImporterTaskConfig>>(
-    {}
-  );
-  const [loading, setLoading] = useState(true);
-  const { values, submitForm, isSubmitting, isValid } =
-    useFormikContext<InvenioNewImportTask>();
+  const { configs, isLoading, submitForm, values, isSubmitting, isValid } =
+    useFormContent();
 
-  const fetchRecordTypes = useCallback(async () => {
-    try {
-      const types = await getRecordTypes();
-      const newConfigs: Record<string, ImporterTaskConfig> = {};
-
-      for (const type of types) {
-        const serializer = await getSerializers(type);
-        if (serializer) {
-          newConfigs[type] = serializer;
-        }
-      }
-
-      setConfigs(newConfigs);
-    } catch (error) {
-      console.error('Error fetching record types:', error);
-    } finally {
-      setLoading(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    fetchRecordTypes();
-  }, [fetchRecordTypes]);
-
-  if (loading) {
+  if (isLoading) {
     return <p>Loading record types...</p>;
   }
 
@@ -50,9 +16,9 @@ export const FormContent = () => {
   }
 
   return (
-    <div>
+    <Fragment>
       <TextField
-        fieldPath='title'
+        fieldPath='task.title'
         label='Title'
         placeholder='Enter a title for the import task'
         required
@@ -60,7 +26,7 @@ export const FormContent = () => {
 
       <Form.Group widths='equal'>
         <SelectField
-          fieldPath='recordType'
+          fieldPath='task.recordType'
           label='Record Type'
           options={Object.keys(configs).map(type => ({
             key: type,
@@ -72,40 +38,49 @@ export const FormContent = () => {
         />
 
         <SelectField
-          fieldPath='serializer'
+          fieldPath='task.serializer'
           label='Serializer'
           options={
-            values.recordType && configs[values.recordType]
-              ? configs[values.recordType].serializers.map(serializer => ({
+            values.task.recordType && configs[values.task.recordType]
+              ? configs[values.task.recordType].serializers.map(serializer => ({
                   key: serializer,
                   value: serializer,
-                  text: `${serializer} (${values.recordType})`
+                  text: serializer
                 }))
               : []
           }
           placeholder='Select Serializer'
-          disabled={!values.recordType}
+          disabled={!values.task.recordType}
           required
         />
       </Form.Group>
 
       <SelectField
-        fieldPath='mode'
+        fieldPath='task.mode'
         label='Mode'
         options={[
           { key: 'import', value: 'import', text: 'Import' },
           { key: 'delete', value: 'delete', text: 'Delete' }
         ]}
         placeholder='Select Mode'
-        disabled={!values.recordType || !values.serializer}
+        disabled={!values.task.recordType || !values.task.serializer}
         required
       />
 
       <TextAreaField
-        fieldPath='description'
+        fieldPath='task.description'
         label='Notes'
         placeholder='Enter a description for the import task'
         rows={3}
+      />
+
+      <TextField
+        fieldPath='metadata'
+        label='Metadata'
+        placeholder='Enter CSV for metadata'
+        rows={3}
+        type='file'
+        accept='.csv'
       />
 
       <Button
@@ -117,6 +92,6 @@ export const FormContent = () => {
       >
         Submit
       </Button>
-    </div>
+    </Fragment>
   );
 };

@@ -1,10 +1,5 @@
+import { getCsrfToken } from '@/utils';
 import axios, { type AxiosInstance } from 'axios';
-import Cookies from 'js-cookie';
-
-const getCsrfToken = (): string | null => {
-  const csrfToken = Cookies.get('csrftoken');
-  return csrfToken ? csrfToken : null;
-};
 
 export const apiClient: AxiosInstance = axios.create({
   baseURL: '',

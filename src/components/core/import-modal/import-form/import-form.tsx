@@ -1,37 +1,17 @@
 import { createImporterTask } from '@/services';
-import type { InvenioNewImportTask } from '@/types';
 import React from 'react';
 import { BaseForm } from 'react-invenio-forms';
-import { object, string } from 'yup';
 import { FormContent } from './form-content';
-
-const initialValues: InvenioNewImportTask = {
-  title: '',
-  description: '',
-  mode: 'import',
-  status: 'created',
-  startTime: null,
-  endTime: null,
-  recordType: '',
-  serializer: ''
-};
-
-// Add validation schema
-const validationSchema = object({
-  title: string().required('Title is required'),
-  recordType: string().required('Record type is required'),
-  serializer: string().required('Serializer is required'),
-  mode: string().required('Mode is required')
-});
-
-interface ImportFormProps {
-  onSubmit?: () => void;
-}
+import {
+  FORM_VALIDATION_SCHEMA,
+  INITIAL_FORM_VALUES
+} from './import-form.consts';
+import type { ImportFormProps, ImportFormValues } from './import-form.types';
 
 export const ImportForm: React.FC<ImportFormProps> = ({ onSubmit }) => {
-  const handleSubmit = async (values: InvenioNewImportTask) => {
+  const handleSubmit = async (values: ImportFormValues) => {
     try {
-      const response = await createImporterTask(values);
+      const response = await createImporterTask(values.task);
       onSubmit?.();
       if (response) {
         console.log('Import task created successfully:', response);
@@ -46,8 +26,8 @@ export const ImportForm: React.FC<ImportFormProps> = ({ onSubmit }) => {
   return (
     <BaseForm
       formik={{
-        initialValues,
-        validationSchema,
+        initialValues: INITIAL_FORM_VALUES,
+        validationSchema: FORM_VALIDATION_SCHEMA,
         onSubmit: handleSubmit
       }}
     >

@@ -3,8 +3,8 @@ export interface InvenioNewImportTask {
   description: string;
   mode: 'import' | 'delete';
   status: string;
-  startTime: null;
-  endTime: null;
+  startTime?: null;
+  endTime?: null;
   recordType: string;
   serializer: string;
 }

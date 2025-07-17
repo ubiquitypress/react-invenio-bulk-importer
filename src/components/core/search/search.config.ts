@@ -13,7 +13,7 @@ export const defaultSearchConfig: SearchConfig = {
     hiddenParams: null,
     layout: 'list',
     page: 1,
-    size: 20,
+    size: 10,
     sortBy: 'newest'
   },
   layoutOptions: {
@@ -21,9 +21,13 @@ export const defaultSearchConfig: SearchConfig = {
     listView: true
   },
   paginationOptions: {
-    defaultValue: 20,
+    defaultValue: 10,
     maxTotalResults: 10000,
     resultsPerPage: [
+      {
+        text: '10',
+        value: 10
+      },
       {
         text: '20',
         value: 20

@@ -80,7 +80,6 @@ export const Search: React.FC<SearchProps> = ({
             <EmptyResults />
             <ResultsList />
           </ResultsLoader>
-
           <SearchFooter />
         </SearchProvider>
       </ReactSearchKit>

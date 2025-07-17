@@ -4,8 +4,20 @@ import { Button, Form } from 'semantic-ui-react';
 import { useFormContent } from './hooks';
 
 export const FormContent = () => {
-  const { configs, isLoading, submitForm, values, isSubmitting, isValid } =
-    useFormContent();
+  const {
+    configs,
+    isLoading,
+    submitForm,
+    setFieldValue,
+    values,
+    isSubmitting,
+    isValid
+  } = useFormContent();
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0] || null;
+    setFieldValue('metadata', file);
+  };
 
   if (isLoading) {
     return <p>Loading record types...</p>;
@@ -53,34 +65,41 @@ export const FormContent = () => {
           disabled={!values.task.recordType}
           required
         />
+
+        <SelectField
+          fieldPath='task.mode'
+          label='Mode'
+          options={[
+            { key: 'import', value: 'import', text: 'Import' },
+            { key: 'delete', value: 'delete', text: 'Delete' }
+          ]}
+          placeholder='Select Mode'
+          disabled={!values.task.recordType || !values.task.serializer}
+          required
+        />
       </Form.Group>
 
-      <SelectField
-        fieldPath='task.mode'
-        label='Mode'
-        options={[
-          { key: 'import', value: 'import', text: 'Import' },
-          { key: 'delete', value: 'delete', text: 'Delete' }
-        ]}
-        placeholder='Select Mode'
-        disabled={!values.task.recordType || !values.task.serializer}
-        required
-      />
+      <Form.Field>
+        <label htmlFor={'file-input'}>Metadata File</label>
+        <input
+          id={'file-input'}
+          type='file'
+          accept='.csv'
+          onChange={handleFileChange}
+          style={{ marginTop: '8px' }}
+        />
+        {values.metadata && (
+          <p style={{ marginTop: '8px', fontSize: '12px', color: '#666' }}>
+            Selected: {values.metadata.name}
+          </p>
+        )}
+      </Form.Field>
 
       <TextAreaField
         fieldPath='task.description'
         label='Notes'
         placeholder='Enter a description for the import task'
         rows={3}
-      />
-
-      <TextField
-        fieldPath='metadata'
-        label='Metadata'
-        placeholder='Enter CSV for metadata'
-        rows={3}
-        type='file'
-        accept='.csv'
       />
 
       <Button

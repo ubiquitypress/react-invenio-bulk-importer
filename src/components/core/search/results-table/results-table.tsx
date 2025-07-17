@@ -13,11 +13,11 @@ export const ResultsTable = ({ children }: { children: React.ReactNode }) => {
       <TableHeader>
         <TableRow>
           <TableHeaderCell>ID</TableHeaderCell>
-          <TableHeaderCell>Date</TableHeaderCell>
+          <TableHeaderCell>Date Created</TableHeaderCell>
           <TableHeaderCell>Status</TableHeaderCell>
           <TableHeaderCell>Records</TableHeaderCell>
           <TableHeaderCell>Files</TableHeaderCell>
-          <TableHeaderCell>Provider</TableHeaderCell>
+          <TableHeaderCell>Serializer</TableHeaderCell>
           <TableHeaderCell>Mode</TableHeaderCell>
           <TableHeaderCell>Actions</TableHeaderCell>
         </TableRow>

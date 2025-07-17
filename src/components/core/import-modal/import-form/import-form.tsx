@@ -1,4 +1,4 @@
-import { createImporterTask } from '@/services';
+import { addTaskMetadata, createImporterTask, validateTask } from '@/services';
 import React from 'react';
 import { BaseForm } from 'react-invenio-forms';
 import { FormContent } from './form-content';
@@ -9,15 +9,26 @@ import {
 import type { ImportFormProps, ImportFormValues } from './import-form.types';
 
 export const ImportForm: React.FC<ImportFormProps> = ({ onSubmit }) => {
+  /**
+   * Handles form submission for the import task.
+   * @param values The form values submitted by the user.
+   */
   const handleSubmit = async (values: ImportFormValues) => {
     try {
-      const response = await createImporterTask(values.task);
-      onSubmit?.();
-      if (response) {
-        console.log('Import task created successfully:', response);
-      } else {
-        console.error('Failed to create import task');
+      const task = await createImporterTask(values.task);
+
+      if (!task) {
+        throw new Error('Failed to create import task');
       }
+
+      if (values.metadata) {
+        const addMetadata = await addTaskMetadata(task.id, values.metadata);
+        console.log('Metadata added:', addMetadata);
+        const validate = await validateTask(task.id);
+        console.log('Task validation result:', validate);
+      }
+
+      onSubmit?.();
     } catch (error) {
       console.error('Error creating import task:', error);
     }

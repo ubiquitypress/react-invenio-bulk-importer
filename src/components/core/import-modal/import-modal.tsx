@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import {
   Button,
   Icon,
@@ -7,10 +7,18 @@ import {
   ModalContent,
   ModalHeader
 } from 'semantic-ui-react';
+import { useSearch } from '../search/provider';
 import { ImportForm } from './import-form';
 
 export const ImportModal = () => {
   const [open, setOpen] = useState(false);
+  const { refreshSearch } = useSearch();
+
+  const handleSubmitSuccess = useCallback(() => {
+    setOpen(false);
+    refreshSearch();
+  }, [refreshSearch]);
+
   return (
     <Modal
       closeIcon
@@ -26,7 +34,7 @@ export const ImportModal = () => {
     >
       <ModalHeader>New Import Task</ModalHeader>
       <ModalContent>
-        <ImportForm onSubmit={() => setOpen(false)} />
+        <ImportForm onSubmit={handleSubmitSuccess} />
       </ModalContent>
       <ModalActions>
         <Button onClick={() => setOpen(false)}>Close</Button>

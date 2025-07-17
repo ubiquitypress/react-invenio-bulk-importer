@@ -14,7 +14,7 @@ export const useFormContent = () => {
     {}
   );
   const [isLoading, setIsLoading] = useState(true);
-  const { values, submitForm, isSubmitting, isValid } =
+  const { values, submitForm, isSubmitting, isValid, setFieldValue } =
     useFormikContext<ImportFormValues>();
 
   /**
@@ -57,6 +57,7 @@ export const useFormContent = () => {
     isLoading,
     values,
     submitForm,
+    setFieldValue,
     isSubmitting,
     isValid
   };

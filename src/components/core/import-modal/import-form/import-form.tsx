@@ -1,4 +1,9 @@
-import { addTaskMetadata, createImporterTask, validateTask } from '@/services';
+import {
+  addTaskMetadata,
+  createImporterTask,
+  getTaskStatus,
+  validateTask
+} from '@/services';
 import React from 'react';
 import { BaseForm } from 'react-invenio-forms';
 import { FormContent } from './form-content';
@@ -26,6 +31,11 @@ export const ImportForm: React.FC<ImportFormProps> = ({ onSubmit }) => {
         console.log('Metadata added:', addMetadata);
         const validate = await validateTask(task.id);
         console.log('Task validation result:', validate);
+
+        if (validate) {
+          const status = await getTaskStatus(task.id);
+          console.log('Task status:', status);
+        }
       }
 
       onSubmit?.();

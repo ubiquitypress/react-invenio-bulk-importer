@@ -1,9 +1,6 @@
 import { apiClient } from '@/api';
 
-export const addTaskMetadata = async (
-  taskId: string,
-  metadata: File
-): Promise<void> => {
+export const addTaskMetadata = async (taskId: string, metadata: File) => {
   try {
     const response = await apiClient.put(
       `/api/importer-tasks/${taskId}/metadata`,

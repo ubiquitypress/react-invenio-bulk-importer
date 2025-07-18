@@ -21,7 +21,6 @@ export const Search: React.FC<SearchProps> = ({
   config: userConfig = {},
   overriddenComponents: userOverrides = {}
 }) => {
-  // Deep merge configs
   const config: SearchConfig = {
     ...defaultSearchConfig,
     ...userConfig,
@@ -55,7 +54,10 @@ export const Search: React.FC<SearchProps> = ({
         ...defaultSearchConfig.searchApi.invenio,
         ...userConfig.searchApi?.invenio
       }
-    }
+    },
+    showFacets: userConfig.showFacets ?? true,
+    showImportModal: userConfig.showImportModal ?? true,
+    showSearchFooter: userConfig.showSearchFooter ?? true
   };
 
   const searchApi = new InvenioSearchApi(config.searchApi);
@@ -75,12 +77,12 @@ export const Search: React.FC<SearchProps> = ({
         initialQueryState={config.initialQueryState}
       >
         <SearchProvider config={config}>
-          <SearchBarRow />
+          <SearchBarRow appId={config.appId} />
           <ResultsLoader>
             <EmptyResults />
             <ResultsList />
           </ResultsLoader>
-          <SearchFooter />
+          {config.showSearchFooter && <SearchFooter />}
         </SearchProvider>
       </ReactSearchKit>
     </OverridableContext.Provider>

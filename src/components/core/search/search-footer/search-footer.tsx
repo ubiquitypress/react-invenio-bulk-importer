@@ -9,7 +9,7 @@ export const SearchFooter = () => {
     <Grid>
       <Grid.Row verticalAlign='middle'>
         <Grid.Column width={4} textAlign='left'>
-          <Count label={(cmp: string) => <div>{cmp} total task(s)</div>} />
+          <Count label={(cmp: string) => <div>{cmp} item(s)</div>} />
         </Grid.Column>
         <Grid.Column width={8} textAlign='center'>
           <Pagination options={{ size: 'mini' }} />

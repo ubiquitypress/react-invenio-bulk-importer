@@ -10,14 +10,13 @@ import React from 'react';
 import { Button, Dropdown, Icon, TableCell, TableRow } from 'semantic-ui-react';
 import { useSearch } from '../provider';
 
-export const ResultItem = ({
-  result,
-  index
-}: {
+interface ResultItemProps {
   result: InvenioTask;
   index: number;
-}) => {
-  const { refreshSearch } = useSearch();
+}
+
+export const ResultItem: React.FC<ResultItemProps> = ({ result, index }) => {
+  const { refreshSearch, config } = useSearch();
 
   if (!result) {
     return null;
@@ -73,7 +72,9 @@ export const ResultItem = ({
   return (
     <TableRow key={index}>
       <TableCell>
-        <a href={result.links.self}>{result.title || 'No title'}</a>
+        <a href={`${config.resultPath}/${result.id}`}>
+          {result.title || 'No title'}
+        </a>
       </TableCell>
       <TableCell>{formatDate(result.created)}</TableCell>
       <TableCell>{capitalizeFirstLetter(result.status)}</TableCell>

@@ -60,5 +60,6 @@ export const defaultSearchConfig: SearchConfig = {
       text: 'Oldest'
     }
   ],
-  sortOrderDisabled: true
+  sortOrderDisabled: true,
+  resultPath: '/administration/importer-tasks'
 };

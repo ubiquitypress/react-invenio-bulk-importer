@@ -19,12 +19,13 @@ export interface DefaultSortingOption {
 }
 
 export interface InitialQueryState {
-  filters: unknown[];
-  hiddenParams: unknown | null;
-  layout: string;
-  page: number;
-  size: number;
-  sortBy: string;
+  filters?: unknown[];
+  hiddenParams?: unknown | null;
+  layout?: string;
+  page?: number;
+  size?: number;
+  sortBy?: string;
+  queryString?: string;
 }
 
 export interface LayoutOptions {
@@ -50,7 +51,11 @@ export interface SearchConfig {
   initialQueryState: InitialQueryState;
   layoutOptions: LayoutOptions;
   paginationOptions: PaginationOptions;
+  resultPath: string;
   searchApi: SearchApiConfig;
   sortOptions: SortOption[];
   sortOrderDisabled: boolean;
+  showFacets?: boolean;
+  showImportModal?: boolean;
+  showSearchFooter?: boolean;
 }

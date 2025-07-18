@@ -9,7 +9,7 @@ import {
 
 export const ResultsTable = ({ children }: { children: React.ReactNode }) => {
   return (
-    <Table celled size='small' comp>
+    <Table padded size='small' comp>
       <TableHeader>
         <TableRow>
           <TableHeaderCell>ID</TableHeaderCell>

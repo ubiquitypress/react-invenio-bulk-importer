@@ -5,7 +5,9 @@ import './theme/index.css';
 import { BulkImporter } from './components/core';
 
 const App: React.FC = () => {
-  return <BulkImporter.Search />;
+  return (
+    <BulkImporter.TaskDetails taskId='36664269-7eb9-47b1-ae90-22b041049fb7' />
+  );
 };
 
 ReactDOM.render(<App />, document.getElementById('root'));

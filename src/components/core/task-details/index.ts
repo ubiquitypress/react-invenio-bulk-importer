@@ -1,2 +1,2 @@
 export * from './task-details';
-export * from './task-record-item';
+export * from './task-details-records/task-record-item/task-record-item';

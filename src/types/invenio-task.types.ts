@@ -1,3 +1,5 @@
+import type { InvenioImporterRecordStatusType } from './invenio-importer-record.types';
+
 export interface InvenioTask {
   id: string;
   created: string;
@@ -16,7 +18,7 @@ export interface InvenioTask {
   serializer: string;
   start_time?: string | null;
   end_time?: string | null;
-  records_status?: Record<ImporterTaskStates, number> & {
+  records_status?: Record<InvenioImporterRecordStatusType, number> & {
     total_records: number;
   };
   status: ImporterTaskStates;

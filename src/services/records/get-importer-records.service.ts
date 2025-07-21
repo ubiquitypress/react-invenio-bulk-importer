@@ -1,8 +1,11 @@
 import { apiClient } from '@/api';
+import type { InvenioImporterRecords } from '@/types';
 
 export const getImportRecords = async () => {
   try {
-    const response = await apiClient.get('/api/importer-records');
+    const response = await apiClient.get<InvenioImporterRecords>(
+      '/api/importer-records'
+    );
     if (response.status === 200) {
       return response.data;
     } else {

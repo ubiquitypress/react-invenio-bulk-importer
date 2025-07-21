@@ -1,6 +1,6 @@
 import { apiClient } from '@/api';
 
-export const validateTask = async (taskId: string) => {
+export const validateImporterTask = async (taskId: string) => {
   try {
     const res = await apiClient.post(
       `/api/importer-tasks/${taskId}/validate`,

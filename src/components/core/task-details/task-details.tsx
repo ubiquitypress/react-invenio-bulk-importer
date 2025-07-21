@@ -1,4 +1,5 @@
 import { StatusLabel } from '@/components/ui';
+import { useImporterTask } from '@/hooks';
 import { getImporterTask } from '@/services';
 import type { InvenioTask } from '@/types';
 import { capitalizeFirstLetter } from '@/utils';
@@ -26,6 +27,9 @@ export const TaskDetails: React.FC<TaskDetailsProps> = ({ taskId }) => {
   const [task, setTask] = useState<InvenioTask | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const { getStatus, isGettingStatus } = useImporterTask(taskId, {
+    onStatusChangeSuccess: setTask
+  });
 
   const fetchTaskDetails = useCallback(async () => {
     try {
@@ -54,7 +58,7 @@ export const TaskDetails: React.FC<TaskDetailsProps> = ({ taskId }) => {
   }, [taskId, fetchTaskDetails]);
 
   // Loading state
-  if (loading) {
+  if (loading || isGettingStatus) {
     return (
       <Segment>
         <Loader content='Loading task details...' />
@@ -129,11 +133,10 @@ export const TaskDetails: React.FC<TaskDetailsProps> = ({ taskId }) => {
                   )}
                   <Button.Group size='small'>
                     <Button
-                      disabled
                       color='blue'
                       icon='refresh'
                       content='Check Status'
-                      onClick={fetchTaskDetails}
+                      onClick={() => getStatus()}
                       loading={loading}
                     />
                     <Button

@@ -1,9 +1,9 @@
-import type { InvenioImporterRecordStatusType, InvenioTask } from '@/types';
+import type { InvenioImporterRecordStates, InvenioTask } from '@/types';
 import React from 'react';
 import { Icon, Label as SemanticLabel } from 'semantic-ui-react';
 
 interface LabelProps extends React.ComponentProps<typeof SemanticLabel> {
-  status: InvenioTask['status'] | InvenioImporterRecordStatusType;
+  status: InvenioTask['status'] | InvenioImporterRecordStates;
 }
 
 export const StatusLabel: React.FC<LabelProps> = ({

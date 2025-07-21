@@ -6,4 +6,4 @@ export * from './get-importer-task.service';
 export * from './get-record-types.service';
 export * from './get-serializers.service';
 export * from './get-task-status.service';
-export * from './validate-task.service';
+export * from './validate-importer-task.service';

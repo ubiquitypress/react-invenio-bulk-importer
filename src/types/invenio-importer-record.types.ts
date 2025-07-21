@@ -9,7 +9,7 @@ export interface InvenioImporterRecord {
     metadata: string;
   };
   revision_id: number;
-  status: InvenioImporterRecordStatusType;
+  status: InvenioImporterRecordStates;
   src_data: {
     id: string;
     doi: string;
@@ -95,5 +95,5 @@ export const InvenioImporterRecordStatus = {
   IMPORTED: 'success'
 } as const;
 
-export type InvenioImporterRecordStatusType =
+export type InvenioImporterRecordStates =
   (typeof InvenioImporterRecordStatus)[keyof typeof InvenioImporterRecordStatus];

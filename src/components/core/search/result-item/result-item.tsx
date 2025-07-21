@@ -1,9 +1,4 @@
-import {
-  deleteImporterTask,
-  executeBulkImport,
-  getTaskStatus,
-  validateTask
-} from '@/services';
+import { useImporterTask } from '@/hooks';
 import type { InvenioTask } from '@/types';
 import { capitalizeFirstLetter, formatDate } from '@/utils';
 import React from 'react';
@@ -18,56 +13,47 @@ interface ResultItemProps {
 export const ResultItem: React.FC<ResultItemProps> = ({ result, index }) => {
   const { refreshSearch, config } = useSearch();
 
+  const {
+    deleteTask,
+    validateTask,
+    runBulkImport,
+    getStatus,
+    isDeleting,
+    isValidating,
+    isBulkImporting,
+    isGettingStatus,
+    error,
+    clearError
+  } = useImporterTask(result.id, {
+    onDeleteSuccess: () => {
+      refreshSearch();
+    },
+    onValidateSuccess: () => {
+      refreshSearch();
+    },
+    onBulkImportSuccess: () => {
+      refreshSearch();
+    },
+    onStatusChangeSuccess: () => {
+      refreshSearch();
+    }
+  });
+
   if (!result) {
     return null;
   }
 
-  const handleDeleteTask = async (taskId: string) => {
-    try {
-      const deleted = await deleteImporterTask(taskId);
-      if (deleted) {
-        refreshSearch(); // Refresh the search results after deletion
-      } else {
-        console.error(`Failed to delete task ${taskId}.`);
-      }
-    } catch (error) {
-      console.error(`Error deleting task ${taskId}:`, error);
+  // Helper function to get loading text for dropdown
+  const getActionText = (action: string, isLoading: boolean) => {
+    if (isLoading) {
+      return `${action}...`;
     }
+    return action;
   };
 
-  const handleValidateTask = async (taskId: string) => {
-    try {
-      const validationResult = await validateTask(taskId);
-      console.log('Validation result:', validationResult);
-      refreshSearch(); // Refresh the search results after validation
-    } catch (error) {
-      console.error(`Error validating task ${taskId}:`, error);
-    }
-  };
-
-  const handleExecuteBulkImport = async (taskId: string) => {
-    try {
-      const response = await executeBulkImport(taskId);
-      console.log('Bulk import executed:', response);
-      refreshSearch(); // Refresh the search results after execution
-    } catch (error) {
-      console.error(`Error executing bulk import for task ${taskId}:`, error);
-    }
-  };
-
-  const handleStatusChange = async () => {
-    try {
-      const status = await getTaskStatus(result.id);
-      if (status) {
-        refreshSearch();
-        console.log(`Current status for task ${result.id}:`, status);
-      } else {
-        console.error(`Failed to retrieve status for task ${result.id}.`);
-      }
-    } catch (error) {
-      console.error(`Error changing status for task ${result.id}:`, error);
-    }
-  };
+  // Helper function to check if any operation is loading
+  const isAnyOperationLoading =
+    isDeleting || isValidating || isBulkImporting || isGettingStatus;
 
   return (
     <TableRow key={index}>
@@ -83,12 +69,24 @@ export const ResultItem: React.FC<ResultItemProps> = ({ result, index }) => {
       <TableCell>{result.serializer}</TableCell>
       <TableCell>{capitalizeFirstLetter(result.mode)}</TableCell>
       <TableCell style={{ width: '220px' }}>
+        {error && (
+          <div style={{ color: 'red', fontSize: '12px', marginBottom: '5px' }}>
+            {error.message}
+            <Button
+              onClick={clearError}
+              style={{ marginLeft: '5px', fontSize: '10px' }}
+            >
+              Clear
+            </Button>
+          </div>
+        )}
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
           <Dropdown
-            text='Select Action'
+            text={isAnyOperationLoading ? 'Processing...' : 'Select Action'}
             floating
             labeled
             className='icon'
+            disabled={isAnyOperationLoading}
             options={[
               {
                 key: 'download',
@@ -98,31 +96,41 @@ export const ResultItem: React.FC<ResultItemProps> = ({ result, index }) => {
               },
               {
                 key: 'validate',
-                text: 'Retry Validation',
+                text: getActionText('Retry Validation', isValidating),
                 value: 'validate',
-                onClick: () => handleValidateTask(result.id)
+                disabled: isAnyOperationLoading,
+                onClick: () => validateTask()
               },
               {
                 key: 'load',
-                text: 'Load Bulk Import',
+                text: getActionText('Load Bulk Import', isBulkImporting),
                 value: 'load',
-                onClick: () => handleExecuteBulkImport(result.id)
+                disabled: isAnyOperationLoading,
+                onClick: () => runBulkImport()
               },
               {
                 key: 'status',
-                text: 'Get Status',
+                text: getActionText('Get Status', isGettingStatus),
                 value: 'status',
-                onClick: handleStatusChange
+                disabled: isAnyOperationLoading,
+                onClick: () => getStatus()
               },
               {
                 key: 'delete',
-                text: 'Delete',
+                text: getActionText('Delete', isDeleting),
                 value: 'delete',
-                onClick: () => handleDeleteTask(result.id)
+                disabled: isAnyOperationLoading,
+                onClick: () => deleteTask()
               }
             ]}
           />
-          <Button basic size='tiny'>
+          <Button
+            basic
+            size='tiny'
+            disabled={isAnyOperationLoading}
+            as='a'
+            href={`${config.resultPath}/${result.id}`}
+          >
             <Icon name='eye' />
             View
           </Button>

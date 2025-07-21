@@ -1,4 +1,4 @@
-import type { InvenioImporterRecordStatusType } from './invenio-importer-record.types';
+import type { InvenioImporterRecordStates } from './invenio-importer-record.types';
 
 export interface InvenioTask {
   id: string;
@@ -18,10 +18,10 @@ export interface InvenioTask {
   serializer: string;
   start_time?: string | null;
   end_time?: string | null;
-  records_status?: Record<InvenioImporterRecordStatusType, number> & {
+  records_status?: Record<InvenioImporterRecordStates, number> & {
     total_records: number;
   };
-  status: ImporterTaskStates;
+  status: InvenioImporterTaskStates;
   files: {
     enabled: boolean;
   };
@@ -47,5 +47,5 @@ export const ImporterTaskStates = {
   DAMAGED: 'damaged'
 } as const;
 
-export type ImporterTaskStates =
+export type InvenioImporterTaskStates =
   (typeof ImporterTaskStates)[keyof typeof ImporterTaskStates];

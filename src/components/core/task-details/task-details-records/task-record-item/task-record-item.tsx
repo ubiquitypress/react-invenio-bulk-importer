@@ -1,8 +1,15 @@
-import { StatusIcon } from '@/components/ui';
 import type { InvenioImporterRecord } from '@/types';
-import { capitalizeFirstLetter } from '@/utils';
+import { capitalizeFirstLetter, getStatusColor } from '@/utils';
 import React, { useState } from 'react';
-import { Button, Dropdown, Icon, TableCell, TableRow } from 'semantic-ui-react';
+import {
+  Button,
+  Dropdown,
+  Icon,
+  Label,
+  Popup,
+  TableCell,
+  TableRow
+} from 'semantic-ui-react';
 import { ErrorModal } from './error-modal';
 
 export interface TaskRecordItemProps {
@@ -14,35 +21,63 @@ export const TaskRecordItem: React.FC<TaskRecordItemProps> = ({
   result,
   index
 }) => {
-  const [copyState, setCopyState] = useState<'idle' | 'copied'>('idle');
+  const [copyState, setCopyState] = useState<'idle' | 'copying' | 'copied'>(
+    'idle'
+  );
   const [openModal, setOpenModal] = useState(false);
 
   if (!result) {
     return null;
   }
 
-  const handleCopyId = () => {
-    navigator.clipboard.writeText(result.id);
-    setCopyState('copied');
-    setTimeout(() => {
+  const handleCopyId = async () => {
+    try {
+      setCopyState('copying');
+      await navigator.clipboard.writeText(result.id);
+      setCopyState('copied');
+      setTimeout(() => {
+        setCopyState('idle');
+      }, 2000);
+    } catch {
       setCopyState('idle');
-    }, 2000);
+    }
   };
 
-  const dropdownOptions = [
+  const hasErrors = result.errors && result.errors.length > 0;
+  const statusColor = getStatusColor(result.status);
+
+  const getStatusIcon = (color: string) => {
+    if (color === 'red') {
+      return 'times';
+    }
+    if (color === 'green') {
+      return 'check';
+    }
+    return undefined;
+  };
+
+  const actionOptions = [
+    ...(hasErrors
+      ? [
+          {
+            key: 'view-errors',
+            text: 'View Errors',
+            value: 'view-errors',
+            icon: 'exclamation triangle',
+            onClick: () => setOpenModal(true)
+          }
+        ]
+      : []),
     {
-      key: 'modal',
-      text: (
-        <Button
-          size='mini'
-          content='View error(s)'
-          onClick={e => {
-            e.stopPropagation();
-            setOpenModal(true);
-          }}
-        />
-      ),
-      value: 'modal'
+      key: 'details',
+      text: 'View Details',
+      value: 'details',
+      icon: 'eye',
+      disabled: true,
+      onClick: () => {
+        // Handle view details
+        console.log('View details for:', result.id);
+      }
     }
   ];
 
@@ -50,28 +85,87 @@ export const TaskRecordItem: React.FC<TaskRecordItemProps> = ({
     <TableRow key={index}>
       <TableCell>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-          {result.id}
-          <Button size='mini' circular icon>
-            <Icon
-              onClick={handleCopyId}
-              name={copyState === 'copied' ? 'check' : 'copy'}
-            />
-          </Button>
+          <code style={{ fontSize: '0.9em', color: '#666' }}>
+            {result.id.length > 20
+              ? `${result.id.substring(0, 20)}…`
+              : result.id}
+          </code>
+          <Popup
+            content={copyState === 'copied' ? 'Copied!' : 'Copy ID'}
+            trigger={
+              <Button
+                size='mini'
+                circular
+                icon
+                loading={copyState === 'copying'}
+                onClick={handleCopyId}
+                color={copyState === 'copied' ? 'green' : undefined}
+              >
+                <Icon name={copyState === 'copied' ? 'check' : 'copy'} />
+              </Button>
+            }
+            position='top center'
+            size='mini'
+          />
         </div>
       </TableCell>
-      <TableCell>{result.src_data.title || 'No Title'}</TableCell>
-      <TableCell>{capitalizeFirstLetter(result.status)}</TableCell>
+
+      {/* Title Column */}
       <TableCell>
-        <StatusIcon status={result.status} size='large' />
+        <div style={{ maxWidth: '300px' }}>
+          {result.src_data?.title || (
+            <em style={{ color: '#999' }}>No Title Available</em>
+          )}
+        </div>
       </TableCell>
-      <TableCell style={{ width: '220px' }}>
+
+      {/* Status Column with Label */}
+      <TableCell>
+        <Label color={statusColor} size='small'>
+          <Icon name={getStatusIcon(statusColor) || 'circle notched'} />
+          {capitalizeFirstLetter(result.status)}
+        </Label>
+
+        {hasErrors && (
+          <Popup
+            content={`${result.errors.length} error${result.errors.length > 1 ? 's' : ''} found`}
+            trigger={
+              <Icon
+                name='exclamation triangle'
+                color='red'
+                style={{ marginLeft: '0.5rem', cursor: 'help' }}
+              />
+            }
+            position='top center'
+            size='mini'
+          />
+        )}
+      </TableCell>
+
+      {/* Actions Column */}
+      <TableCell textAlign='right'>
         <Dropdown
-          text='Select Option'
+          button
+          className='icon'
           floating
           labeled
-          className='icon'
-          options={dropdownOptions}
-        />
+          icon='ellipsis horizontal'
+          text='Actions'
+          size='mini'
+        >
+          <Dropdown.Menu>
+            {actionOptions.map(option => (
+              <Dropdown.Item
+                key={option.key}
+                icon={option.icon}
+                text={option.text}
+                disabled={option.disabled}
+                onClick={option.onClick}
+              />
+            ))}
+          </Dropdown.Menu>
+        </Dropdown>
+
         <ErrorModal
           setOpenModal={setOpenModal}
           openModal={openModal}

@@ -15,8 +15,7 @@ export const ResultTable = ({ children }: { children: React.ReactNode }) => {
           <TableHeaderCell>ID</TableHeaderCell>
           <TableHeaderCell>Title</TableHeaderCell>
           <TableHeaderCell>Status</TableHeaderCell>
-          <TableHeaderCell>Action</TableHeaderCell>
-          <TableHeaderCell>Options</TableHeaderCell>
+          <TableHeaderCell />
         </TableRow>
       </TableHeader>
       <TableBody>{children}</TableBody>

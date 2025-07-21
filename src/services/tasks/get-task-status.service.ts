@@ -1,8 +1,9 @@
 import { apiClient } from '@/api';
+import type { InvenioTask } from '@/types';
 
 export const getTaskStatus = async (taskId: string) => {
   try {
-    const response = await apiClient.put(
+    const response = await apiClient.put<InvenioTask>(
       `/api/importer-tasks/${taskId}/status`,
       {}
     );

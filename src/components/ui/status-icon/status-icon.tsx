@@ -1,9 +1,9 @@
-import type { InvenioImporterRecordStatusType, InvenioTask } from '@/types';
+import type { InvenioImporterRecordStates, InvenioTask } from '@/types';
 import React from 'react';
 import { Icon } from 'semantic-ui-react';
 
 interface StatusIconProps extends React.ComponentProps<typeof Icon> {
-  status: InvenioTask['status'] | InvenioImporterRecordStatusType;
+  status: InvenioTask['status'] | InvenioImporterRecordStates;
 }
 
 export const StatusIcon: React.FC<StatusIconProps> = ({ status, ...rest }) => {

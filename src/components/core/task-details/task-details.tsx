@@ -18,6 +18,7 @@ import {
 } from 'semantic-ui-react';
 import { TaskDetailsProvider } from './provider';
 import { TaskDetailsRecords } from './task-details-records';
+import { UploadMetadataModal } from './upload-metadata-modal';
 
 interface TaskDetailsProps {
   taskId: string;
@@ -115,7 +116,7 @@ export const TaskDetails: React.FC<TaskDetailsProps> = ({ taskId }) => {
             <Grid.Row verticalAlign='middle'>
               <Grid.Column width={8} verticalAlign='middle'>
                 <Header as='h2'>
-                  <Icon name='tasks' size='huge' />
+                  <Icon name='tasks' />
                   <Header.Content>
                     {task.title}
                     {task.description && (
@@ -125,13 +126,21 @@ export const TaskDetails: React.FC<TaskDetailsProps> = ({ taskId }) => {
                 </Header>
               </Grid.Column>
               <Grid.Column width={8} textAlign='right'>
-                <Segment basic size='small' horizontal>
+                <div
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'flex-end',
+                    justifyContent: 'center',
+                    gap: '1rem'
+                  }}
+                >
                   {task.status && (
                     <StatusLabel size='large' status={task.status}>
                       {capitalizeFirstLetter(task.status)}
                     </StatusLabel>
                   )}
-                  <Button.Group size='small'>
+                  <Button.Group style={{ marginLeft: '1rem' }} size='tiny'>
                     <Button
                       color='blue'
                       icon='refresh'
@@ -139,6 +148,7 @@ export const TaskDetails: React.FC<TaskDetailsProps> = ({ taskId }) => {
                       onClick={() => getStatus()}
                       loading={loading}
                     />
+                    <UploadMetadataModal />
                     <Button
                       disabled
                       color='green'
@@ -146,7 +156,7 @@ export const TaskDetails: React.FC<TaskDetailsProps> = ({ taskId }) => {
                       content='Run Task'
                     />
                   </Button.Group>
-                </Segment>
+                </div>
               </Grid.Column>
             </Grid.Row>
           </Grid>
@@ -160,7 +170,7 @@ export const TaskDetails: React.FC<TaskDetailsProps> = ({ taskId }) => {
               Progress Overview
             </Header>
 
-            <Statistic.Group widths='three' size='small'>
+            <Statistic.Group widths='three'>
               <Statistic color='blue'>
                 <Statistic.Value>{validatedRecords}</Statistic.Value>
                 <Statistic.Label>Validated</Statistic.Label>
@@ -185,11 +195,7 @@ export const TaskDetails: React.FC<TaskDetailsProps> = ({ taskId }) => {
                 <div style={{ textAlign: 'center', marginBottom: '0.5rem' }}>
                   <strong>Validation Progress</strong>
                 </div>
-                <Progress
-                  percent={validationProgress}
-                  color='blue'
-                  size='small'
-                >
+                <Progress percent={validationProgress} color='blue'>
                   {validatedRecords} / {totalRecords}
                 </Progress>
               </Grid.Column>
@@ -198,7 +204,7 @@ export const TaskDetails: React.FC<TaskDetailsProps> = ({ taskId }) => {
                 <div style={{ textAlign: 'center', marginBottom: '0.5rem' }}>
                   <strong>Error Records</strong>
                 </div>
-                <Progress percent={errorsProgress} color='red' size='small'>
+                <Progress percent={errorsProgress} color='red'>
                   {errorRecords} / {totalRecords}
                 </Progress>
               </Grid.Column>
@@ -207,7 +213,7 @@ export const TaskDetails: React.FC<TaskDetailsProps> = ({ taskId }) => {
                 <div style={{ textAlign: 'center', marginBottom: '0.5rem' }}>
                   <strong>Import Progress</strong>
                 </div>
-                <Progress percent={importProgress} color='green' size='small'>
+                <Progress percent={importProgress} color='green'>
                   {successRecords} / {totalRecords}
                 </Progress>
               </Grid.Column>

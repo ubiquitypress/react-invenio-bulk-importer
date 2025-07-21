@@ -1,5 +1,6 @@
 import type { InvenioImporterRecord } from '@/types';
 import { capitalizeFirstLetter, getStatusColor } from '@/utils';
+import { runImporterRecord } from '@/services';
 import React, { useState } from 'react';
 import {
   Button,
@@ -69,14 +70,17 @@ export const TaskRecordItem: React.FC<TaskRecordItemProps> = ({
         ]
       : []),
     {
-      key: 'details',
-      text: 'View Details',
-      value: 'details',
-      icon: 'eye',
-      disabled: true,
-      onClick: () => {
-        // Handle view details
-        console.log('View details for:', result.id);
+      key: 'run',
+      text: 'Run',
+      value: 'run',
+      icon: 'play',
+      onClick: async () => {
+        try {
+          await runImporterRecord(result.id);
+          console.log(`Record ${result.id} is being processed.`);
+        } catch (error) {
+          console.error('Error running record:', error);
+        }
       }
     }
   ];
@@ -159,7 +163,6 @@ export const TaskRecordItem: React.FC<TaskRecordItemProps> = ({
                 key={option.key}
                 icon={option.icon}
                 text={option.text}
-                disabled={option.disabled}
                 onClick={option.onClick}
               />
             ))}

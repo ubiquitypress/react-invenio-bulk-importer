@@ -27,10 +27,8 @@ export const ImportForm: React.FC<ImportFormProps> = ({ onSubmit }) => {
       }
 
       if (values.metadata) {
-        const addMetadata = await addTaskMetadata(task.id, values.metadata);
-        console.log('Metadata added:', addMetadata);
+        await addTaskMetadata(task.id, values.metadata);
         const validate = await validateImporterTask(task.id);
-        console.log('Task validation result:', validate);
 
         if (validate) {
           const status = await getTaskStatus(task.id);

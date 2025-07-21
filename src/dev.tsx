@@ -4,9 +4,23 @@ import 'semantic-ui-css/semantic.min.css';
 import './theme/index.css';
 import { BulkImporter } from './components/core';
 
+// Regex pattern for extracting task ID from URL path
+const TASK_ID_PATTERN = /\/administration\/importer-tasks\/(.+)$/;
+
+const getTaskIdFromPath = (): string | null => {
+  const path = window.location.pathname;
+  const match = path.match(TASK_ID_PATTERN);
+  return match ? match[1] : null;
+};
+
 const App: React.FC = () => {
+  const taskId = getTaskIdFromPath();
+
   return (
-    <BulkImporter.TaskDetails taskId='36664269-7eb9-47b1-ae90-22b041049fb7' />
+    <div>
+      <BulkImporter.Search />
+      {taskId && <BulkImporter.TaskDetails taskId={taskId} />}
+    </div>
   );
 };
 

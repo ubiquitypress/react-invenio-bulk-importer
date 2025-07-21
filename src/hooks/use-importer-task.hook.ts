@@ -4,7 +4,7 @@ import {
   getTaskStatus,
   validateImporterTask
 } from '@/services';
-import type { InvenioTask } from '@/types';
+import { InvenioTask } from '@/types';
 import { useCallback, useState } from 'react';
 
 // biome-ignore lint/suspicious/noExplicitAny: Using any for flexibility in task handling

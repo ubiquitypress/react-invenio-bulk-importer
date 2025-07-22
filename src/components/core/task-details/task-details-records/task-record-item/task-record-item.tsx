@@ -1,6 +1,6 @@
+import { runImporterRecord } from '@/services';
 import type { InvenioImporterRecord } from '@/types';
 import { capitalizeFirstLetter, getStatusColor } from '@/utils';
-import { runImporterRecord } from '@/services';
 import React, { useState } from 'react';
 import {
   Button,

@@ -1,4 +1,5 @@
 export * from './add-task-metadata.service';
+export * from './commit-task-file.service';
 export * from './create-importer-task.service';
 export * from './delete-importer-task.service';
 export * from './execute-bulk-import.service';
@@ -6,4 +7,6 @@ export * from './get-importer-task.service';
 export * from './get-record-types.service';
 export * from './get-serializers.service';
 export * from './get-task-status.service';
+export * from './initialize-task-files.service';
+export * from './upload-task-files.service';
 export * from './validate-importer-task.service';

@@ -4,7 +4,7 @@ import type { InvenioImporterRecords } from '@/types';
 export const runImporterRecord = async (recordId: string) => {
   try {
     const response = await apiClient.post<InvenioImporterRecords>(
-      `/api/importer-records/${recordId}`,
+      `/api/importer-records/${recordId}/run`,
       {}
     );
     if (response.status === 200) {

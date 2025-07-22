@@ -1,3 +1,4 @@
+import { FileUploader } from '@/components/core/file-uploader';
 import React, { Fragment } from 'react';
 import { SelectField, TextAreaField, TextField } from 'react-invenio-forms';
 import { Button, Form } from 'semantic-ui-react';
@@ -17,6 +18,10 @@ export const FormContent = () => {
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0] || null;
     setFieldValue('metadata', file);
+  };
+
+  const handleFilesChange = (files: File[]) => {
+    setFieldValue('files', files);
   };
 
   if (isLoading) {
@@ -93,6 +98,24 @@ export const FormContent = () => {
             Selected: {values.metadata.name}
           </p>
         )}
+        <p style={{ marginTop: '8px', fontSize: '12px', color: '#666' }}>
+          Upload a CSV or JSON file containing the record metadata to be
+          imported.
+        </p>
+      </Form.Field>
+
+      <Form.Field>
+        <FileUploader
+          value={values.files || []}
+          onChange={handleFilesChange}
+          accept='*'
+          maxSize={10 * 1024 * 1024 * 1024}
+          maxFiles={100}
+        />
+        <p style={{ marginTop: '8px', fontSize: '12px', color: '#666' }}>
+          <strong>Attachment Files:</strong> Upload files that will be attached
+          to the imported records.
+        </p>
       </Form.Field>
 
       <TextAreaField

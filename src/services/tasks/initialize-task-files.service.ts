@@ -10,15 +10,10 @@ export const initializeTaskFiles = async (
   try {
     const response = await apiClient.post(
       `/api/importer-tasks/${taskId}/files`,
-      {
-        data: payload,
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      }
+      payload
     );
 
-    if (response.status !== 200) {
+    if (response.status !== 201) {
       throw new Error(`Failed to initialize files: ${response.statusText}`);
     }
   } catch (error) {

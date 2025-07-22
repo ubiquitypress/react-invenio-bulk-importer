@@ -1,6 +1,5 @@
 import { StatusLabel } from '@/components/ui';
 import { useImporterTask } from '@/hooks';
-import { getImporterTask } from '@/services';
 import type { InvenioTask } from '@/types';
 import { capitalizeFirstLetter } from '@/utils';
 import React, { useCallback, useEffect, useState } from 'react';
@@ -37,11 +36,10 @@ export const TaskDetails: React.FC<TaskDetailsProps> = ({ taskId }) => {
       setLoading(true);
       setError(null);
 
-      const taskDetails = await getImporterTask(taskId);
+      const taskDetails = await getStatus();
       if (!taskDetails) {
         throw new Error('Task not found');
       }
-      setTask(taskDetails);
     } catch (error) {
       console.error('Error fetching task details:', error);
       setError(
@@ -50,7 +48,7 @@ export const TaskDetails: React.FC<TaskDetailsProps> = ({ taskId }) => {
     } finally {
       setLoading(false);
     }
-  }, [taskId]);
+  }, [getStatus]);
 
   useEffect(() => {
     if (taskId) {
@@ -140,22 +138,24 @@ export const TaskDetails: React.FC<TaskDetailsProps> = ({ taskId }) => {
                       {capitalizeFirstLetter(task.status)}
                     </StatusLabel>
                   )}
-                  <Button.Group style={{ marginLeft: '1rem' }} size='tiny'>
+                  <div>
                     <Button
+                      size='small'
                       color='blue'
                       icon='refresh'
-                      content='Check Status'
+                      content='Refresh'
                       onClick={() => getStatus()}
                       loading={loading}
                     />
                     <UploadMetadataModal />
                     <Button
+                      size='small'
                       disabled
                       color='green'
                       icon='play'
                       content='Run Task'
                     />
-                  </Button.Group>
+                  </div>
                 </div>
               </Grid.Column>
             </Grid.Row>

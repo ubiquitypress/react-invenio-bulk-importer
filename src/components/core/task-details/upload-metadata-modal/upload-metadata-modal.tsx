@@ -59,7 +59,9 @@ export const UploadMetadataModal = () => {
       onClose={handleCloseModal}
       size='small'
       closeIcon
-      trigger={<Button icon='upload' content='Upload New Metadata' />}
+      trigger={
+        <Button icon='upload' size='small' content='Upload New Metadata' />
+      }
     >
       <Header icon>
         <Icon name='upload' />

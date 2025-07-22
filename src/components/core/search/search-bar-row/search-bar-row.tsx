@@ -4,7 +4,6 @@ import { SearchBar } from 'react-searchkit';
 import { ImportModal } from '../../import-modal';
 import { useSearch } from '../provider';
 import { SearchFacets } from '../search-facets';
-import { styles } from './search-bar-row.styles';
 import type { SearchBarRowProps } from './search-bar-row.types';
 
 export const SearchBarRow: React.FC<SearchBarRowProps> = ({
@@ -15,16 +14,23 @@ export const SearchBarRow: React.FC<SearchBarRowProps> = ({
   return (
     <Overridable id={`${appId}.SearchBarRow`}>
       <section
-        className={styles.searchBarRow}
+        style={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          alignItems: 'center',
+          gap: '1rem',
+          paddingBlock: '0.5rem',
+          minBlockSize: '3rem'
+        }}
         aria-label='Records search and filters'
       >
         {showFacets && (
-          <div className={styles.facets}>
+          <div style={{ flex: '0 0 auto' }}>
             <SearchFacets />
           </div>
         )}
 
-        <div className={styles.search}>
+        <div style={{ flex: '1 1 auto', minInlineSize: '15rem' }}>
           <SearchBar
             autofocus
             actionProps={{
@@ -37,13 +43,10 @@ export const SearchBarRow: React.FC<SearchBarRowProps> = ({
             placeholder='Search…'
             aria-describedby='search-instructions'
           />
-          <span className={styles.visuallyHidden}>
-            Type keywords to search through records. Press Enter to submit.
-          </span>
         </div>
 
         {showImportModal && (
-          <div className={styles.import}>
+          <div style={{ flex: '0 0 auto' }}>
             <ImportModal />
           </div>
         )}

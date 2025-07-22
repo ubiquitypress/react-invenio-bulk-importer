@@ -50,11 +50,11 @@ export const TaskRecordItem: React.FC<TaskRecordItemProps> = ({
   const getStatusIcon = (color: string) => {
     if (color === 'red') {
       return 'times';
-    }
-    if (color === 'green') {
+    } else if (color === 'green' || color === 'blue') {
       return 'check';
     }
-    return undefined;
+
+    return 'question';
   };
 
   const actionOptions = [
@@ -71,7 +71,8 @@ export const TaskRecordItem: React.FC<TaskRecordItemProps> = ({
       : []),
     {
       key: 'run',
-      text: 'Run',
+      disabled: result.status === 'success',
+      text: 'Run Record',
       value: 'run',
       icon: 'play',
       onClick: async () => {
@@ -126,7 +127,7 @@ export const TaskRecordItem: React.FC<TaskRecordItemProps> = ({
       {/* Status Column with Label */}
       <TableCell>
         <Label color={statusColor} size='small'>
-          <Icon name={getStatusIcon(statusColor) || 'circle notched'} />
+          <Icon name={getStatusIcon(statusColor)} />
           {capitalizeFirstLetter(result.status)}
         </Label>
 
@@ -163,6 +164,7 @@ export const TaskRecordItem: React.FC<TaskRecordItemProps> = ({
                 key={option.key}
                 icon={option.icon}
                 text={option.text}
+                disabled={option.disabled}
                 onClick={option.onClick}
               />
             ))}

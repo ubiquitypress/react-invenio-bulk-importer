@@ -7,4 +7,5 @@ export interface ImportFormProps {
 export interface ImportFormValues {
   task: InvenioNewImportTask;
   metadata: File | null;
+  files: File[];
 }

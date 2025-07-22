@@ -12,7 +12,8 @@ export const INITIAL_FORM_VALUES: ImportFormValues = {
     recordType: '',
     serializer: ''
   },
-  metadata: null
+  metadata: null,
+  files: []
 };
 
 export const FORM_VALIDATION_SCHEMA = object({

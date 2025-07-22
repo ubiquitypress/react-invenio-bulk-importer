@@ -1,3 +1,4 @@
+import { StatusLabel } from '@/components/ui';
 import { useImporterTask } from '@/hooks';
 import type { InvenioTask } from '@/types';
 import { capitalizeFirstLetter, formatDate } from '@/utils';
@@ -63,9 +64,12 @@ export const ResultItem: React.FC<ResultItemProps> = ({ result, index }) => {
         </a>
       </TableCell>
       <TableCell>{formatDate(result.created)}</TableCell>
-      <TableCell>{capitalizeFirstLetter(result.status)}</TableCell>
+      <TableCell>
+        <StatusLabel status={result.status}>
+          {capitalizeFirstLetter(result.status)}
+        </StatusLabel>
+      </TableCell>
       <TableCell>{result.records_status?.total_records ?? 0}</TableCell>
-      <TableCell>{0}</TableCell>
       <TableCell>{result.serializer}</TableCell>
       <TableCell>{capitalizeFirstLetter(result.mode)}</TableCell>
       <TableCell style={{ width: '220px' }}>

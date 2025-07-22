@@ -16,7 +16,6 @@ export const ResultsTable = ({ children }: { children: React.ReactNode }) => {
           <TableHeaderCell>Date Created</TableHeaderCell>
           <TableHeaderCell>Status</TableHeaderCell>
           <TableHeaderCell>Records</TableHeaderCell>
-          <TableHeaderCell>Files</TableHeaderCell>
           <TableHeaderCell>Serializer</TableHeaderCell>
           <TableHeaderCell>Mode</TableHeaderCell>
           <TableHeaderCell>Actions</TableHeaderCell>

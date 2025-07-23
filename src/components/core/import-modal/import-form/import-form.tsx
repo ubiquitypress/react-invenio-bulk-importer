@@ -1,5 +1,6 @@
 import { createCompleteTask } from '@/services';
-import React from 'react';
+import type { OrchestrationSteps } from '@/types';
+import React, { useState } from 'react';
 import { BaseForm } from 'react-invenio-forms';
 import { FormContent } from './form-content';
 import {
@@ -9,6 +10,9 @@ import {
 import type { ImportFormProps, ImportFormValues } from './import-form.types';
 
 export const ImportForm: React.FC<ImportFormProps> = ({ onSubmit }) => {
+  const [progress, setProgress] = useState<
+    Record<OrchestrationSteps, number> | undefined
+  >(undefined);
   /**
    * Handles form submission for the import task.
    * @param values The form values submitted by the user.
@@ -16,7 +20,12 @@ export const ImportForm: React.FC<ImportFormProps> = ({ onSubmit }) => {
   const handleSubmit = async (values: ImportFormValues) => {
     try {
       await createCompleteTask(values.task, values.metadata, values.files, {
-        autoValidate: !!values.metadata
+        autoValidate: !!values.metadata,
+        onProgress(step, progress) {
+          setProgress({
+            [step]: progress
+          } as Record<OrchestrationSteps, number>);
+        }
       });
       onSubmit?.();
     } catch (error) {
@@ -33,7 +42,7 @@ export const ImportForm: React.FC<ImportFormProps> = ({ onSubmit }) => {
         onSubmit: handleSubmit
       }}
     >
-      <FormContent />
+      <FormContent progress={progress} />
     </BaseForm>
   );
 };

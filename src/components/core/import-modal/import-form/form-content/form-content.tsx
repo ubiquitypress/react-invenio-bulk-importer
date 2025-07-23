@@ -1,10 +1,15 @@
 import { FileUploader } from '@/components/core';
+import type { OrchestrationSteps } from '@/types';
 import React, { Fragment } from 'react';
 import { SelectField, TextAreaField, TextField } from 'react-invenio-forms';
-import { Button, Form } from 'semantic-ui-react';
+import { Button, Form, Icon, Segment } from 'semantic-ui-react';
 import { useFormContent } from './hooks';
 
-export const FormContent = () => {
+interface FormContentProps {
+  progress?: Record<OrchestrationSteps, number>;
+}
+
+export const FormContent: React.FC<FormContentProps> = ({ progress }) => {
   const {
     configs,
     isLoading,
@@ -117,15 +122,38 @@ export const FormContent = () => {
         rows={3}
       />
 
-      <Button
-        type='button'
-        primary
-        onClick={submitForm}
-        disabled={!isValid || isSubmitting}
-        loading={isSubmitting}
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'flex-start',
+          gap: '1rem'
+        }}
       >
-        Submit
-      </Button>
+        <Button
+          type='button'
+          primary
+          onClick={submitForm}
+          disabled={!isValid || isSubmitting}
+          loading={isSubmitting}
+        >
+          Submit
+        </Button>
+
+        {progress &&
+          Object.entries(progress).map(([step, value]) => (
+            <Segment.Inline basic key={step}>
+              <Icon
+                name='spinner'
+                loading
+                style={{
+                  marginInlineEnd: '0.5rem'
+                }}
+              />
+              <strong>{step}:</strong> {value}%
+            </Segment.Inline>
+          ))}
+      </div>
     </Fragment>
   );
 };

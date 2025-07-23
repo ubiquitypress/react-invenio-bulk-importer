@@ -2,8 +2,8 @@ import React, { useCallback, useRef } from 'react';
 import { Icon, Message } from 'semantic-ui-react';
 import type { FileUploaderProps } from './file-uploader.types';
 import { FileUploaderArea } from './file-uploader-area';
-import { UploadedFilesList } from './uploaded-files-list';
 import { useFileUploader } from './hooks/use-file-uploader.hook';
+import { UploadedFilesList } from './uploaded-files-list';
 
 export const FileUploader: React.FC<FileUploaderProps> = ({
   onChange,

@@ -2,9 +2,6 @@ import React from 'react';
 import {
   Card,
   Grid,
-  Icon,
-  Label,
-  Message,
   Progress,
   Segment,
   type SemanticCOLORS,

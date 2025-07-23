@@ -1,5 +1,7 @@
 import { FileUploader } from '@/components/core/file-uploader';
+import { ProgressLoading } from '@/components/ui';
 import { executeTaskWorkflow, updateTaskContent } from '@/services';
+import type { OrchestrationSteps } from '@/types';
 import React, { useState } from 'react';
 import { Button, Form, Header, Icon, Modal } from 'semantic-ui-react';
 import { useTaskDetails } from '../provider';
@@ -9,6 +11,10 @@ export const UploadMetadataModal = () => {
   const [uploadFile, setUploadFile] = useState<File | null>(null);
   const [uploadFiles, setUploadFiles] = useState<File[]>([]);
   const [openModal, setOpenModal] = useState(false);
+  const [progress, setProgress] = useState<Record<
+    OrchestrationSteps,
+    number
+  > | null>(null);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0] || null;
@@ -27,6 +33,7 @@ export const UploadMetadataModal = () => {
     setOpenModal(false);
     setUploadFile(null);
     setUploadFiles([]);
+    setProgress(null);
   };
 
   const handleUpload = async () => {
@@ -41,9 +48,10 @@ export const UploadMetadataModal = () => {
         uploadFile,
         uploadFiles.length > 0 ? uploadFiles : undefined,
         {
-          onProgress: (step, progress, details) => {
-            console.log(`${step}: ${progress}% ${details || ''}`);
-          },
+          onProgress: (step, progress) =>
+            setProgress({
+              [step]: progress
+            } as Record<OrchestrationSteps, number>),
           onError: (error, step) => {
             console.error(`Error during ${step}:`, error);
           }
@@ -54,9 +62,10 @@ export const UploadMetadataModal = () => {
       if (uploadFile) {
         await executeTaskWorkflow(taskId, {
           autoExecute: true, // Auto-execute import after validation
-          onProgress: (step, progress, details) => {
-            console.log(`${step}: ${progress}% ${details || ''}`);
-          },
+          onProgress: (step, progress) =>
+            setProgress({
+              [step]: progress
+            } as Record<OrchestrationSteps, number>),
           onError: (error, step) => {
             console.error(`Error during ${step}:`, error);
           }
@@ -78,7 +87,7 @@ export const UploadMetadataModal = () => {
       onClose={handleCloseModal}
       size='small'
       closeIcon
-      trigger={<Button icon='upload' size='small' content='Upload Content' />}
+      trigger={<Button icon='upload' size='tiny' content='Upload Content' />}
     >
       <Header icon>
         <Icon name='upload' />
@@ -124,18 +133,28 @@ export const UploadMetadataModal = () => {
       </Modal.Content>
 
       <Modal.Actions>
-        <Button onClick={handleCloseModal} color='grey'>
-          <Icon name='cancel' />
-          Cancel
-        </Button>
-        <Button
-          onClick={handleUpload}
-          color='blue'
-          disabled={!uploadFile && uploadFiles.length === 0}
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'flex-end',
+            alignItems: 'center',
+            gap: '.5rem'
+          }}
         >
-          <Icon name='upload' />
-          Upload
-        </Button>
+          {progress && <ProgressLoading progress={progress} />}
+          <Button onClick={handleCloseModal} color='grey'>
+            <Icon name='cancel' />
+            Cancel
+          </Button>
+          <Button
+            onClick={handleUpload}
+            color='blue'
+            disabled={!uploadFile && uploadFiles.length === 0}
+          >
+            <Icon name='upload' />
+            Upload
+          </Button>
+        </div>
       </Modal.Actions>
     </Modal>
   );

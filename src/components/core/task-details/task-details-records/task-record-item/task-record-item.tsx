@@ -11,7 +11,7 @@ import {
   TableCell,
   TableRow
 } from 'semantic-ui-react';
-import { ErrorModal } from './error-modal';
+import { DetailsModal } from './details-modal';
 
 export interface TaskRecordItemProps {
   result: InvenioImporterRecord;
@@ -25,7 +25,8 @@ export const TaskRecordItem: React.FC<TaskRecordItemProps> = ({
   const [copyState, setCopyState] = useState<'idle' | 'copying' | 'copied'>(
     'idle'
   );
-  const [openModal, setOpenModal] = useState(false);
+  const [openDetailsModal, setOpenDetailsModal] = useState(false);
+  const [detailsModalInitialTab, setDetailsModalInitialTab] = useState(0);
 
   if (!result) {
     return null;
@@ -47,6 +48,11 @@ export const TaskRecordItem: React.FC<TaskRecordItemProps> = ({
   const hasErrors = result.errors && result.errors.length > 0;
   const statusColor = getStatusColor(result.status);
 
+  const getErrorsTabIndex = () => {
+    // Basic Info = 0, Source Data = 1, Errors = 2 (if exists), Files = last
+    return hasErrors ? 2 : -1;
+  };
+
   const getStatusIcon = (color: string) => {
     if (color === 'red') {
       return 'times';
@@ -65,7 +71,10 @@ export const TaskRecordItem: React.FC<TaskRecordItemProps> = ({
             text: 'View Errors',
             value: 'view-errors',
             icon: 'exclamation triangle',
-            onClick: () => setOpenModal(true)
+            onClick: () => {
+              setDetailsModalInitialTab(getErrorsTabIndex());
+              setOpenDetailsModal(true);
+            }
           }
         ]
       : []),
@@ -90,8 +99,8 @@ export const TaskRecordItem: React.FC<TaskRecordItemProps> = ({
       value: 'view-details',
       icon: 'info circle',
       onClick: () => {
-        // Implement view details logic here
-        console.log(`Viewing details for record ${result.id}`);
+        setDetailsModalInitialTab(0);
+        setOpenDetailsModal(true);
       }
     }
   ];
@@ -181,10 +190,11 @@ export const TaskRecordItem: React.FC<TaskRecordItemProps> = ({
           </Dropdown.Menu>
         </Dropdown>
 
-        <ErrorModal
-          setOpenModal={setOpenModal}
-          openModal={openModal}
-          result={result}
+        <DetailsModal
+          record={result}
+          open={openDetailsModal}
+          onClose={() => setOpenDetailsModal(false)}
+          initialTab={detailsModalInitialTab}
         />
       </TableCell>
     </TableRow>

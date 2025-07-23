@@ -21,7 +21,7 @@ export const StatusIcon: React.FC<StatusIconProps> = ({ status, ...rest }) => {
     status === 'validated' ||
     status === 'created'
   ) {
-    return <Icon name='check circle' {...rest} />;
+    return <Icon name='check circle' color='green' {...rest} />;
   } else if (status === 'importing' || status === 'validating') {
     return <Icon name='spinner' loading {...rest} />;
   }

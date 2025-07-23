@@ -1,8 +1,9 @@
 import { FileUploader } from '@/components/core';
+import { ProgressLoading } from '@/components/ui';
 import type { OrchestrationSteps } from '@/types';
 import React, { Fragment } from 'react';
 import { SelectField, TextAreaField, TextField } from 'react-invenio-forms';
-import { Button, Form, Icon, Segment } from 'semantic-ui-react';
+import { Button, Form } from 'semantic-ui-react';
 import { useFormContent } from './hooks';
 
 interface FormContentProps {
@@ -126,10 +127,11 @@ export const FormContent: React.FC<FormContentProps> = ({ progress }) => {
         style={{
           display: 'flex',
           alignItems: 'center',
-          justifyContent: 'flex-start',
-          gap: '1rem'
+          justifyContent: 'flex-end',
+          gap: '.5rem'
         }}
       >
+        {progress && <ProgressLoading progress={progress} />}
         <Button
           type='button'
           primary
@@ -139,20 +141,6 @@ export const FormContent: React.FC<FormContentProps> = ({ progress }) => {
         >
           Submit
         </Button>
-
-        {progress &&
-          Object.entries(progress).map(([step, value]) => (
-            <Segment.Inline basic key={step}>
-              <Icon
-                name='spinner'
-                loading
-                style={{
-                  marginInlineEnd: '0.5rem'
-                }}
-              />
-              <strong>{step}:</strong> {value}%
-            </Segment.Inline>
-          ))}
       </div>
     </Fragment>
   );

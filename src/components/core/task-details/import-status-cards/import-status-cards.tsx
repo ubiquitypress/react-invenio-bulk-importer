@@ -55,7 +55,7 @@ export const ImportStatusCards = ({
       icon: 'exclamation triangle',
       title: 'Errors',
       value: errorRecords,
-      label: 'Records with Issues',
+      label: 'with Errors',
       progress: errorsProgress,
       progressLabel: `${errorsProgress.toFixed(1)}% of Total`
     },

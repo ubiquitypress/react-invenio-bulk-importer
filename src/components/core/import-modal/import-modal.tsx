@@ -3,7 +3,6 @@ import {
   Button,
   Icon,
   Modal,
-  ModalActions,
   ModalContent,
   ModalHeader
 } from 'semantic-ui-react';
@@ -36,9 +35,6 @@ export const ImportModal = () => {
       <ModalContent>
         <ImportForm onSubmit={handleSubmitSuccess} />
       </ModalContent>
-      <ModalActions>
-        <Button onClick={() => setOpen(false)}>Close</Button>
-      </ModalActions>
     </Modal>
   );
 };

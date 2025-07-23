@@ -5,6 +5,7 @@ import { capitalizeFirstLetter } from '@/utils';
 import React, { useEffect, useState } from 'react';
 import {
   Button,
+  Container,
   Grid,
   Header,
   Icon,
@@ -76,79 +77,87 @@ export const TaskDetails: React.FC<TaskDetailsProps> = ({ taskId }) => {
 
   return (
     <TaskDetailsProvider taskId={taskId}>
-      <Segment.Group compact style={{ border: 'none', boxShadow: 'none' }}>
+      <Container fluid verticalAlign='top'>
         {/* Task Header Section */}
-        <Segment>
-          <Grid>
-            <Grid.Row verticalAlign='middle'>
-              <Grid.Column width={8} verticalAlign='middle'>
-                <Header as='h2'>
-                  <Icon name='tasks' circular />
-                  <Header.Content>{task.title}</Header.Content>
-                </Header>
-                {task.status && (
-                  <StatusLabel size='large' status={task.status}>
-                    {capitalizeFirstLetter(task.status)}
-                  </StatusLabel>
-                )}
-              </Grid.Column>
-              <Grid.Column width={8} textAlign='right'>
+        <Grid>
+          <Grid.Row verticalAlign='top'>
+            <Grid.Column width={8} verticalAlign='middle'>
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'flex-start',
+                  gap: '.5rem'
+                }}
+              >
+                <Icon name='tasks' circular size='big' />
                 <div
                   style={{
                     display: 'flex',
                     flexDirection: 'column',
-                    alignItems: 'flex-end',
-                    justifyContent: 'center',
-                    gap: '1rem'
+                    alignItems: 'flex-start'
                   }}
                 >
-                  <div>
-                    <Button
-                      size='small'
-                      color='blue'
-                      icon='refresh'
-                      content='Refresh'
-                      onClick={() => getStatus()}
-                      loading={isGettingStatus}
-                    />
-                    <UploadMetadataModal />
-                    <Button
-                      size='small'
-                      color='green'
-                      icon='play'
-                      onClick={async () => {
-                        await runBulkImport();
-                        await getStatus();
-                      }}
-                      loading={isBulkImporting}
-                      disabled={
-                        !(
-                          task.status === 'created' ||
-                          task.status === 'validated'
-                        )
-                      }
-                      content='Run Task'
-                    />
-                  </div>
+                  <Header as='h2'>
+                    <Header.Content>{task.title}</Header.Content>
+                  </Header>
+                  {task.status && (
+                    <StatusLabel size='large' status={task.status}>
+                      {capitalizeFirstLetter(task.status)}
+                    </StatusLabel>
+                  )}
                 </div>
+              </div>
+            </Grid.Column>
+            <Grid.Column width={8} textAlign='right'>
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'flex-end',
+                  justifyContent: 'center',
+                  gap: '1rem'
+                }}
+              >
+                <div>
+                  <Button
+                    size='tiny'
+                    color='blue'
+                    icon='refresh'
+                    content='Refresh'
+                    onClick={() => getStatus()}
+                    loading={isGettingStatus}
+                  />
+                  <UploadMetadataModal />
+                  <Button
+                    size='tiny'
+                    color='green'
+                    icon='play'
+                    onClick={async () => {
+                      await runBulkImport();
+                      await getStatus();
+                    }}
+                    loading={isBulkImporting}
+                    content='Run Task'
+                  />
+                </div>
+              </div>
+            </Grid.Column>
+          </Grid.Row>
+          {/* Description Section - Only show if description exists */}
+          {task.description && (
+            <Grid.Row>
+              <Grid.Column width={16}>
+                <Message info icon size='small'>
+                  <Icon name='info circle' />
+                  <Message.Content>
+                    <Message.Header>Notes</Message.Header>
+                    {task.description}
+                  </Message.Content>
+                </Message>
               </Grid.Column>
             </Grid.Row>
-            {/* Description Section - Only show if description exists */}
-            {task.description && (
-              <Grid.Row>
-                <Grid.Column width={16}>
-                  <Message info icon size='small'>
-                    <Icon name='info circle' />
-                    <Message.Content>
-                      <Message.Header>Notes</Message.Header>
-                      {task.description}
-                    </Message.Content>
-                  </Message>
-                </Grid.Column>
-              </Grid.Row>
-            )}
-          </Grid>
-        </Segment>
+          )}
+        </Grid>
 
         {/* Statistics Section */}
         {totalRecords > 0 && (
@@ -161,7 +170,7 @@ export const TaskDetails: React.FC<TaskDetailsProps> = ({ taskId }) => {
             />
           </Segment>
         )}
-      </Segment.Group>
+      </Container>
       <TaskDetailsRecords />
     </TaskDetailsProvider>
   );

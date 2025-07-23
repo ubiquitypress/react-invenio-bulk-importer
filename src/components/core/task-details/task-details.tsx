@@ -2,19 +2,17 @@ import { StatusLabel } from '@/components/ui';
 import { useImporterTask } from '@/hooks';
 import type { InvenioTask } from '@/types';
 import { capitalizeFirstLetter } from '@/utils';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Button,
-  Divider,
   Grid,
   Header,
   Icon,
   Loader,
   Message,
-  Progress,
-  Segment,
-  Statistic
+  Segment
 } from 'semantic-ui-react';
+import { ImportStatusCards } from './import-status-cards';
 import { TaskDetailsProvider } from './provider';
 import { TaskDetailsRecords } from './task-details-records';
 import { UploadMetadataModal } from './upload-metadata-modal';
@@ -25,39 +23,16 @@ interface TaskDetailsProps {
 
 export const TaskDetails: React.FC<TaskDetailsProps> = ({ taskId }) => {
   const [task, setTask] = useState<InvenioTask | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const { getStatus, isGettingStatus } = useImporterTask(taskId, {
-    onStatusChangeSuccess: setTask
-  });
-
-  const fetchTaskDetails = useCallback(async () => {
-    try {
-      setLoading(true);
-      setError(null);
-
-      const taskDetails = await getStatus();
-      if (!taskDetails) {
-        throw new Error('Task not found');
-      }
-    } catch (error) {
-      console.error('Error fetching task details:', error);
-      setError(
-        error instanceof Error ? error.message : 'Failed to fetch task details'
-      );
-    } finally {
-      setLoading(false);
-    }
-  }, [getStatus]);
+  const { getStatus, isGettingStatus, runBulkImport, isBulkImporting, error } =
+    useImporterTask(taskId, { onStatusChangeSuccess: setTask });
 
   useEffect(() => {
-    if (taskId) {
-      fetchTaskDetails();
-    }
-  }, [taskId, fetchTaskDetails]);
+    // Fetch task status when component mounts
+    getStatus();
+  }, [getStatus]);
 
   // Loading state
-  if (loading || isGettingStatus) {
+  if (isGettingStatus || isBulkImporting) {
     return (
       <Segment>
         <Loader content='Loading task details...' />
@@ -99,29 +74,23 @@ export const TaskDetails: React.FC<TaskDetailsProps> = ({ taskId }) => {
     (task.records_status?.['validation failed'] || 0) +
     (task.records_status?.['serializer validation failed'] || 0);
 
-  const validationProgress =
-    totalRecords > 0 ? (validatedRecords / totalRecords) * 100 : 0;
-  const importProgress =
-    totalRecords > 0 ? (successRecords / totalRecords) * 100 : 0;
-  const errorsProgress =
-    totalRecords > 0 ? (errorRecords / totalRecords) * 100 : 0;
-
   return (
     <TaskDetailsProvider taskId={taskId}>
-      <Segment.Group compact>
+      <Segment.Group compact style={{ border: 'none', boxShadow: 'none' }}>
+        {/* Task Header Section */}
         <Segment>
           <Grid>
             <Grid.Row verticalAlign='middle'>
               <Grid.Column width={8} verticalAlign='middle'>
                 <Header as='h2'>
-                  <Icon name='tasks' />
-                  <Header.Content>
-                    {task.title}
-                    {task.description && (
-                      <Header.Subheader>{task.description}</Header.Subheader>
-                    )}
-                  </Header.Content>
+                  <Icon name='tasks' circular />
+                  <Header.Content>{task.title}</Header.Content>
                 </Header>
+                {task.status && (
+                  <StatusLabel size='large' status={task.status}>
+                    {capitalizeFirstLetter(task.status)}
+                  </StatusLabel>
+                )}
               </Grid.Column>
               <Grid.Column width={8} textAlign='right'>
                 <div
@@ -133,11 +102,6 @@ export const TaskDetails: React.FC<TaskDetailsProps> = ({ taskId }) => {
                     gap: '1rem'
                   }}
                 >
-                  {task.status && (
-                    <StatusLabel size='large' status={task.status}>
-                      {capitalizeFirstLetter(task.status)}
-                    </StatusLabel>
-                  )}
                   <div>
                     <Button
                       size='small'
@@ -145,79 +109,56 @@ export const TaskDetails: React.FC<TaskDetailsProps> = ({ taskId }) => {
                       icon='refresh'
                       content='Refresh'
                       onClick={() => getStatus()}
-                      loading={loading}
+                      loading={isGettingStatus}
                     />
                     <UploadMetadataModal />
                     <Button
                       size='small'
-                      disabled
                       color='green'
                       icon='play'
+                      onClick={async () => {
+                        await runBulkImport();
+                        await getStatus();
+                      }}
+                      loading={isBulkImporting}
+                      disabled={
+                        !(
+                          task.status === 'created' ||
+                          task.status === 'validated'
+                        )
+                      }
                       content='Run Task'
                     />
                   </div>
                 </div>
               </Grid.Column>
             </Grid.Row>
+            {/* Description Section - Only show if description exists */}
+            {task.description && (
+              <Grid.Row>
+                <Grid.Column width={16}>
+                  <Message info icon size='small'>
+                    <Icon name='info circle' />
+                    <Message.Content>
+                      <Message.Header>Notes</Message.Header>
+                      {task.description}
+                    </Message.Content>
+                  </Message>
+                </Grid.Column>
+              </Grid.Row>
+            )}
           </Grid>
         </Segment>
 
         {/* Statistics Section */}
         {totalRecords > 0 && (
-          <Segment>
-            <Header as='h4'>
-              <Icon name='chart bar' />
-              Progress Overview
-            </Header>
-
-            <Statistic.Group widths='three'>
-              <Statistic color='blue'>
-                <Statistic.Value>{validatedRecords}</Statistic.Value>
-                <Statistic.Label>Validated</Statistic.Label>
-              </Statistic>
-
-              <Statistic color='red'>
-                <Statistic.Value>{errorRecords}</Statistic.Value>
-                <Statistic.Label>With Errors</Statistic.Label>
-              </Statistic>
-
-              <Statistic color='green'>
-                <Statistic.Value>{successRecords}</Statistic.Value>
-                <Statistic.Label>Imported</Statistic.Label>
-              </Statistic>
-            </Statistic.Group>
-
-            <Divider />
-
-            {/* Progress Bars */}
-            <Grid columns={3} divided>
-              <Grid.Column>
-                <div style={{ textAlign: 'center', marginBottom: '0.5rem' }}>
-                  <strong>Validation Progress</strong>
-                </div>
-                <Progress percent={validationProgress} color='blue'>
-                  {validatedRecords} / {totalRecords}
-                </Progress>
-              </Grid.Column>
-
-              <Grid.Column>
-                <div style={{ textAlign: 'center', marginBottom: '0.5rem' }}>
-                  <strong>Error Records</strong>
-                </div>
-                <Progress percent={errorsProgress} color='red'>
-                  {errorRecords} / {totalRecords}
-                </Progress>
-              </Grid.Column>
-
-              <Grid.Column>
-                <div style={{ textAlign: 'center', marginBottom: '0.5rem' }}>
-                  <strong>Import Progress</strong>
-                </div>
-                <Progress percent={importProgress} color='green'>
-                  {successRecords} / {totalRecords}
-                </Progress>
-              </Grid.Column>
-            </Grid>
+          <Segment basic>
+            <ImportStatusCards
+              totalRecords={totalRecords}
+              validatedRecords={validatedRecords}
+              errorRecords={errorRecords}
+              successRecords={successRecords}
+            />
           </Segment>
         )}
       </Segment.Group>

@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import 'semantic-ui-css/semantic.min.css';
 import './theme/index.css';
+import { Button } from 'semantic-ui-react';
 import { BulkImporter } from './components/core';
 
 // Regex pattern for extracting task ID from URL path
@@ -18,8 +19,21 @@ const App: React.FC = () => {
 
   return (
     <div>
-      <BulkImporter.Search />
-      {taskId && <BulkImporter.TaskDetails taskId={taskId} />}
+      {!taskId && <BulkImporter.Search />}
+      {taskId && (
+        <div>
+          <Button
+            basic
+            size='small'
+            onClick={() => {
+              window.location.href = window.location.origin;
+            }}
+          >
+            Back to List
+          </Button>
+          <BulkImporter.TaskDetails taskId={taskId} />
+        </div>
+      )}
     </div>
   );
 };

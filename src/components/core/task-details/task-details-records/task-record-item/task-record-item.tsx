@@ -83,6 +83,16 @@ export const TaskRecordItem: React.FC<TaskRecordItemProps> = ({
           console.error('Error running record:', error);
         }
       }
+    },
+    {
+      key: 'view-details',
+      text: 'View Details',
+      value: 'view-details',
+      icon: 'info circle',
+      onClick: () => {
+        // Implement view details logic here
+        console.log(`Viewing details for record ${result.id}`);
+      }
     }
   ];
 

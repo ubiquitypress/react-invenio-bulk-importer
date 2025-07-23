@@ -5,3 +5,4 @@ export * from './invenio-new-task.types';
 export * from './invenio-task.types';
 export * from './invenio-task-config.types';
 export * from './search-config.types';
+export * from './task-orchestrator.types';

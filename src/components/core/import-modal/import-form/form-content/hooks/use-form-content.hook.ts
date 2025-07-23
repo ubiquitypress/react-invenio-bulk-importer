@@ -48,6 +48,30 @@ export const useFormContent = () => {
     }
   }, []);
 
+  /**
+   * Handles changes to the metadata file input field.
+   *
+   * This function updates the form state with the selected file.
+   *
+   * @param event - The change event from the file input element.
+   */
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0] || null;
+    setFieldValue('metadata', file);
+  };
+
+  /**
+   * Handles changes to the files input field.
+   *
+   * This function updates the form state with the selected files.
+   *
+   * @param files - An array of File objects representing the selected files.
+   */
+  const handleFilesChange = (files: File[]) => {
+    setFieldValue('files', files);
+  };
+
+  // Fetch record types on component mount
   useEffect(() => {
     fetchRecordTypes();
   }, [fetchRecordTypes]);
@@ -58,6 +82,8 @@ export const useFormContent = () => {
     values,
     submitForm,
     setFieldValue,
+    handleFileChange,
+    handleFilesChange,
     isSubmitting,
     isValid
   };

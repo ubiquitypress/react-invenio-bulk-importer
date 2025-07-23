@@ -75,6 +75,7 @@ export interface InvenioImporterRecord {
     'related_identifiers.resource_type.id': string;
     'additional_titles.alternative-title.eng': string;
   };
+
   errors: Array<{
     msg: string;
     loc: string;

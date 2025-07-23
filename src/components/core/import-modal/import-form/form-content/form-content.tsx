@@ -1,4 +1,4 @@
-import { FileUploader } from '@/components/core/file-uploader';
+import { FileUploader } from '@/components/core';
 import React, { Fragment } from 'react';
 import { SelectField, TextAreaField, TextField } from 'react-invenio-forms';
 import { Button, Form } from 'semantic-ui-react';
@@ -9,20 +9,12 @@ export const FormContent = () => {
     configs,
     isLoading,
     submitForm,
-    setFieldValue,
+    handleFileChange,
+    handleFilesChange,
     values,
     isSubmitting,
     isValid
   } = useFormContent();
-
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0] || null;
-    setFieldValue('metadata', file);
-  };
-
-  const handleFilesChange = (files: File[]) => {
-    setFieldValue('files', files);
-  };
 
   if (isLoading) {
     return <p>Loading record types...</p>;
@@ -99,8 +91,8 @@ export const FormContent = () => {
           </p>
         )}
         <p style={{ marginTop: '8px', fontSize: '12px', color: '#666' }}>
-          Upload a CSV or JSON file containing the record metadata to be
-          imported.
+          Upload a CSV file containing the records metadata to be imported or
+          deleted.
         </p>
       </Form.Field>
 
@@ -113,8 +105,8 @@ export const FormContent = () => {
           maxFiles={100}
         />
         <p style={{ marginTop: '8px', fontSize: '12px', color: '#666' }}>
-          <strong>Attachment Files:</strong> Upload files that will be attached
-          to the imported records.
+          Upload files related to the records. You can upload multiple files,
+          and they will be associated with the import task.
         </p>
       </Form.Field>
 

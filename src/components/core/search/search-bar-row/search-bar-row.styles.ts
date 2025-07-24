@@ -16,9 +16,6 @@ export const styles = {
     flex: '1 1 auto',
     minInlineSize: '15rem'
   }),
-  import: css({
-    flex: '0 0 auto'
-  }),
 
   visuallyHidden: css({
     srOnly: true

@@ -4,6 +4,7 @@ import { SearchBar } from 'react-searchkit';
 import { ImportModal } from '../../import-modal';
 import { useSearch } from '../provider';
 import { SearchFacets } from '../search-facets';
+import { styles } from './search-bar-row.styles';
 import type { SearchBarRowProps } from './search-bar-row.types';
 
 export const SearchBarRow: React.FC<SearchBarRowProps> = ({
@@ -14,23 +15,16 @@ export const SearchBarRow: React.FC<SearchBarRowProps> = ({
   return (
     <Overridable id={`${appId}.SearchBarRow`}>
       <section
-        style={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          alignItems: 'center',
-          gap: '1rem',
-          paddingBlock: '0.5rem',
-          minBlockSize: '3rem'
-        }}
+        className={styles.searchBarRow}
         aria-label='Records search and filters'
       >
         {showFacets && (
-          <div style={{ flex: '0 0 auto' }}>
+          <div className={styles.facets}>
             <SearchFacets />
           </div>
         )}
 
-        <div style={{ flex: '1 1 auto', minInlineSize: '15rem' }}>
+        <div className={styles.search}>
           <SearchBar
             autofocus
             actionProps={{
@@ -46,7 +40,7 @@ export const SearchBarRow: React.FC<SearchBarRowProps> = ({
         </div>
 
         {showImportModal && (
-          <div style={{ flex: '0 0 auto' }}>
+          <div className={styles.facets}>
             <ImportModal />
           </div>
         )}

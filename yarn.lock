@@ -1880,6 +1880,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"classnames@npm:^2.5.1":
+  version: 2.5.1
+  resolution: "classnames@npm:2.5.1"
+  checksum: 10c0/afff4f77e62cea2d79c39962980bf316bacb0d7c49e13a21adaadb9221e1c6b9d3cdb829d8bb1b23c406f4e740507f37e1dcf506f7e3b7113d17c5bab787aa69
+  languageName: node
+  linkType: hard
+
 "clsx@npm:^1.1.1":
   version: 1.2.1
   resolution: "clsx@npm:1.2.1"
@@ -2779,6 +2786,7 @@ __metadata:
     "@vitejs/plugin-basic-ssl": "npm:^2.1.0"
     "@vitejs/plugin-react": "npm:^4.0.0"
     axios: "npm:^1.7.7"
+    classnames: "npm:^2.5.1"
     formik: "npm:^2.1.0"
     js-cookie: "npm:2.2.1"
     lodash: "npm:^4.17.0"

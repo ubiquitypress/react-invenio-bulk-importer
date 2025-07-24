@@ -1,5 +1,10 @@
 import { apiClient } from '@/api';
 
+/**
+ * Executes a bulk import for a given task ID.
+ * @param taskId - The ID of the importer task to execute.
+ * @returns A promise that resolves to the response data from the API.
+ */
 export const executeBulkImport = async (taskId: string) => {
   try {
     const response = await apiClient.post(`/api/importer-tasks/${taskId}/load`);

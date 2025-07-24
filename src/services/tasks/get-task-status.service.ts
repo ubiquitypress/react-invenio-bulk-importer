@@ -1,6 +1,11 @@
 import { apiClient } from '@/api';
 import type { InvenioTask } from '@/types';
 
+/**
+ * Gets the status of an importer task by its ID.
+ * @param taskId - The ID of the importer task.
+ * @returns A promise that resolves to the task status data.
+ */
 export const getTaskStatus = async (taskId: string) => {
   try {
     const response = await apiClient.put<InvenioTask>(

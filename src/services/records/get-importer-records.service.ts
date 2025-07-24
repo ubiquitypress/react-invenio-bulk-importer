@@ -1,6 +1,10 @@
 import { apiClient } from '@/api';
 import type { InvenioImporterRecords } from '@/types';
 
+/**
+ * Fetches import records from the Invenio API.
+ * @returns A promise that resolves to the import records data.
+ */
 export const getImportRecords = async () => {
   try {
     const response = await apiClient.get<InvenioImporterRecords>(

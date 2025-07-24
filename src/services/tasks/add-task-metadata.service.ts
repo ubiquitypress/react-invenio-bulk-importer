@@ -1,5 +1,11 @@
 import { apiClient } from '@/api';
 
+/**
+ * Adds metadata to an importer task.
+ * @param taskId - The ID of the importer task.
+ * @param metadata - The metadata file to be added.
+ * @returns A promise that resolves to the response data.
+ */
 export const addTaskMetadata = async (taskId: string, metadata: File) => {
   try {
     const response = await apiClient.put(

@@ -1,6 +1,11 @@
 import { apiClient } from '@/api';
 import type { InvenioImporterRecords } from '@/types';
 
+/**
+ * Runs an importer record by its ID.
+ * @param recordId - The ID of the importer record to run.
+ * @returns A promise that resolves to the import record data.
+ */
 export const runImporterRecord = async (recordId: string) => {
   try {
     const response = await apiClient.post<InvenioImporterRecords>(

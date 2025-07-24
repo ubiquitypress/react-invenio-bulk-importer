@@ -100,7 +100,7 @@ export const ResultItem: React.FC<ResultItemProps> = ({ result, index }) => {
               },
               {
                 key: 'validate',
-                text: getActionText('Retry Validation', isValidating),
+                text: getActionText('Re-validate', isValidating),
                 value: 'validate',
                 disabled: isAnyOperationLoading,
                 onClick: () => validateTask()

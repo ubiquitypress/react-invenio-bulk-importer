@@ -1,6 +1,6 @@
-import type { BaseProps, OverridableComponents } from '@/types';
+import type { OverridableComponents } from '@/types';
 
-export interface SearchBarRowProps extends BaseProps {
+export interface SearchBarRowProps {
   appId?: string;
   overriddenComponents?: OverridableComponents;
   showFacets?: boolean;

@@ -1,4 +1,4 @@
-import { StatusLabel } from '@/components/ui';
+import { Spinner, StatusLabel } from '@/components/ui';
 import { useImporterTask } from '@/hooks';
 import type { InvenioTask } from '@/types';
 import { capitalizeFirstLetter } from '@/utils';
@@ -9,7 +9,6 @@ import {
   Grid,
   Header,
   Icon,
-  Loader,
   Message,
   Segment
 } from 'semantic-ui-react';
@@ -34,13 +33,8 @@ export const TaskDetails: React.FC<TaskDetailsProps> = ({ taskId }) => {
 
   // Loading state
   if (isGettingStatus || isBulkImporting) {
-    return (
-      <Segment>
-        <Loader content='Loading task details...' />
-      </Segment>
-    );
+    return <Spinner />;
   }
-
 
   // No task found
   if (!task) {
@@ -76,7 +70,7 @@ export const TaskDetails: React.FC<TaskDetailsProps> = ({ taskId }) => {
             </Message.Content>
           </Message>
         )}
-        
+
         {/* Task Header Section */}
         <Grid>
           <Grid.Row verticalAlign='top'>

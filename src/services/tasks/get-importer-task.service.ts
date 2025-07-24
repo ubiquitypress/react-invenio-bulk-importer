@@ -1,6 +1,11 @@
 import { apiClient } from '@/api';
 import type { InvenioTask } from '@/types';
 
+/**
+ * Fetches an importer task by its ID.
+ * @param taskId - The ID of the importer task to retrieve.
+ * @returns A promise that resolves to the importer task data.
+ */
 export const getImporterTask = async (taskId: string) => {
   try {
     const response = await apiClient.get<InvenioTask>(

@@ -1,5 +1,11 @@
 import { apiClient } from '@/api';
 
+/**
+ * Commits a file to an importer task.
+ * @param taskId - The ID of the importer task.
+ * @param fileName - The name of the file to commit.
+ * @returns A promise that resolves when the file is successfully committed.
+ */
 export const commitTaskFile = async (
   taskId: string,
   fileName: string

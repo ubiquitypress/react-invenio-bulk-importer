@@ -1,5 +1,11 @@
 import { apiClient } from '@/api';
 
+/**
+ * Initializes task files for Invenio.
+ * @param taskId - The ID of the importer task.
+ * @param fileNames - An array of file names to initialize.
+ * @returns A promise that resolves when the files are successfully initialized.
+ */
 export const initializeTaskFiles = async (
   taskId: string,
   fileNames: string[]

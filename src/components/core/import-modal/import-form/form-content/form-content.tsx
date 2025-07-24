@@ -1,5 +1,5 @@
 import { FileUploader } from '@/components/core';
-import { ProgressLoading } from '@/components/ui';
+import { ProgressLoading, Spinner } from '@/components/ui';
 import type { OrchestrationSteps } from '@/types';
 import React, { Fragment } from 'react';
 import { SelectField, TextAreaField, TextField } from 'react-invenio-forms';
@@ -23,7 +23,7 @@ export const FormContent: React.FC<FormContentProps> = ({ progress }) => {
   } = useFormContent();
 
   if (isLoading) {
-    return <p>Loading record types...</p>;
+    return <Spinner />;
   }
 
   if (!configs || Object.keys(configs).length === 0) {

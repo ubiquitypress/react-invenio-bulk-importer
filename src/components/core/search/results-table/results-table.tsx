@@ -12,10 +12,11 @@ export const ResultsTable = ({ children }: { children: React.ReactNode }) => {
     <Table padded size='small' comp>
       <TableHeader>
         <TableRow>
-          <TableHeaderCell>ID</TableHeaderCell>
+          <TableHeaderCell>Title</TableHeaderCell>
           <TableHeaderCell>Date Created</TableHeaderCell>
           <TableHeaderCell>Status</TableHeaderCell>
-          <TableHeaderCell>Records</TableHeaderCell>
+          <TableHeaderCell>Type</TableHeaderCell>
+          <TableHeaderCell>Items</TableHeaderCell>
           <TableHeaderCell>Serializer</TableHeaderCell>
           <TableHeaderCell>Mode</TableHeaderCell>
           <TableHeaderCell>Actions</TableHeaderCell>

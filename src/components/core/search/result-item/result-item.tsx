@@ -3,7 +3,14 @@ import { useImporterTask } from '@/hooks';
 import type { InvenioTask } from '@/types';
 import { capitalizeFirstLetter, formatDate } from '@/utils';
 import React from 'react';
-import { Button, Dropdown, Icon, TableCell, TableRow } from 'semantic-ui-react';
+import {
+  Button,
+  Dropdown,
+  Icon,
+  Label,
+  TableCell,
+  TableRow
+} from 'semantic-ui-react';
 import { useSearch } from '../provider';
 
 interface ResultItemProps {
@@ -12,11 +19,10 @@ interface ResultItemProps {
 }
 
 export const ResultItem: React.FC<ResultItemProps> = ({ result, index }) => {
-  const { refreshSearch, config } = useSearch();
+  const { config, refreshSearch } = useSearch();
 
   const {
     deleteTask,
-    validateTask,
     runBulkImport,
     getStatus,
     isDeleting,
@@ -27,9 +33,6 @@ export const ResultItem: React.FC<ResultItemProps> = ({ result, index }) => {
     clearError
   } = useImporterTask(result.id, {
     onDeleteSuccess: () => {
-      refreshSearch();
-    },
-    onValidateSuccess: () => {
       refreshSearch();
     },
     onBulkImportSuccess: () => {
@@ -44,15 +47,7 @@ export const ResultItem: React.FC<ResultItemProps> = ({ result, index }) => {
     return null;
   }
 
-  // Helper function to get loading text for dropdown
-  const getActionText = (action: string, isLoading: boolean) => {
-    if (isLoading) {
-      return `${action}...`;
-    }
-    return action;
-  };
-
-  // Helper function to check if any operation is loading
+  // Determine if any operation is currently loading
   const isAnyOperationLoading =
     isDeleting || isValidating || isBulkImporting || isGettingStatus;
 
@@ -68,6 +63,9 @@ export const ResultItem: React.FC<ResultItemProps> = ({ result, index }) => {
         <StatusLabel status={result.status}>
           {capitalizeFirstLetter(result.status)}
         </StatusLabel>
+      </TableCell>
+      <TableCell>
+        <Label>{capitalizeFirstLetter(result.record_type)}</Label>
       </TableCell>
       <TableCell>{result.records_status?.total_records ?? 0}</TableCell>
       <TableCell>{result.serializer}</TableCell>
@@ -93,35 +91,22 @@ export const ResultItem: React.FC<ResultItemProps> = ({ result, index }) => {
             disabled={isAnyOperationLoading}
             options={[
               {
-                key: 'download',
-                text: 'Download',
-                value: 'download',
-                disabled: true
-              },
-              {
-                key: 'validate',
-                text: getActionText('Re-validate', isValidating),
-                value: 'validate',
-                disabled: isAnyOperationLoading,
-                onClick: () => validateTask()
-              },
-              {
                 key: 'load',
-                text: getActionText('Load Bulk Import', isBulkImporting),
+                text: 'Run',
                 value: 'load',
                 disabled: isAnyOperationLoading,
                 onClick: () => runBulkImport()
               },
               {
                 key: 'status',
-                text: getActionText('Get Status', isGettingStatus),
+                text: 'Refresh Status',
                 value: 'status',
                 disabled: isAnyOperationLoading,
                 onClick: () => getStatus()
               },
               {
                 key: 'delete',
-                text: getActionText('Delete', isDeleting),
+                text: 'Delete',
                 value: 'delete',
                 disabled: isAnyOperationLoading,
                 onClick: () => deleteTask()

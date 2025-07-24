@@ -7,15 +7,12 @@ import {
 import type { InvenioTask } from '@/types';
 import { useCallback, useState } from 'react';
 
-// biome-ignore lint/suspicious/noExplicitAny: Using any for flexibility in task handling
-type TempAny = any; // TODO: Replace with a more specific type
-
 interface UseImporterTaskOptions {
   onDeleteSuccess?: () => void;
   onDeleteError?: (error: Error) => void;
-  onValidateSuccess?: (result: TempAny) => void;
+  onValidateSuccess?: (result: InvenioTask) => void;
   onValidateError?: (error: Error) => void;
-  onBulkImportSuccess?: (response: TempAny) => void;
+  onBulkImportSuccess?: (response: InvenioTask) => void;
   onBulkImportError?: (error: Error) => void;
   onStatusChangeSuccess?: (task: InvenioTask) => void;
   onStatusChangeError?: (error: Error) => void;
@@ -31,9 +28,9 @@ interface TaskState {
 
 interface UseImporterTaskReturn extends TaskState {
   deleteTask: () => Promise<void>;
-  validateTask: () => Promise<TempAny>;
-  runBulkImport: () => Promise<TempAny>;
-  getStatus: () => Promise<TempAny>;
+  validateTask: () => Promise<InvenioTask>;
+  runBulkImport: () => Promise<InvenioTask>;
+  getStatus: () => Promise<InvenioTask>;
   clearError: () => void;
 }
 
@@ -120,6 +117,8 @@ export const useImporterTask = (
       }
 
       onValidateSuccess?.(validationResult);
+      await getTaskStatus(taskId); // Get updated status after validation
+
       return validationResult;
     } catch (error) {
       const errorObj =
@@ -142,12 +141,11 @@ export const useImporterTask = (
 
     try {
       const response = await executeBulkImport(taskId);
-
       if (!response) {
         throw new Error(`Failed to execute bulk import for task ${taskId}`);
       }
-
       onBulkImportSuccess?.(response);
+      await getTaskStatus(taskId); // Get updated status after bulk import
       return response;
     } catch (error) {
       const errorObj =
@@ -172,7 +170,7 @@ export const useImporterTask = (
       if (!status) {
         throw new Error(`Failed to retrieve status for task ${taskId}`);
       }
-
+      setState(prev => ({ ...prev, error: null })); // Clear any previous errors
       onStatusChangeSuccess?.(status);
       return status;
     } catch (error) {

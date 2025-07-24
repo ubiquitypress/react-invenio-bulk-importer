@@ -125,7 +125,7 @@ export const UploadMetadataModal = () => {
               value={uploadFiles}
               onChange={handleFilesChange}
               accept='*'
-              maxSize={10 * 1024 * 1024 * 1024}
+              maxTotalSize={10 * 1024 * 1024 * 1024}
               maxFiles={100}
             />
           </Form.Field>

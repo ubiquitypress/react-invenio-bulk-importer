@@ -1,4 +1,5 @@
 import { apiClient } from '@/api';
+import type { InvenioTask } from '@/types';
 
 /**
  * Executes a bulk import for a given task ID.
@@ -7,7 +8,9 @@ import { apiClient } from '@/api';
  */
 export const executeBulkImport = async (taskId: string) => {
   try {
-    const response = await apiClient.post(`/api/importer-tasks/${taskId}/load`);
+    const response = await apiClient.post<InvenioTask>(
+      `/api/importer-tasks/${taskId}/load`
+    );
 
     if (response.status === 200) {
       return response.data;

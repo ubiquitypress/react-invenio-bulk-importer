@@ -13,6 +13,8 @@ export const ImportModal = () => {
   const [open, setOpen] = useState(false);
   const { refreshSearch } = useSearch();
 
+  // Callback to handle successful form submission
+  // Closes the modal and refreshes the search results
   const handleSubmitSuccess = useCallback(() => {
     setOpen(false);
     refreshSearch();

@@ -7,9 +7,13 @@ import {
   TableRow
 } from 'semantic-ui-react';
 
-export const ResultTable = ({ children }: { children: React.ReactNode }) => {
+export interface ResultTableProps {
+  children: React.ReactNode;
+}
+
+export const ResultTable: React.FC<ResultTableProps> = ({ children }) => {
   return (
-    <Table padded size='small' comp>
+    <Table padded size='small' compact>
       <TableHeader>
         <TableRow>
           <TableHeaderCell>ID</TableHeaderCell>

@@ -41,18 +41,6 @@ export const TaskDetails: React.FC<TaskDetailsProps> = ({ taskId }) => {
     );
   }
 
-  // Error state
-  if (error) {
-    return (
-      <Message negative icon>
-        <Icon name='exclamation triangle' />
-        <Message.Content>
-          <Message.Header>Error Loading Task</Message.Header>
-          {error}
-        </Message.Content>
-      </Message>
-    );
-  }
 
   // No task found
   if (!task) {
@@ -78,6 +66,17 @@ export const TaskDetails: React.FC<TaskDetailsProps> = ({ taskId }) => {
   return (
     <TaskDetailsProvider taskId={taskId}>
       <Container fluid verticalAlign='top'>
+        {/* Error Message */}
+        {error && (
+          <Message negative icon>
+            <Icon name='exclamation triangle' />
+            <Message.Content>
+              <Message.Header>Error</Message.Header>
+              {error?.message || 'An unknown error occurred'}
+            </Message.Content>
+          </Message>
+        )}
+        
         {/* Task Header Section */}
         <Grid>
           <Grid.Row verticalAlign='top'>
@@ -143,6 +142,7 @@ export const TaskDetails: React.FC<TaskDetailsProps> = ({ taskId }) => {
               </div>
             </Grid.Column>
           </Grid.Row>
+
           {/* Description Section - Only show if description exists */}
           {task.description && (
             <Grid.Row>

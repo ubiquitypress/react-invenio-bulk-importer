@@ -1,23 +1,6 @@
 import React from 'react';
-import {
-  Card,
-  Grid,
-  Progress,
-  Segment,
-  type SemanticCOLORS,
-  type SemanticICONS,
-  Statistic
-} from 'semantic-ui-react';
-
-interface CardConfig {
-  color: SemanticCOLORS;
-  icon: SemanticICONS;
-  title: string;
-  value: number;
-  label: string;
-  progress: number;
-  progressLabel: string;
-}
+import { Card, Grid, Progress, Segment, Statistic } from 'semantic-ui-react';
+import { useImportStatusConfig } from './hooks';
 
 export const ImportStatusCards = ({
   totalRecords = 0,
@@ -28,47 +11,16 @@ export const ImportStatusCards = ({
   className = '',
   style = {}
 }) => {
-  // Calculate progress percentages
-  const validationProgress =
-    totalRecords > 0 ? (validatedRecords / totalRecords) * 100 : 0;
-  const errorsProgress =
-    totalRecords > 0 ? (errorRecords / totalRecords) * 100 : 0;
-  const importProgress =
-    totalRecords > 0 ? (successRecords / totalRecords) * 100 : 0;
+  const cardConfig = useImportStatusConfig({
+    totalRecords,
+    validatedRecords,
+    errorRecords,
+    successRecords
+  });
 
   if (totalRecords === 0 && !showWhenEmpty) {
     return null;
   }
-
-  const cardConfig: CardConfig[] = [
-    {
-      color: 'blue',
-      icon: 'check circle',
-      title: 'Validation',
-      value: validatedRecords,
-      label: `of ${totalRecords} Validated`,
-      progress: validationProgress,
-      progressLabel: `${validationProgress.toFixed(1)}% Complete`
-    },
-    {
-      color: 'red',
-      icon: 'exclamation triangle',
-      title: 'Errors',
-      value: errorRecords,
-      label: 'with Errors',
-      progress: errorsProgress,
-      progressLabel: `${errorsProgress.toFixed(1)}% of Total`
-    },
-    {
-      color: 'green',
-      icon: 'upload',
-      title: 'Import',
-      value: successRecords,
-      label: 'Successfully Imported',
-      progress: importProgress,
-      progressLabel: `${importProgress.toFixed(1)}% Complete`
-    }
-  ];
 
   return (
     <Segment basic className={className} style={style}>

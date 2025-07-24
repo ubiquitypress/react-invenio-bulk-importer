@@ -11,6 +11,7 @@ export interface FileUploaderProps {
   accept?: string;
   maxFiles?: number;
   maxTotalSize?: number;
+  skipEmptyFiles?: boolean;
   disabled?: boolean;
   error?: string;
 }

@@ -24,7 +24,11 @@ export const useFileUploader = ({
    * Returns an error message if validation fails, otherwise null.
    */
   const validateFile = useCallback(
-    (file: File, accept?: string): string | null => {
+    (file: File, accept?: string, skipEmptyFiles?: boolean): string | null => {
+      if (skipEmptyFiles && file.size === 0) {
+        return 'Empty files are not allowed';
+      }
+
       if (accept) {
         const acceptedTypes = accept.split(',').map(type => type.trim());
         const isValidType = acceptedTypes.some(type => {
@@ -52,7 +56,8 @@ export const useFileUploader = ({
       newFiles: File[],
       accept?: string,
       maxFiles?: number,
-      maxTotalSize?: number
+      maxTotalSize?: number,
+      skipEmptyFiles?: boolean
     ) => {
       const validFiles: UploadableFile[] = [];
       const errors: string[] = [];
@@ -63,7 +68,7 @@ export const useFileUploader = ({
           break;
         }
 
-        const validation = validateFile(file, accept);
+        const validation = validateFile(file, accept, skipEmptyFiles);
         if (validation) {
           errors.push(`${file.name}: ${validation}`);
           continue;

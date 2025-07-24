@@ -10,6 +10,7 @@ export const FileUploader: React.FC<FileUploaderProps> = ({
   accept = '.csv,.json,.xlsx,.txt',
   maxFiles = 5,
   maxTotalSize = 50 * 1024 * 1024, // 50MB
+  skipEmptyFiles = true,
   disabled = false,
   error
 }) => {
@@ -44,7 +45,13 @@ export const FileUploader: React.FC<FileUploaderProps> = ({
       setValidationError(null);
 
       const fileArray = Array.from(files);
-      const addedFiles = addFiles(fileArray, accept, maxFiles, maxTotalSize);
+      const addedFiles = addFiles(
+        fileArray,
+        accept,
+        maxFiles,
+        maxTotalSize,
+        skipEmptyFiles
+      );
 
       // Immediately notify parent of selected files for UI feedback
       if (addedFiles.length > 0) {
@@ -52,7 +59,15 @@ export const FileUploader: React.FC<FileUploaderProps> = ({
         onChange(allFiles);
       }
     },
-    [addFiles, accept, maxFiles, maxTotalSize, onChange, uploadFiles]
+    [
+      addFiles,
+      accept,
+      maxFiles,
+      maxTotalSize,
+      skipEmptyFiles,
+      onChange,
+      uploadFiles
+    ]
   );
 
   /**

@@ -21,7 +21,7 @@ export const FilesTab: React.FC<FilesTabProps> = ({ record }) => {
   }
 
   return (
-    <Segment>
+    <Segment basic>
       {record.record_files && record.record_files.length > 0 && (
         <React.Fragment>
           <Header as='h4'>

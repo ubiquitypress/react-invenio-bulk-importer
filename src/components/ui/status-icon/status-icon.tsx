@@ -16,14 +16,12 @@ export const StatusIcon: React.FC<StatusIconProps> = ({ status, ...rest }) => {
     status === 'import failed'
   ) {
     return <Icon name='close' color='red' {...rest} />;
-  } else if (
-    status === 'success' ||
-    status === 'validated' ||
-    status === 'created'
-  ) {
+  } else if (status === 'success' || status === 'created') {
     return <Icon name='check circle' color='green' {...rest} />;
   } else if (status === 'importing' || status === 'validating') {
     return <Icon name='spinner' loading {...rest} />;
+  } else if (status === 'validated') {
+    return <Icon name='check circle' color='blue' {...rest} />;
   }
 
   // Default case for any other status

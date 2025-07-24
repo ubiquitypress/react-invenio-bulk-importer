@@ -8,7 +8,7 @@ interface ErrorsTabProps {
 
 export const ErrorsTab: React.FC<ErrorsTabProps> = ({ record }) => {
   return (
-    <Segment>
+    <Segment basic>
       {record.errors.map((error, index) => (
         <Message key={`error-${index}-${error.type}`} negative>
           <Message.Header>{error.type}</Message.Header>

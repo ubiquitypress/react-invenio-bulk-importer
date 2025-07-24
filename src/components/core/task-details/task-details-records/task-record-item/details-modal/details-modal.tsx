@@ -25,6 +25,13 @@ export const DetailsModal: React.FC<DetailsModalProps> = ({
     }
   }, [open, initialTab]);
 
+  /**
+   * Handles tab change events.
+   * Updates the active tab index based on the clicked tab.
+   * @param _ - The mouse event (not used).
+   * @param data - The tab data containing the active index.
+   * @returns void
+   */
   const handleTabChange = (
     _: React.MouseEvent<HTMLDivElement>,
     data: TabProps
@@ -33,6 +40,11 @@ export const DetailsModal: React.FC<DetailsModalProps> = ({
     setActiveTabIndex(index);
   };
 
+  /**
+   * Generates the panes for the tab component.
+   * Each pane corresponds to a different tab in the modal.
+   * @returns An array of tab panes.
+   */
   const panes = [
     {
       menuItem: { key: 'basic', icon: 'info circle', content: 'Basic Info' },
@@ -76,6 +88,10 @@ export const DetailsModal: React.FC<DetailsModalProps> = ({
     }
   ];
 
+  /**
+   * Generates the title for the record.
+   * @returns The title for the record, derived from various metadata fields.
+   */
   const getRecordTitle = () => {
     return (
       record.serializer_data?.metadata?.title ||
@@ -86,7 +102,13 @@ export const DetailsModal: React.FC<DetailsModalProps> = ({
   };
 
   return (
-    <Modal open={open} onClose={onClose} size='large' closeIcon>
+    <Modal
+      centered={false}
+      open={open}
+      onClose={onClose}
+      size='large'
+      closeIcon
+    >
       <Modal.Header>
         <div
           style={{

@@ -9,7 +9,7 @@ interface BasicInfoTabProps {
 
 export const BasicInfoTab: React.FC<BasicInfoTabProps> = ({ record }) => {
   return (
-    <Segment>
+    <Segment basic>
       <List>
         <List.Item>
           <List.Icon name='tag' />

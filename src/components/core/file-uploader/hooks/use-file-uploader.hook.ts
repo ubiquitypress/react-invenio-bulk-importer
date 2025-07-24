@@ -1,3 +1,4 @@
+import { getTotalSize } from '@/utils';
 import { useCallback, useState } from 'react';
 import type { UploadableFile } from '../file-uploader.types';
 
@@ -7,6 +8,11 @@ interface UseFileUploaderProps {
   onUploadError?: (error: string) => void;
 }
 
+/**
+ * Custom hook for managing file uploads.
+ * Provides functionality to add, remove, and clear files,
+ * along with validation against accepted types and size limits.
+ */
 export const useFileUploader = ({
   onUploadError
 }: UseFileUploaderProps = {}) => {
@@ -18,7 +24,7 @@ export const useFileUploader = ({
    * Returns an error message if validation fails, otherwise null.
    */
   const validateFile = useCallback(
-    (file: File, accept?: string, maxSize?: number): string | null => {
+    (file: File, accept?: string): string | null => {
       if (accept) {
         const acceptedTypes = accept.split(',').map(type => type.trim());
         const isValidType = acceptedTypes.some(type => {
@@ -30,10 +36,6 @@ export const useFileUploader = ({
         if (!isValidType) {
           return `File type not accepted. Accepted types: ${accept}`;
         }
-      }
-
-      if (maxSize && file.size > maxSize) {
-        return `File size exceeds maximum of ${(maxSize / 1024 / 1024).toFixed(2)}MB`;
       }
 
       return null;
@@ -49,8 +51,8 @@ export const useFileUploader = ({
     (
       newFiles: File[],
       accept?: string,
-      maxSize?: number,
-      maxFiles?: number
+      maxFiles?: number,
+      maxTotalSize?: number
     ) => {
       const validFiles: UploadableFile[] = [];
       const errors: string[] = [];
@@ -61,12 +63,13 @@ export const useFileUploader = ({
           break;
         }
 
-        const validation = validateFile(file, accept, maxSize);
+        const validation = validateFile(file, accept);
         if (validation) {
           errors.push(`${file.name}: ${validation}`);
           continue;
         }
 
+        // Check for duplicate files in the current upload list
         const isDuplicate = uploadFiles.some(
           f => f.file.name === file.name && f.file.size === file.size
         );
@@ -75,6 +78,22 @@ export const useFileUploader = ({
           continue;
         }
 
+        // Check total size limit before adding the file
+        if (maxTotalSize) {
+          const currentTotalSize = getTotalSize([
+            ...uploadFiles,
+            ...validFiles
+          ]);
+          const newTotalSize = currentTotalSize + file.size;
+          if (newTotalSize > maxTotalSize) {
+            errors.push(
+              `Total size would exceed maximum of ${(maxTotalSize / 1024 / 1024).toFixed(2)}MB`
+            );
+            break;
+          }
+        }
+
+        // If all checks pass, add the file to the valid files list
         validFiles.push({
           file,
           id: `${file.name}-${file.size}-${Date.now()}`

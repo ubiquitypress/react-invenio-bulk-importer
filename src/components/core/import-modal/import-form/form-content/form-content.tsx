@@ -107,7 +107,7 @@ export const FormContent: React.FC<FormContentProps> = ({ progress }) => {
           value={values.files || []}
           onChange={handleFilesChange}
           accept='*'
-          maxSize={10 * 1024 * 1024 * 1024}
+          maxTotalSize={10 * 1024 * 1024 * 1024} // 10 GB
           maxFiles={100}
         />
         <p style={{ marginTop: '8px', fontSize: '12px', color: '#666' }}>

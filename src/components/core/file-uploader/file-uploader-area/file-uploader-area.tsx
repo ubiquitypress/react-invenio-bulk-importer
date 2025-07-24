@@ -6,8 +6,8 @@ import type { UploadableFile } from '../file-uploader.types';
 interface FileUploaderAreaProps {
   fileInputRef: React.RefObject<HTMLInputElement>;
   accept: string;
-  maxSize: number;
   maxFiles: number;
+  maxTotalSize: number;
   isDragOver: boolean;
   disabled?: boolean;
   uploadFiles: UploadableFile[];
@@ -21,8 +21,8 @@ interface FileUploaderAreaProps {
 export const FileUploaderArea: React.FC<FileUploaderAreaProps> = ({
   fileInputRef,
   accept,
-  maxSize,
   maxFiles,
+  maxTotalSize,
   disabled = false,
   isDragOver,
   uploadFiles,
@@ -70,7 +70,7 @@ export const FileUploaderArea: React.FC<FileUploaderAreaProps> = ({
               <strong>Drop files here or click to select</strong>
             </p>
             <p style={{ fontSize: '12px', color: '#666' }}>
-              Max size: {formatFileSize(maxSize)} | Max files: {maxFiles}
+              Max files: {maxFiles} | Max total: {formatFileSize(maxTotalSize)}
             </p>
             {uploadFiles.length > 0 && (
               <p

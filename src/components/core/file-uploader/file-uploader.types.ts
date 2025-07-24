@@ -9,8 +9,8 @@ export interface FileUploaderProps {
   value?: File[];
   onChange: (files: File[]) => void;
   accept?: string;
-  maxSize?: number;
   maxFiles?: number;
+  maxTotalSize?: number;
   disabled?: boolean;
   error?: string;
 }

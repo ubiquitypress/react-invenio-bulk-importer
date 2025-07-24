@@ -8,14 +8,16 @@ import { UploadedFilesList } from './uploaded-files-list';
 export const FileUploader: React.FC<FileUploaderProps> = ({
   onChange,
   accept = '.csv,.json,.xlsx,.txt',
-  maxSize = 10 * 1024 * 1024, // 10MB
   maxFiles = 5,
+  maxTotalSize = 50 * 1024 * 1024, // 50MB
   disabled = false,
   error
 }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [isDragOver, setIsDragOver] = React.useState(false);
-
+  const [validationError, setValidationError] = React.useState<string | null>(
+    null
+  );
   const { uploadFiles, isUploading, addFiles, removeFile, clearFiles } =
     useFileUploader({
       onUploadComplete: files => {
@@ -23,6 +25,7 @@ export const FileUploader: React.FC<FileUploaderProps> = ({
       },
       onUploadError: errorMessage => {
         console.error('Upload error:', errorMessage);
+        setValidationError(errorMessage);
       }
     });
 
@@ -37,8 +40,11 @@ export const FileUploader: React.FC<FileUploaderProps> = ({
         return;
       }
 
+      // Clear previous validation errors
+      setValidationError(null);
+
       const fileArray = Array.from(files);
-      const addedFiles = addFiles(fileArray, accept, maxSize, maxFiles);
+      const addedFiles = addFiles(fileArray, accept, maxFiles, maxTotalSize);
 
       // Immediately notify parent of selected files for UI feedback
       if (addedFiles.length > 0) {
@@ -46,7 +52,7 @@ export const FileUploader: React.FC<FileUploaderProps> = ({
         onChange(allFiles);
       }
     },
-    [addFiles, accept, maxSize, maxFiles, onChange, uploadFiles]
+    [addFiles, accept, maxFiles, maxTotalSize, onChange, uploadFiles]
   );
 
   /**
@@ -121,6 +127,8 @@ export const FileUploader: React.FC<FileUploaderProps> = ({
   const handleRemoveFile = useCallback(
     (fileId: string) => {
       removeFile(fileId);
+      // Clear validation errors when files are removed
+      setValidationError(null);
       // Update parent with remaining files
       const remainingFiles = uploadFiles
         .filter(f => f.id !== fileId)
@@ -136,6 +144,8 @@ export const FileUploader: React.FC<FileUploaderProps> = ({
    */
   const handleClearFiles = useCallback(() => {
     clearFiles();
+    // Clear validation errors when all files are cleared
+    setValidationError(null);
     onChange([]);
   }, [clearFiles, onChange]);
 
@@ -144,8 +154,8 @@ export const FileUploader: React.FC<FileUploaderProps> = ({
       <FileUploaderArea
         fileInputRef={fileInputRef}
         accept={accept}
-        maxSize={maxSize}
         maxFiles={maxFiles}
+        maxTotalSize={maxTotalSize}
         isDragOver={isDragOver}
         disabled={disabled}
         uploadFiles={uploadFiles}
@@ -156,10 +166,10 @@ export const FileUploader: React.FC<FileUploaderProps> = ({
         onFileDialogOpen={openFileDialog}
       />
 
-      {error && (
+      {(error || validationError) && (
         <Message negative size='small'>
           <Icon name='exclamation triangle' />
-          {error}
+          {error || validationError}
         </Message>
       )}
 

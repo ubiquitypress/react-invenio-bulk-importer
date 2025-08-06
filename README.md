@@ -179,30 +179,6 @@ src/
 └── theme/               # Global styles
 ```
 
-## API Integration
-
-The library expects specific API endpoints for full functionality:
-
-### Required Endpoints
-
-- `GET /api/tasks` - List import tasks
-- `POST /api/tasks` - Create new import task
-- `GET /api/tasks/:id` - Get task details
-- `DELETE /api/tasks/:id` - Delete task
-- `POST /api/tasks/:id/run` - Execute import
-- `GET /api/tasks/:id/records` - Get task records
-- `GET /api/config/record-types` - Get available record types
-
-### Configuration
-
-```jsx
-const apiConfig = {
-  baseURL: 'https://your-invenio-instance.com/api',
-  timeout: 30000,
-  // Additional axios config...
-};
-```
-
 ### Code Style
 
 This project uses:
@@ -212,7 +188,4 @@ This project uses:
 - **PandaCSS** for styling
 - **Semantic UI React** for base components
 
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
 

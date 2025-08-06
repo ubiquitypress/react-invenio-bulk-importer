@@ -1,4 +1,5 @@
 export * from './capitalize-first-letter';
+export * from './cn';
 export * from './file-utils';
 export * from './format-date';
 export * from './get-csrf-token';

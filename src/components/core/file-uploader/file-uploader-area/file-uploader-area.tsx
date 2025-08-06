@@ -1,7 +1,9 @@
 import { formatFileSize, getTotalSizeFormatted } from '@/utils';
+import { cn } from '@/utils/cn';
 import React, { Fragment } from 'react';
 import { Icon, Segment } from 'semantic-ui-react';
 import type { UploadableFile } from '../file-uploader.types';
+import { styles } from './file-uploader-area.styles';
 
 interface FileUploaderAreaProps {
   fileInputRef: React.RefObject<HTMLInputElement>;
@@ -40,42 +42,40 @@ export const FileUploaderArea: React.FC<FileUploaderAreaProps> = ({
         multiple
         accept={accept}
         onChange={onInputChange}
-        style={{ display: 'none' }}
+        className={styles.hiddenInput}
         disabled={disabled}
       />
 
       <Segment
         placeholder
-        className={`file-drop-zone ${isDragOver ? 'drag-over' : ''}`}
+        className={cn(
+          'file-drop-zone',
+          styles.dropZone,
+          {
+            [styles.dropZoneActive]: isDragOver,
+            [styles.dropZoneDisabled]: disabled
+          }
+        )}
         onDragOver={onDragOver}
         onDragLeave={onDragLeave}
         onDrop={onDrop}
-        style={{
-          minHeight: '120px',
-          border: isDragOver ? '2px dashed #2185d0' : '2px dashed #d4d4d5',
-          backgroundColor: isDragOver ? '#f8f9fa' : 'transparent',
-          cursor: disabled ? 'not-allowed' : 'pointer',
-          opacity: disabled ? 0.6 : 1
-        }}
         onClick={onFileDialogOpen}
       >
-        <div style={{ textAlign: 'center', padding: '20px' }}>
+        <div className={styles.contentContainer}>
           <Icon
             name='cloud upload'
             size='huge'
             color={isDragOver ? 'blue' : 'grey'}
           />
-          <div style={{ marginTop: '10px' }}>
+          <div className={styles.textContainer}>
             <p>
               <strong>Drop files here or click to select</strong>
             </p>
-            <p style={{ fontSize: '12px', color: '#666' }}>
+            <p className={styles.smallText}>
               Max files: {maxFiles} | Max total: {formatFileSize(maxTotalSize)}
             </p>
             {uploadFiles.length > 0 && (
-              <p
-                style={{ fontSize: '12px', color: '#2185d0', marginTop: '8px' }}
-              >
+              <p className={styles.selectedFilesText}>
                 <strong>
                   {uploadFiles.length} files selected •{' '}
                   {getTotalSizeFormatted(uploadFiles)} total

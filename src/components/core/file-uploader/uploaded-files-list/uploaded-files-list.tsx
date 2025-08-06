@@ -2,6 +2,7 @@ import { formatFileSize, getTotalSizeFormatted } from '@/utils';
 import React from 'react';
 import { Button, Icon, Label, List, Message, Segment } from 'semantic-ui-react';
 import type { UploadableFile } from '../file-uploader.types';
+import { styles } from './uploaded-files-list.styles';
 
 interface UploadedFilesListProps {
   uploadFiles: UploadableFile[];
@@ -18,14 +19,7 @@ export const UploadedFilesList: React.FC<UploadedFilesListProps> = ({
 }) => {
   return (
     <Segment>
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          marginBottom: '10px'
-        }}
-      >
+      <div className={styles.headerContainer}>
         <strong>
           Selected Files ({uploadFiles.length}) •{' '}
           {getTotalSizeFormatted(uploadFiles)}
@@ -44,21 +38,9 @@ export const UploadedFilesList: React.FC<UploadedFilesListProps> = ({
         {uploadFiles.map(uploadFile => (
           <List.Item key={uploadFile.id}>
             <List.Content>
-              <div
-                style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center'
-                }}
-              >
-                <div style={{ flex: 1 }}>
-                  <div
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '8px'
-                    }}
-                  >
+              <div className={styles.listItemContainer}>
+                <div className={styles.fileContentContainer}>
+                  <div className={styles.fileInfoContainer}>
                     <Icon name={'file'} />
                     <span>{uploadFile.file.name}</span>
                     <Label size='mini' basic>
@@ -67,7 +49,7 @@ export const UploadedFilesList: React.FC<UploadedFilesListProps> = ({
                   </div>
 
                   {uploadFile.error && (
-                    <Message negative size='mini' style={{ marginTop: '5px' }}>
+                    <Message negative size='mini' className={styles.errorMessage}>
                       {uploadFile.error}
                     </Message>
                   )}

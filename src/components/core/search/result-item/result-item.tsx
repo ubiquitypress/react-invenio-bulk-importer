@@ -12,6 +12,7 @@ import {
   TableRow
 } from 'semantic-ui-react';
 import { useSearch } from '../provider';
+import { styles } from './result-item.styles';
 
 interface ResultItemProps {
   result: InvenioTask;
@@ -70,19 +71,21 @@ export const ResultItem: React.FC<ResultItemProps> = ({ result, index }) => {
       <TableCell>{result.records_status?.total_records ?? 0}</TableCell>
       <TableCell>{result.serializer}</TableCell>
       <TableCell>{capitalizeFirstLetter(result.mode)}</TableCell>
-      <TableCell style={{ width: '220px' }}>
+      <TableCell className={styles.actionsCell}>
         {error && (
-          <div style={{ color: 'red', fontSize: '12px', marginBottom: '5px' }}>
+          <div className={styles.errorContainer}>
             {error.message}
             <Button
               onClick={clearError}
-              style={{ marginLeft: '5px', fontSize: '10px' }}
+              className={styles.clearErrorButton}
+              size='mini'
+              basic
             >
               Clear
             </Button>
           </div>
         )}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+        <div className={styles.actionsContainer}>
           <Dropdown
             text={isAnyOperationLoading ? 'Processing...' : 'Select Action'}
             floating

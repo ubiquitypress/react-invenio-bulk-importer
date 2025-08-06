@@ -15,6 +15,7 @@ import {
 import { ImportStatusCards } from './import-status-cards';
 import { TaskDetailsProvider } from './provider';
 import { TaskDetailsRecords } from './task-details-records';
+import { styles } from './task-details.styles';
 import { UploadMetadataModal } from './upload-metadata-modal';
 
 interface TaskDetailsProps {
@@ -75,21 +76,9 @@ export const TaskDetails: React.FC<TaskDetailsProps> = ({ taskId }) => {
         <Grid>
           <Grid.Row verticalAlign='top'>
             <Grid.Column width={8} verticalAlign='middle'>
-              <div
-                style={{
-                  display: 'flex',
-                  alignItems: 'flex-start',
-                  gap: '.5rem'
-                }}
-              >
+              <div className={styles.headerContainer}>
                 <Icon name='tasks' circular size='big' />
-                <div
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'flex-start'
-                  }}
-                >
+                <div className={styles.headerContent}>
                   <Header as='h2'>
                     <Header.Content>{task.title}</Header.Content>
                   </Header>
@@ -102,15 +91,7 @@ export const TaskDetails: React.FC<TaskDetailsProps> = ({ taskId }) => {
               </div>
             </Grid.Column>
             <Grid.Column width={8} textAlign='right'>
-              <div
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'flex-end',
-                  justifyContent: 'center',
-                  gap: '1rem'
-                }}
-              >
+              <div className={styles.actionsContainer}>
                 <div>
                   <Button
                     size='tiny'

@@ -1,4 +1,5 @@
 import React, { createContext, useContext } from 'react';
+import { styles } from './task-details.provider.styles';
 
 interface TaskDetailsContextProps {
   taskId: string;
@@ -14,14 +15,7 @@ export const TaskDetailsProvider: React.FC<TaskDetailsContextProps> = ({
 }) => {
   return (
     <TaskDetailsContext.Provider value={{ taskId }}>
-      <div
-        style={{
-          paddingBlockStart: '1rem',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '1rem'
-        }}
-      >
+      <div className={styles.container}>
         {children}
       </div>
     </TaskDetailsContext.Provider>

@@ -2,6 +2,7 @@ import { StatusIcon } from '@/components/ui';
 import type { InvenioImporterRecord } from '@/types';
 import React, { useEffect, useState } from 'react';
 import { Button, Icon, Modal, Tab, type TabProps } from 'semantic-ui-react';
+import { styles } from './details-modal.styles';
 import { BasicInfoTab, ErrorsTab, FilesTab, SourceDataTab } from './tabs';
 
 interface DetailsModalProps {
@@ -110,13 +111,7 @@ export const DetailsModal: React.FC<DetailsModalProps> = ({
       closeIcon
     >
       <Modal.Header>
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between'
-          }}
-        >
+        <div className={styles.headerContainer}>
           <div>
             <Icon name='file alternate outline' />
             {getRecordTitle()}

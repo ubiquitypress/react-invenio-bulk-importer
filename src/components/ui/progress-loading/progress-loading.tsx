@@ -1,6 +1,7 @@
 import type { OrchestrationSteps } from '@/types';
 import React, { Fragment } from 'react';
 import { Icon, Segment } from 'semantic-ui-react';
+import { styles } from './progress-loading.styles';
 
 interface ProgressLoadingProps {
   progress: Record<OrchestrationSteps, number>;
@@ -18,9 +19,7 @@ export const ProgressLoading = ({
           <Icon
             name='spinner'
             loading
-            style={{
-              marginInlineEnd: '0.5rem'
-            }}
+            className={styles.spinnerIcon}
           />
           <strong>{step}</strong> {showPercentage ? `${value}%` : null}
         </Segment.Inline>

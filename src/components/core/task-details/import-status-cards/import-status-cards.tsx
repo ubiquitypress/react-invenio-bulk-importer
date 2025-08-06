@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, Grid, Progress, Segment, Statistic } from 'semantic-ui-react';
 import { useImportStatusConfig } from './hooks';
+import { styles } from './import-status-cards.styles';
 
 export const ImportStatusCards = ({
   totalRecords = 0,
@@ -34,7 +35,7 @@ export const ImportStatusCards = ({
                   <Statistic
                     size='large'
                     color={card.color}
-                    style={{ margin: '1rem 0' }}
+                    className={styles.statistic}
                   >
                     <Statistic.Value>{card.value}</Statistic.Value>
                     <Statistic.Label>{card.label}</Statistic.Label>
@@ -43,7 +44,7 @@ export const ImportStatusCards = ({
                     <Segment.Inline
                       basic
                       size='small'
-                      style={{ marginBottom: '0.5rem' }}
+                      className={styles.progressLabel}
                     >
                       {card.progressLabel}
                     </Segment.Inline>
@@ -51,7 +52,7 @@ export const ImportStatusCards = ({
                       percent={card.progress}
                       color={card.color}
                       size='small'
-                      style={{ marginBottom: '0.5rem' }}
+                      className={styles.progress}
                     />
                   </Segment>
                 </Card.Description>

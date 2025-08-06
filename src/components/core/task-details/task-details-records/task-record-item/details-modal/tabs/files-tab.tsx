@@ -1,6 +1,7 @@
 import type { InvenioImporterRecord } from '@/types';
 import React from 'react';
 import { Header, Icon, List, Message, Segment, Table } from 'semantic-ui-react';
+import { styles } from './files-tab.styles';
 
 interface FilesTabProps {
   record: InvenioImporterRecord;
@@ -63,7 +64,7 @@ export const FilesTab: React.FC<FilesTabProps> = ({ record }) => {
                     </Table.Cell>
                     <Table.Cell>{(file.size / 1024).toFixed(2)} KB</Table.Cell>
                     <Table.Cell>{file.origin}</Table.Cell>
-                    <Table.Cell style={{ wordBreak: 'break-all' }}>
+                    <Table.Cell className={styles.pathCell}>
                       {file.full_path}
                     </Table.Cell>
                   </Table.Row>

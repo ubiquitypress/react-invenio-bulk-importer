@@ -4,6 +4,7 @@ import type { OrchestrationSteps } from '@/types';
 import React, { Fragment } from 'react';
 import { SelectField, TextAreaField, TextField } from 'react-invenio-forms';
 import { Button, Form } from 'semantic-ui-react';
+import { styles } from './form-content.styles';
 import { useFormContent } from './hooks';
 
 interface FormContentProps {
@@ -89,14 +90,14 @@ export const FormContent: React.FC<FormContentProps> = ({ progress }) => {
           type='file'
           accept='.csv'
           onChange={handleFileChange}
-          style={{ marginTop: '8px' }}
+          className={styles.fileInput}
         />
         {values.metadata && (
-          <p style={{ marginTop: '8px', fontSize: '12px', color: '#666' }}>
+          <p className={styles.helpText}>
             Selected: {values.metadata.name}
           </p>
         )}
-        <p style={{ marginTop: '8px', fontSize: '12px', color: '#666' }}>
+        <p className={styles.helpText}>
           Upload a CSV file containing the records metadata to be imported or
           deleted.
         </p>
@@ -111,7 +112,7 @@ export const FormContent: React.FC<FormContentProps> = ({ progress }) => {
           maxTotalSize={10 * 1024 * 1024 * 1024} // 10 GB
           maxFiles={100}
         />
-        <p style={{ marginTop: '8px', fontSize: '12px', color: '#666' }}>
+        <p className={styles.helpText}>
           Upload files related to the records. You can upload multiple files,
           and they will be associated with the import task.
         </p>
@@ -124,14 +125,7 @@ export const FormContent: React.FC<FormContentProps> = ({ progress }) => {
         rows={3}
       />
 
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'flex-end',
-          gap: '.5rem'
-        }}
-      >
+      <div className={styles.buttonContainer}>
         {progress && <ProgressLoading progress={progress} />}
         <Button
           type='button'

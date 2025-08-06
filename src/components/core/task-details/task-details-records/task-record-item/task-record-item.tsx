@@ -12,6 +12,7 @@ import {
   TableRow
 } from 'semantic-ui-react';
 import { DetailsModal } from './details-modal';
+import { styles } from './task-record-item.styles';
 
 export interface TaskRecordItemProps {
   result: InvenioImporterRecord;
@@ -108,8 +109,8 @@ export const TaskRecordItem: React.FC<TaskRecordItemProps> = ({
   return (
     <TableRow key={index}>
       <TableCell>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-          <code style={{ fontSize: '0.9em', color: '#666' }}>
+        <div className={styles.idContainer}>
+          <code className={styles.codeElement}>
             {result.id.length > 20
               ? `${result.id.substring(0, 20)}…`
               : result.id}
@@ -136,9 +137,9 @@ export const TaskRecordItem: React.FC<TaskRecordItemProps> = ({
 
       {/* Title Column */}
       <TableCell>
-        <div style={{ maxWidth: '300px' }}>
+        <div className={styles.titleContainer}>
           {result.src_data?.title || (
-            <em style={{ color: '#999' }}>No Title Available</em>
+            <em className={styles.noTitle}>No Title Available</em>
           )}
         </div>
       </TableCell>
@@ -157,7 +158,7 @@ export const TaskRecordItem: React.FC<TaskRecordItemProps> = ({
               <Icon
                 name='exclamation triangle'
                 color='red'
-                style={{ marginLeft: '0.5rem', cursor: 'help' }}
+                className={styles.errorIcon}
               />
             }
             position='top center'

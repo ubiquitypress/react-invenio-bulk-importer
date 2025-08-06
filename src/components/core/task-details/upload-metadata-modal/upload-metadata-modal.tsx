@@ -5,6 +5,7 @@ import type { OrchestrationSteps } from '@/types';
 import React, { useState } from 'react';
 import { Button, Form, Header, Icon, Modal } from 'semantic-ui-react';
 import { useTaskDetails } from '../provider';
+import { styles } from './upload-metadata-modal.styles';
 
 export const UploadMetadataModal = () => {
   const { taskId } = useTaskDetails();
@@ -105,22 +106,14 @@ export const UploadMetadataModal = () => {
               accept='.csv'
             />
             {uploadFile && (
-              <div style={{ marginTop: '0.5rem', color: '#666' }}>
+              <div className={styles.selectedFileInfo}>
                 Selected: {uploadFile.name}
               </div>
             )}
           </Form.Field>
 
           <Form.Field>
-            <div
-              style={{
-                marginBottom: '8px',
-                fontSize: '14px',
-                fontWeight: 'bold'
-              }}
-            >
-              Additional Files (Optional)
-            </div>
+            <div className={styles.fieldLabel}>Additional Files (Optional)</div>
             <FileUploader
               value={uploadFiles}
               onChange={handleFilesChange}
@@ -133,22 +126,16 @@ export const UploadMetadataModal = () => {
       </Modal.Content>
 
       <Modal.Actions>
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'flex-end',
-            alignItems: 'center',
-            gap: '.5rem'
-          }}
-        >
+        <div className={styles.actionsContainer}>
           {progress && <ProgressLoading progress={progress} />}
-          <Button onClick={handleCloseModal} color='grey'>
+          <Button onClick={handleCloseModal} color='grey' disabled={!!progress}>
             <Icon name='cancel' />
             Cancel
           </Button>
           <Button
             onClick={handleUpload}
             color='blue'
+            loading={!!progress}
             disabled={!uploadFile && uploadFiles.length === 0}
           >
             <Icon name='upload' />

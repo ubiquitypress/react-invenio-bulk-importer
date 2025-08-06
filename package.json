@@ -1,6 +1,13 @@
 {
-  "name": "invenio-bulk-importer",
+  "name": "react-invenio-bulk-importer",
   "version": "0.0.1",
+  "description": "React components for Invenio Bulk Importer",
+  "keywords": [
+    "invenio",
+    "invenioRDM",
+    "bulk-import",
+    "react"
+  ],
   "main": "./dist/index.cjs.js",
   "module": "./dist/index.es.js",
   "types": "./dist/index.d.ts",

@@ -2,6 +2,8 @@ import React from 'react';
 import { OverridableContext } from 'react-overridable';
 // @ts-ignore - react-searchkit doesn't have types
 import {
+  ActiveFilters,
+  Count,
   EmptyResults,
   InvenioSearchApi,
   Pagination,
@@ -9,13 +11,11 @@ import {
   ResultsList,
   ResultsLoader,
   SearchBar,
-  Count,
-  Sort,
-  ActiveFilters
+  Sort
 } from 'react-searchkit';
 import { ResultItem } from './result-item';
-import type { SearchProps } from './search.types';
 import { defaultSearchConfig } from './search.config';
+import type { SearchProps } from './search.types';
 
 export const Search: React.FC<SearchProps> = ({
   config: userConfig = {},

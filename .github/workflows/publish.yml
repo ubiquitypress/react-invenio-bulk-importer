@@ -23,12 +23,13 @@ jobs:
         with:
           node-version: '18'
           registry-url: 'https://registry.npmjs.org'
+          cache: 'yarn'
           
       - name: Enable Corepack (for Yarn 4)
         run: corepack enable
         
       - name: Install dependencies
-        run: yarn install --immutable
+        run: yarn install
         
       - name: Generate PandaCSS
         run: yarn prepare

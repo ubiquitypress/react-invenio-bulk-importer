@@ -24,9 +24,7 @@ export const SourceDataTab: React.FC<SourceDataTabProps> = ({ record }) => {
               <Table.Cell>
                 <strong>{key}</strong>
               </Table.Cell>
-              <Table.Cell className={styles.valueCell}>
-                {value}
-              </Table.Cell>
+              <Table.Cell className={styles.valueCell}>{value}</Table.Cell>
             </Table.Row>
           ))}
       </Table.Body>

@@ -93,9 +93,7 @@ export const FormContent: React.FC<FormContentProps> = ({ progress }) => {
           className={styles.fileInput}
         />
         {values.metadata && (
-          <p className={styles.helpText}>
-            Selected: {values.metadata.name}
-          </p>
+          <p className={styles.helpText}>Selected: {values.metadata.name}</p>
         )}
         <p className={styles.helpText}>
           Upload a CSV file containing the records metadata to be imported or

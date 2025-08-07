@@ -21,7 +21,7 @@ export default defineConfig({
   },
   plugins: [
     react({ jsxRuntime: 'classic' }),
-    dts({ 
+    dts({
       insertTypesEntry: true,
       tsconfigPath: './tsconfig.dts.json',
       rollupTypes: true

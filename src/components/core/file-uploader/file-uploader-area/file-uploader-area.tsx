@@ -48,14 +48,10 @@ export const FileUploaderArea: React.FC<FileUploaderAreaProps> = ({
 
       <Segment
         placeholder
-        className={cn(
-          'file-drop-zone',
-          styles.dropZone,
-          {
-            [styles.dropZoneActive]: isDragOver,
-            [styles.dropZoneDisabled]: disabled
-          }
-        )}
+        className={cn('file-drop-zone', styles.dropZone, {
+          [styles.dropZoneActive]: isDragOver,
+          [styles.dropZoneDisabled]: disabled
+        })}
         onDragOver={onDragOver}
         onDragLeave={onDragLeave}
         onDrop={onDrop}

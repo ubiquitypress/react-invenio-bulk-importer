@@ -49,7 +49,11 @@ export const UploadedFilesList: React.FC<UploadedFilesListProps> = ({
                   </div>
 
                   {uploadFile.error && (
-                    <Message negative size='mini' className={styles.errorMessage}>
+                    <Message
+                      negative
+                      size='mini'
+                      className={styles.errorMessage}
+                    >
                       {uploadFile.error}
                     </Message>
                   )}

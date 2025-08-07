@@ -14,8 +14,8 @@ import {
 } from 'semantic-ui-react';
 import { ImportStatusCards } from './import-status-cards';
 import { TaskDetailsProvider } from './provider';
-import { TaskDetailsRecords } from './task-details-records';
 import { styles } from './task-details.styles';
+import { TaskDetailsRecords } from './task-details-records';
 import { UploadMetadataModal } from './upload-metadata-modal';
 
 export interface TaskDetailsProps {

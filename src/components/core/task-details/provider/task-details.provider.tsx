@@ -15,9 +15,7 @@ export const TaskDetailsProvider: React.FC<TaskDetailsContextProps> = ({
 }) => {
   return (
     <TaskDetailsContext.Provider value={{ taskId }}>
-      <div className={styles.container}>
-        {children}
-      </div>
+      <div className={styles.container}>{children}</div>
     </TaskDetailsContext.Provider>
   );
 };

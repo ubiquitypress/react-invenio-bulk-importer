@@ -16,11 +16,7 @@ export const ProgressLoading = ({
     <Fragment>
       {Object.entries(progress).map(([step, value]) => (
         <Segment.Inline basic key={step}>
-          <Icon
-            name='spinner'
-            loading
-            className={styles.spinnerIcon}
-          />
+          <Icon name='spinner' loading className={styles.spinnerIcon} />
           <strong>{step}</strong> {showPercentage ? `${value}%` : null}
         </Segment.Inline>
       ))}

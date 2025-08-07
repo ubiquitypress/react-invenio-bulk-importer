@@ -1,5 +1,5 @@
 {
-  "name": "react-invenio-bulk-importer",
+  "name": "@ubiquitypress/react-invenio-bulk-importer",
   "version": "0.0.1",
   "description": "React components for Invenio Bulk Importer",
   "keywords": [

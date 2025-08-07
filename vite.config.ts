@@ -21,7 +21,11 @@ export default defineConfig({
   },
   plugins: [
     react({ jsxRuntime: 'classic' }),
-    dts({ insertTypesEntry: true }),
+    dts({ 
+      insertTypesEntry: true,
+      tsconfigPath: './tsconfig.dts.json',
+      rollupTypes: true
+    }),
     basicSsl()
   ],
   resolve: {

@@ -18,7 +18,7 @@ import { TaskDetailsRecords } from './task-details-records';
 import { styles } from './task-details.styles';
 import { UploadMetadataModal } from './upload-metadata-modal';
 
-interface TaskDetailsProps {
+export interface TaskDetailsProps {
   taskId: string;
 }
 

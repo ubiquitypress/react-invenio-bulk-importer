@@ -1,4 +1,4 @@
-export * from './components/core';
+export * from './components';
 export * from './types';
 export * from './utils';
 

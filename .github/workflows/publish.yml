@@ -51,11 +51,8 @@ jobs:
       - name: Lint and format
         run: |
           yarn biome check . --fix
-          echo "Biome exit code: $?"
           yarn tsc --noEmit
-          echo "TSC exit code: $?"
           yarn syncpack
-          echo "Syncpack exit code: $?"
         
       - name: Build package
         run: yarn build

@@ -28,7 +28,7 @@ export const TaskDetailsRecords = () => {
           initialQueryState: {
             hiddenParams: [['q', `task.id:${taskId}`]]
           },
-          showFacets: false,
+          showFacets: true,
           showImportModal: false
         }}
         overriddenComponents={overriddenComponents}

@@ -1,4 +1,4 @@
-import type { Bucket } from '../aggregation-bucket.types';
+import type { Bucket } from '@/types';
 
 export interface AggregationBucketValuesProps {
   bucket: Bucket;

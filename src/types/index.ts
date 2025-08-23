@@ -1,3 +1,4 @@
+export * from './aggregation.types';
 export * from './invenio-importer-record.types';
 export * from './invenio-importer-records.types';
 export * from './invenio-new-task.types';

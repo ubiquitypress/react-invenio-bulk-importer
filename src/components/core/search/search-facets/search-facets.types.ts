@@ -4,13 +4,13 @@ export interface StatusOption {
   value: string | null;
 }
 
+export type FilterKey = 'status';
+export type Filter = [FilterKey, string];
+
 export interface SearchFacetsProps {
   currentQueryState: {
-    filters?: [string, string][];
+    filters?: Filter[];
     page?: number;
   };
-  updateQueryState: (query: {
-    filters: [string, string][];
-    page: number;
-  }) => void;
+  updateQueryState: (query: { filters: Filter[]; page: number }) => void;
 }

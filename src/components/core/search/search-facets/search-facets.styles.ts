@@ -8,5 +8,9 @@ export const styles = {
     display: 'flex',
     flexDirection: 'column',
     gap: '2rem'
+  }),
+
+  header: css({
+    fontSize: '1.5rem !important'
   })
 };

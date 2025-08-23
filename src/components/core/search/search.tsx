@@ -8,6 +8,10 @@ import {
   ResultsList,
   ResultsLoader
 } from 'react-searchkit';
+import {
+  AggregationBucket,
+  AggregationBucketValues
+} from './aggregation-bucket';
 import { SearchProvider } from './provider';
 import { ResultItem } from './result-item';
 import { ResultsTable } from './results-table';
@@ -67,7 +71,9 @@ export const Search: React.FC<SearchProps> = ({
   const overriddenComponents = {
     [`${config.appId}.ResultsList.item`]: ResultItem,
     [`${config.appId}.ResultsList.container`]: ResultsTable,
-    [`${config.appId}.SearchFacets`]: SearchFacets,
+    [`${config.appId}.BucketAggregation.element`]: AggregationBucket,
+    [`${config.appId}.BucketAggregationValues.element`]:
+      AggregationBucketValues,
     ...userOverrides
   };
 

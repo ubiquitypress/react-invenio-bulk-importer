@@ -2,26 +2,9 @@ import { css } from '@/styled-system/css';
 
 export const styles = {
   container: css({
-    minInlineSize: '14rem',
+    minInlineSize: '20rem',
     paddingInlineEnd: '1rem',
-    paddingBlock: '1rem',
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '2rem',
-    flex: 0,
-    marginBlockStart: ['0', '7rem'] // Responsive margin: 0 on mobile, 7rem on tablet+
-  }),
-
-  header: css({
-    fontSize: '1.1rem !important'
-  }),
-
-  checkboxContainer: css({
-    wordBreak: 'break-all',
-    marginInlineStart: '1rem',
-
-    '&:not(:last-child)': {
-      marginBlockEnd: '0.5rem'
-    }
+    paddingBlock: '.5rem',
+    flex: 0
   })
 };

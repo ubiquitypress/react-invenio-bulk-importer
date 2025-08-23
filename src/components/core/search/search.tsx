@@ -8,10 +8,16 @@ import {
   ResultsList,
   ResultsLoader
 } from 'react-searchkit';
+import {
+  AggregationBucket,
+  AggregationBucketValues
+} from './aggregation-bucket';
 import { SearchProvider } from './provider';
 import { ResultItem } from './result-item';
 import { ResultsTable } from './results-table';
+import { ResultsToolbar } from './results-toolbar';
 import { defaultSearchConfig } from './search.config';
+import { styles } from './search.styles';
 import type { SearchProps } from './search.types';
 import { SearchBarRow } from './search-bar-row';
 import { SearchFacets } from './search-facets';
@@ -65,7 +71,9 @@ export const Search: React.FC<SearchProps> = ({
   const overriddenComponents = {
     [`${config.appId}.ResultsList.item`]: ResultItem,
     [`${config.appId}.ResultsList.container`]: ResultsTable,
-    [`${config.appId}.SearchFacets`]: SearchFacets,
+    [`${config.appId}.BucketAggregation.element`]: AggregationBucket,
+    [`${config.appId}.BucketAggregationValues.element`]:
+      AggregationBucketValues,
     ...userOverrides
   };
 
@@ -77,12 +85,18 @@ export const Search: React.FC<SearchProps> = ({
         initialQueryState={config.initialQueryState}
       >
         <SearchProvider config={config}>
-          <SearchBarRow appId={config.appId} />
-          <ResultsLoader>
-            <EmptyResults />
-            <ResultsList />
-          </ResultsLoader>
-          {config.showSearchFooter && <SearchFooter />}
+          <div className={styles.searchLayout}>
+            <SearchFacets />
+            <div className={styles.searchContent}>
+              <SearchBarRow appId={config.appId} />
+              <ResultsToolbar />
+              <ResultsLoader>
+                <EmptyResults />
+                <ResultsList />
+              </ResultsLoader>
+              {config.showSearchFooter && <SearchFooter />}
+            </div>
+          </div>
         </SearchProvider>
       </ReactSearchKit>
     </OverridableContext.Provider>

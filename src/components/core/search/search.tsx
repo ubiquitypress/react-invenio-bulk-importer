@@ -13,6 +13,7 @@ import { ResultItem } from './result-item';
 import { ResultsTable } from './results-table';
 import { ResultsToolbar } from './results-toolbar';
 import { defaultSearchConfig } from './search.config';
+import { styles } from './search.styles';
 import type { SearchProps } from './search.types';
 import { SearchBarRow } from './search-bar-row';
 import { SearchFacets } from './search-facets';
@@ -78,9 +79,9 @@ export const Search: React.FC<SearchProps> = ({
         initialQueryState={config.initialQueryState}
       >
         <SearchProvider config={config}>
-          <div style={{ display: 'flex' }}>
+          <div className={styles.searchLayout}>
             <SearchFacets />
-            <div style={{ flex: 1 }}>
+            <div className={styles.searchContent}>
               <SearchBarRow appId={config.appId} />
               <ResultsToolbar />
               <ResultsLoader>

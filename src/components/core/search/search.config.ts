@@ -5,7 +5,7 @@ export const defaultSearchConfig: SearchConfig = {
   appId: 'search',
   defaultSortingOnEmptyQueryString: [
     {
-      sortBy: 'bestmatch'
+      sortBy: 'newest'
     }
   ],
   initialQueryState: {
@@ -14,7 +14,7 @@ export const defaultSearchConfig: SearchConfig = {
     layout: 'list',
     page: 1,
     size: 10,
-    sortBy: 'bestmatch'
+    sortBy: 'newest'
   },
   layoutOptions: {
     gridView: false,
@@ -51,10 +51,6 @@ export const defaultSearchConfig: SearchConfig = {
     }
   },
   sortOptions: [
-    {
-      sortBy: 'bestmatch',
-      text: 'Best Match'
-    },
     {
       sortBy: 'newest',
       text: 'Newest'

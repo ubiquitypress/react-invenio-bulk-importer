@@ -9,7 +9,7 @@ export const ResultsToolbar = () => {
     <div className={styles.container}>
       <ResultsCount />
       <div className={styles.sortByContainer}>
-        <SortBy id={'sort-by'} values={SORT_BY_OPTIONS} />
+        <SortBy values={SORT_BY_OPTIONS} />
       </div>
     </div>
   );

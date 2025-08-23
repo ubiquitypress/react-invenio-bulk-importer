@@ -11,6 +11,7 @@ import {
 import { SearchProvider } from './provider';
 import { ResultItem } from './result-item';
 import { ResultsTable } from './results-table';
+import { ResultsToolbar } from './results-toolbar';
 import { defaultSearchConfig } from './search.config';
 import type { SearchProps } from './search.types';
 import { SearchBarRow } from './search-bar-row';
@@ -77,12 +78,18 @@ export const Search: React.FC<SearchProps> = ({
         initialQueryState={config.initialQueryState}
       >
         <SearchProvider config={config}>
-          <SearchBarRow appId={config.appId} />
-          <ResultsLoader>
-            <EmptyResults />
-            <ResultsList />
-          </ResultsLoader>
-          {config.showSearchFooter && <SearchFooter />}
+          <div style={{ display: 'flex' }}>
+            <SearchFacets />
+            <div style={{ flex: 1 }}>
+              <SearchBarRow appId={config.appId} />
+              <ResultsToolbar />
+              <ResultsLoader>
+                <EmptyResults />
+                <ResultsList />
+              </ResultsLoader>
+              {config.showSearchFooter && <SearchFooter />}
+            </div>
+          </div>
         </SearchProvider>
       </ReactSearchKit>
     </OverridableContext.Provider>

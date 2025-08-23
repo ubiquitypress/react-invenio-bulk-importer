@@ -1,72 +1,74 @@
 import React from 'react';
 import { withState } from 'react-searchkit';
-import { Menu } from 'semantic-ui-react';
-
-interface StatusOption {
-  key: string;
-  label: string;
-  value: string | null;
-}
-
-interface SearchFacetsProps {
-  currentQueryState: {
-    filters?: [string, string][];
-    page?: number;
-  };
-  updateQueryState: (query: {
-    filters: [string, string][];
-    page: number;
-  }) => void;
-}
+import { Checkbox, Header } from 'semantic-ui-react';
+import { useSearch } from '../provider';
+import { STATUS_OPTIONS } from './search-facets.consts';
+import { styles } from './search-facets.styles';
+import type { SearchFacetsProps, StatusOption } from './search-facets.types';
 
 const _SearchFacets: React.FC<SearchFacetsProps> = ({
   currentQueryState,
   updateQueryState
 }) => {
-  const statusOptions: StatusOption[] = [
-    { key: 'all', label: 'All', value: null },
-    { key: 'pending', label: 'Pending', value: 'pending' },
-    { key: 'success', label: 'Success', value: 'success' },
-    { key: 'failed', label: 'Failed', value: 'failed' }
-  ];
+  const { config } = useSearch();
 
-  const currentStatusFilter = currentQueryState.filters?.find(
-    (filter: [string, string]) => filter[0] === 'status'
-  );
+  if (!config.showFacets) {
+    return null;
+  }
 
-  const handleStatusChange = (status: string | null): void => {
-    const newFilters =
+  const currentStatusFilters =
+    currentQueryState.filters
+      ?.filter((filter: [string, string]) => filter[0] === 'status')
+      .map(filter => filter[1]) || [];
+
+  const handleStatusChange = (status: string, checked: boolean): void => {
+    const otherFilters =
       currentQueryState.filters?.filter(
         (filter: [string, string]) => filter[0] !== 'status'
       ) || [];
 
-    if (status) {
-      newFilters.push(['status', status]);
+    let newStatusFilters: [string, string][] = [];
+
+    if (checked) {
+      const currentStatuses = new Set(currentStatusFilters);
+      currentStatuses.add(status);
+      newStatusFilters = Array.from(currentStatuses).map(s => ['status', s]);
+    } else {
+      newStatusFilters = currentStatusFilters
+        .filter(s => s !== status)
+        .map(s => ['status', s]);
     }
 
     updateQueryState({
       ...currentQueryState,
-      filters: newFilters,
+      filters: [...otherFilters, ...newStatusFilters],
       page: 1
     });
   };
 
   return (
-    <Menu activeIndex={0} compact size='tiny'>
-      {statusOptions.map(({ key, label, value }: StatusOption) => (
-        <Menu.Item
-          key={key}
-          name={key}
-          active={
-            currentStatusFilter?.[1] === value ||
-            (value === null && !currentStatusFilter)
-          }
-          onClick={() => handleStatusChange(value)}
-        >
-          {label}
-        </Menu.Item>
-      ))}
-    </Menu>
+    <aside className={styles.container}>
+      <Header as='h2' style={{ fontSize: '1.2rem' }}>
+        Status
+      </Header>
+      {STATUS_OPTIONS.map(({ key, label, value }: StatusOption) => {
+        if (!value) {
+          return null;
+        }
+
+        return (
+          <div key={key}>
+            <Checkbox
+              label={label}
+              checked={currentStatusFilters.includes(value)}
+              onChange={(_, data) =>
+                handleStatusChange(value, data.checked ?? false)
+              }
+            />
+          </div>
+        );
+      })}
+    </aside>
   );
 };
 

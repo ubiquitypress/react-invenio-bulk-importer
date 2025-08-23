@@ -9,7 +9,7 @@ export const styles = {
     flexDirection: 'column',
     gap: '2rem',
     flex: 0,
-    marginBlockStart: '7rem'
+    marginBlockStart: ['0', '7rem'] // Responsive margin: 0 on mobile, 7rem on tablet+
   }),
 
   header: css({

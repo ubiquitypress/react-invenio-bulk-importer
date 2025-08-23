@@ -4228,6 +4228,8 @@ const ts = async (e, t) => {
 }, kn = {
   searchLayout: b({
     display: "flex",
+    flexDirection: ["column", "row"],
+    // Responsive layout: column on mobile, row on tablet+
     gap: "1rem"
   }),
   searchContent: b({
@@ -6475,7 +6477,8 @@ const zx = {
     flexDirection: "column",
     gap: "2rem",
     flex: 0,
-    marginBlockStart: "7rem"
+    marginBlockStart: ["0", "7rem"]
+    // Responsive margin: 0 on mobile, 7rem on tablet+
   }),
   header: b({
     fontSize: "1.1rem !important"

@@ -2,7 +2,8 @@ import { css } from '@/styled-system/css';
 
 export const styles = {
   actionsCell: css({
-    inlineSize: '15rem'
+    inlineSize: '15rem',
+    whiteSpace: 'nowrap'
   }),
   errorContainer: css({
     display: 'flex',
@@ -19,6 +20,11 @@ export const styles = {
   actionsContainer: css({
     display: 'flex',
     alignItems: 'center',
-    gap: '0.625rem'
+    gap: '0.8rem',
+    flexWrap: 'nowrap',
+    minWidth: 0
+  }),
+  statusCell: css({
+    whiteSpace: 'nowrap'
   })
 };

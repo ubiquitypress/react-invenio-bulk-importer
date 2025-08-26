@@ -1,4 +1,4 @@
-import s, { Component as L, useContext as F, useEffect as Me, useCallback as R, Fragment as or, useState as N, useMemo as ra, createContext as Xs, useRef as Zs } from "react";
+import s, { Component as L, useContext as F, useEffect as je, useCallback as R, Fragment as or, useState as N, useMemo as ra, createContext as Xs, useRef as Zs } from "react";
 import v, { OverridableContext as Js } from "react-overridable";
 import rt from "axios";
 import xe from "qs";
@@ -9,7 +9,7 @@ import po from "redux-thunk";
 import fo from "lodash";
 import { TextField as ho, SelectField as kt, TextAreaField as mo, BaseForm as go } from "react-invenio-forms";
 import { useFormikContext as yo } from "formik";
-var Ke = typeof globalThis < "u" ? globalThis : typeof window < "u" ? window : typeof global < "u" ? global : typeof self < "u" ? self : {};
+var Xe = typeof globalThis < "u" ? globalThis : typeof window < "u" ? window : typeof global < "u" ? global : typeof self < "u" ? self : {};
 function P(e) {
   return e && e.__esModule && Object.prototype.hasOwnProperty.call(e, "default") ? e.default : e;
 }
@@ -33,7 +33,7 @@ function Io(e) {
     To.call(e, r) && r != "constructor" && t.push(r);
   return t;
 }
-var la = Io, Fo = typeof Ke == "object" && Ke && Ke.Object === Object && Ke, ca = Fo, Ao = ca, Oo = typeof self == "object" && self && self.Object === Object && self, Ro = Ao || Oo || Function("return this")(), re = Ro, ko = re, Po = ko.Symbol, Ce = Po, Mr = Ce, ua = Object.prototype, Do = ua.hasOwnProperty, Lo = ua.toString, Re = Mr ? Mr.toStringTag : void 0;
+var la = Io, Fo = typeof Xe == "object" && Xe && Xe.Object === Object && Xe, ca = Fo, Ao = ca, Oo = typeof self == "object" && self && self.Object === Object && self, Ro = Ao || Oo || Function("return this")(), re = Ro, ko = re, Po = ko.Symbol, Ce = Po, Mr = Ce, ua = Object.prototype, Do = ua.hasOwnProperty, Lo = ua.toString, Re = Mr ? Mr.toStringTag : void 0;
 function No(e) {
   var t = Do.call(e, Re), r = e[Re];
   try {
@@ -123,7 +123,7 @@ var ge = Il, Fl = ge, Al = re, Ol = Fl(Al, "DataView"), Rl = Ol, kl = ge, Pl = r
     }
   return t;
 });
-var je = he;
+var Qe = he;
 function ec(e) {
   return e != null && typeof e == "object";
 }
@@ -179,7 +179,7 @@ st.exports;
   }();
   e.exports = l;
 })(st, st.exports);
-var pr = st.exports, Yc = Gc, Wc = dr, Xr = pr, Zr = Xr && Xr.isTypedArray, Kc = Zr ? Wc(Zr) : Yc, fr = Kc, Xc = la, Zc = je, Jc = gt, eu = q, tu = yt, ru = bt, nu = mt, au = fr, iu = "[object Map]", su = "[object Set]", ou = Object.prototype, lu = ou.hasOwnProperty;
+var pr = st.exports, Yc = Gc, Wc = dr, Xr = pr, Zr = Xr && Xr.isTypedArray, Kc = Zr ? Wc(Zr) : Yc, fr = Kc, Xc = la, Zc = Qe, Jc = gt, eu = q, tu = yt, ru = bt, nu = mt, au = fr, iu = "[object Map]", su = "[object Set]", ou = Object.prototype, lu = ou.hasOwnProperty;
 function cu(e) {
   if (e == null)
     return !0;
@@ -395,7 +395,7 @@ var ip = ya, sp = ip;
 function op(e) {
   return e == null ? "" : sp(e);
 }
-var Qe = op, lp = q, cp = mr, up = Zd, dp = Qe;
+var qe = op, lp = q, cp = mr, up = Zd, dp = qe;
 function pp(e, t) {
   return lp(e) ? e : cp(e, t) ? [e] : up(dp(e));
 }
@@ -406,7 +406,7 @@ function mp(e) {
   var t = e + "";
   return t == "0" && 1 / e == -hp ? "-0" : t;
 }
-var qe = mp, gp = xt, yp = qe;
+var Ve = mp, gp = xt, yp = Ve;
 function bp(e, t) {
   t = gp(t, e);
   for (var r = 0, n = t.length; e != null && r < n; )
@@ -419,7 +419,7 @@ function Ep(e, t, r) {
   return n === void 0 ? r : n;
 }
 var ba = Ep;
-const Le = /* @__PURE__ */ P(ba);
+const Ne = /* @__PURE__ */ P(ba);
 function Sp(e, t) {
   return e != null && t in Object(e);
 }
@@ -428,7 +428,7 @@ function Cp(e, t) {
   var r = typeof e;
   return t = t ?? $p, !!t && (r == "number" || r != "symbol" && xp.test(e)) && e > -1 && e % 1 == 0 && e < t;
 }
-var Ct = Cp, wp = xt, Tp = gt, Ip = q, Fp = Ct, Ap = ur, Op = qe;
+var Ct = Cp, wp = xt, Tp = gt, Ip = q, Fp = Ct, Ap = ur, Op = Ve;
 function Rp(e, t, r) {
   t = wp(t, e);
   for (var n = -1, a = t.length, i = !1; ++n < a; ) {
@@ -475,7 +475,7 @@ function Hp(e, t, r, n) {
   }
   return r;
 }
-var Ve = Hp;
+var Ge = Hp;
 function Yp(e) {
   return e;
 }
@@ -590,7 +590,7 @@ var Yf = Hf, Wf = $a, Kf = Yf, Xf = yt;
 function Zf(e) {
   return Xf(e) ? Wf(e, !0) : Kf(e);
 }
-var Tt = Zf, Jf = Ve, eh = If, th = Tt, rh = eh(function(e, t) {
+var Tt = Zf, Jf = Ge, eh = If, th = Tt, rh = eh(function(e, t) {
   Jf(t, th(t), e);
 }), nh = rh, ah = nh;
 const ot = /* @__PURE__ */ P(ah);
@@ -599,7 +599,7 @@ function ih(e) {
 }
 var sh = ih;
 const oh = /* @__PURE__ */ P(sh);
-var lh = Er, ch = xt, uh = Ct, ln = se, dh = qe;
+var lh = Er, ch = xt, uh = Ct, ln = se, dh = Ve;
 function ph(e, t, r, n) {
   if (!ln(e))
     return e;
@@ -710,11 +710,11 @@ var pm = dm, fm = $a, hm = la, mm = yt;
 function gm(e) {
   return mm(e) ? fm(e) : hm(e);
 }
-var Ge = gm, ym = Ve, bm = Ge;
+var He = gm, ym = Ge, bm = He;
 function vm(e, t) {
   return e && ym(t, bm(t), e);
 }
-var Em = vm, Sm = Ve, _m = Tt;
+var Em = vm, Sm = Ge, _m = Tt;
 function $m(e, t) {
   return e && Sm(t, _m(t), e);
 }
@@ -753,7 +753,7 @@ var Ca = Am, Om = Fm, Rm = Ca, km = Object.prototype, Pm = km.propertyIsEnumerab
   return e == null ? [] : (e = Object(e), Om(dn(e), function(t) {
     return Pm.call(e, t);
   }));
-} : Rm, xr = Dm, Lm = Ve, Nm = xr;
+} : Rm, xr = Dm, Lm = Ge, Nm = xr;
 function Bm(e, t) {
   return Lm(e, Nm(e), t);
 }
@@ -761,7 +761,7 @@ var Um = Bm, zm = oa, Mm = zm(Object.getPrototypeOf, Object), wa = Mm, jm = _r, 
   for (var t = []; e; )
     jm(t, qm(e)), e = Qm(e);
   return t;
-} : Vm, Ta = Hm, Ym = Ve, Wm = Ta;
+} : Vm, Ta = Hm, Ym = Ge, Wm = Ta;
 function Km(e, t) {
   return Ym(e, Wm(e), t);
 }
@@ -770,7 +770,7 @@ function eg(e, t, r) {
   var n = t(e);
   return Jm(e) ? n : Zm(n, r(e));
 }
-var Ia = eg, tg = Ia, rg = xr, ng = Ge;
+var Ia = eg, tg = Ia, rg = xr, ng = He;
 function ag(e) {
   return tg(e, ng, rg);
 }
@@ -857,15 +857,15 @@ var Jg = Zg, ey = se, gn = Object.create, ty = function() {
 function sy(e) {
   return typeof e.constructor == "function" && !iy(e) ? ny(ay(e)) : {};
 }
-var oy = sy, ly = je, cy = ne, uy = "[object Map]";
+var oy = sy, ly = Qe, cy = ne, uy = "[object Map]";
 function dy(e) {
   return cy(e) && ly(e) == uy;
 }
-var py = dy, fy = py, hy = dr, yn = pr, bn = yn && yn.isMap, my = bn ? hy(bn) : fy, gy = my, yy = je, by = ne, vy = "[object Set]";
+var py = dy, fy = py, hy = dr, yn = pr, bn = yn && yn.isMap, my = bn ? hy(bn) : fy, gy = my, yy = Qe, by = ne, vy = "[object Set]";
 function Ey(e) {
   return by(e) && yy(e) == vy;
 }
-var Sy = Ey, _y = Sy, $y = dr, vn = pr, En = vn && vn.isSet, xy = En ? $y(En) : _y, Cy = xy, wy = $r, Ty = pm, Iy = Er, Fy = Em, Ay = xm, Oy = Cm, Ry = Tm, ky = Um, Py = Xm, Dy = Fa, Ly = cg, Ny = je, By = fg, Uy = Jg, zy = oy, My = q, jy = bt, Qy = gy, qy = se, Vy = Cy, Gy = Ge, Hy = Tt, Yy = 1, Wy = 2, Ky = 4, Oa = "[object Arguments]", Xy = "[object Array]", Zy = "[object Boolean]", Jy = "[object Date]", eb = "[object Error]", Ra = "[object Function]", tb = "[object GeneratorFunction]", rb = "[object Map]", nb = "[object Number]", ka = "[object Object]", ab = "[object RegExp]", ib = "[object Set]", sb = "[object String]", ob = "[object Symbol]", lb = "[object WeakMap]", cb = "[object ArrayBuffer]", ub = "[object DataView]", db = "[object Float32Array]", pb = "[object Float64Array]", fb = "[object Int8Array]", hb = "[object Int16Array]", mb = "[object Int32Array]", gb = "[object Uint8Array]", yb = "[object Uint8ClampedArray]", bb = "[object Uint16Array]", vb = "[object Uint32Array]", x = {};
+var Sy = Ey, _y = Sy, $y = dr, vn = pr, En = vn && vn.isSet, xy = En ? $y(En) : _y, Cy = xy, wy = $r, Ty = pm, Iy = Er, Fy = Em, Ay = xm, Oy = Cm, Ry = Tm, ky = Um, Py = Xm, Dy = Fa, Ly = cg, Ny = Qe, By = fg, Uy = Jg, zy = oy, My = q, jy = bt, Qy = gy, qy = se, Vy = Cy, Gy = He, Hy = Tt, Yy = 1, Wy = 2, Ky = 4, Oa = "[object Arguments]", Xy = "[object Array]", Zy = "[object Boolean]", Jy = "[object Date]", eb = "[object Error]", Ra = "[object Function]", tb = "[object GeneratorFunction]", rb = "[object Map]", nb = "[object Number]", ka = "[object Object]", ab = "[object RegExp]", ib = "[object Set]", sb = "[object String]", ob = "[object Symbol]", lb = "[object WeakMap]", cb = "[object ArrayBuffer]", ub = "[object DataView]", db = "[object Float32Array]", pb = "[object Float64Array]", fb = "[object Int8Array]", hb = "[object Int16Array]", mb = "[object Int32Array]", gb = "[object Uint8Array]", yb = "[object Uint8ClampedArray]", bb = "[object Uint16Array]", vb = "[object Uint32Array]", x = {};
 x[Oa] = x[Xy] = x[cb] = x[ub] = x[Zy] = x[Jy] = x[db] = x[pb] = x[fb] = x[hb] = x[mb] = x[rb] = x[nb] = x[ka] = x[ab] = x[ib] = x[sb] = x[ob] = x[gb] = x[yb] = x[bb] = x[vb] = !0;
 x[eb] = x[Ra] = x[lb] = !1;
 function nt(e, t, r, n, a, i) {
@@ -1000,7 +1000,7 @@ class Vb {
     };
   }
 }
-function Xe(e, t) {
+function Ze(e, t) {
   return e.indexOf(t) === 0 && (e.length === t.length || e.indexOf(t + "&") === 0);
 }
 function Dt(e) {
@@ -1022,14 +1022,14 @@ function _n(e, t) {
   const r = Dt(e), n = t.map((o) => Dt(o));
   let a = !1;
   const i = n.filter((o) => {
-    const l = Xe(o, r), c = Xe(r, o);
+    const l = Ze(o, r), c = Ze(r, o);
     return l && !a && (a = !0), !l && !c;
   });
   if (!a)
     i.push(r);
   else if (e.length === 3) {
     const l = Pa(e), c = Dt(l), u = i.some((d) => {
-      const p = Xe(d, c), f = Xe(c, d);
+      const p = Ze(d, c), f = Ze(c, d);
       return p || f;
     });
     (ae(i) || !u) && i.push(c);
@@ -1115,14 +1115,14 @@ class Wb {
 }
 class Ba {
   constructor(t) {
-    this.axiosConfig = Le(t, "axios", {}), this.validateAxiosConfig(), this.initSerializers(t), this.initInterceptors(t), this.initAxios(), this.search = this.search.bind(this), this.axiosCancelToken = rt.CancelToken;
+    this.axiosConfig = Ne(t, "axios", {}), this.validateAxiosConfig(), this.initSerializers(t), this.initInterceptors(t), this.initAxios(), this.search = this.search.bind(this), this.axiosCancelToken = rt.CancelToken;
   }
   validateAxiosConfig() {
     if (!Lp(this.axiosConfig, "url"))
       throw new Error("InvenioSearchApi config: `url` field is required.");
   }
   initInterceptors(t) {
-    this.requestInterceptor = Le(t, "interceptors.request", void 0), this.responseInterceptor = Le(t, "interceptors.response", void 0);
+    this.requestInterceptor = Ne(t, "interceptors.request", void 0), this.responseInterceptor = Ne(t, "interceptors.response", void 0);
   }
   getSerializer(t) {
     const r = {
@@ -1133,7 +1133,7 @@ class Ba {
   }
   initSerializers(t) {
     var r;
-    const n = this.getSerializer((r = t.invenio) === null || r === void 0 ? void 0 : r.requestSerializer), a = Le(t, "invenio.responseSerializer", Vb);
+    const n = this.getSerializer((r = t.invenio) === null || r === void 0 ? void 0 : r.requestSerializer), a = Ne(t, "invenio.responseSerializer", Vb);
     this.requestSerializer = new n(), this.responseSerializer = new a();
   }
   initAxios() {
@@ -1320,14 +1320,14 @@ class Jb {
     $n(r);
   }
 }
-const ev = "SET_QUERY_COMPONENT_INITIAL_STATE", Ua = "SET_QUERY_STRING", Tr = "SET_QUERY_SORTING", Ir = "SET_QUERY_SORT_BY", Fr = "SET_QUERY_SORT_ORDER", He = "SET_QUERY_STATE", za = "SET_QUERY_PAGINATION_PAGE", Ma = "SET_QUERY_PAGINATION_SIZE", ja = "SET_QUERY_FILTERS", Qa = "SET_QUERY_SUGGESTIONS", qa = "SET_SUGGESTION_STRING", Va = "CLEAR_QUERY_SUGGESTIONS", Ga = "RESULTS_LOADING", Ha = "RESULTS_FETCH_SUCCESS", Ya = "RESULTS_FETCH_ERROR", Yt = "RESULTS_UPDATE_LAYOUT", Wa = "RESET_QUERY", tv = (e) => (t) => {
+const ev = "SET_QUERY_COMPONENT_INITIAL_STATE", Ua = "SET_QUERY_STRING", Tr = "SET_QUERY_SORTING", Ir = "SET_QUERY_SORT_BY", Fr = "SET_QUERY_SORT_ORDER", Ye = "SET_QUERY_STATE", za = "SET_QUERY_PAGINATION_PAGE", Ma = "SET_QUERY_PAGINATION_SIZE", ja = "SET_QUERY_FILTERS", Qa = "SET_QUERY_SUGGESTIONS", qa = "SET_SUGGESTION_STRING", Va = "CLEAR_QUERY_SUGGESTIONS", Ga = "RESULTS_LOADING", Ha = "RESULTS_FETCH_SUCCESS", Ya = "RESULTS_FETCH_ERROR", Yt = "RESULTS_UPDATE_LAYOUT", Wa = "RESET_QUERY", tv = (e) => (t) => {
   e && t(ee({
     shouldUpdateUrlQueryString: !1,
     shouldReplaceUrlQueryString: !0
   }));
 }, Ka = (e) => (t) => {
   t({
-    type: He,
+    type: Ye,
     payload: e
   }), t(ee());
 }, Xa = (e) => (t) => {
@@ -1398,7 +1398,7 @@ const ev = "SET_QUERY_COMPONENT_INITIAL_STATE", Ua = "SET_QUERY_STRING", Tr = "S
 }, uv = (e, t, r, n) => {
   const a = r().query;
   t({
-    type: He,
+    type: Ye,
     payload: {
       ...a,
       ...e.newQueryState
@@ -1409,7 +1409,7 @@ const ev = "SET_QUERY_COMPONENT_INITIAL_STATE", Ua = "SET_QUERY_STRING", Tr = "S
 }, dv = (e, t, r, n) => {
   function a(l, c, u, d) {
     l.queryString === "" ? (l.sortBy = u.defaultSortingOnEmptyQueryString.sortBy, l.sortOrder = u.defaultSortingOnEmptyQueryString.sortOrder) : (l.sortBy = c.initialSortBy, l.sortOrder = c.initialSortOrder), d({
-      type: He,
+      type: Ye,
       payload: l
     });
   }
@@ -1480,7 +1480,7 @@ const ev = "SET_QUERY_COMPONENT_INITIAL_STATE", Ua = "SET_QUERY_STRING", Tr = "S
   if (r.urlHandlerApi) {
     const n = r.urlHandlerApi.get(r.initialQueryState);
     e({
-      type: He,
+      type: Ye,
       payload: n
     }), e(ee({
       shouldReplaceUrlQueryString: !0
@@ -1575,7 +1575,7 @@ const ev = "SET_QUERY_COMPONENT_INITIAL_STATE", Ua = "SET_QUERY_STRING", Tr = "S
         ...e,
         ...t.payload
       };
-    case He:
+    case Ye:
       return {
         ...e,
         ...ct,
@@ -2105,7 +2105,7 @@ class ni extends L {
         overridableId: a
       });
     }, this._getSelectedFilters = (r) => r.filter((n) => n[0] === this.agg.aggName), this._getResultBuckets = (r) => {
-      const n = Le(r, this.agg.aggName, {});
+      const n = Ne(r, this.agg.aggName, {});
       return "buckets" in n ? (Array.isArray(n.buckets) || (n.buckets = Object.entries(n.buckets).map((a) => {
         let [i, o] = a;
         return {
@@ -2530,7 +2530,7 @@ function gi(e) {
     overridableId: i,
     onResultsRendered: o
   } = e;
-  return Me(() => {
+  return je(() => {
     o && o();
   }, [o]), /* @__PURE__ */ s.createElement(X, {
     condition: !t && r > 0
@@ -2605,7 +2605,7 @@ function bi(e) {
     overridableId: a,
     onResultsRendered: i
   } = e;
-  return Me(() => {
+  return je(() => {
     i && i();
   }, [i]), /* @__PURE__ */ s.createElement(X, {
     condition: !t && r > 0
@@ -3534,7 +3534,7 @@ const { mergeCss: Vi, assignCss: FC } = LE(qi), An = {
     });
   }, [r, n]);
   return /* @__PURE__ */ s.createElement(Gi.Provider, { value: { config: e, refreshSearch: a } }, t);
-}, ZE = kr(XE), Ye = () => {
+}, ZE = kr(XE), We = () => {
   const e = s.useContext(Gi);
   if (!e)
     throw new Error("useSearchConfig must be used within a SearchProvider");
@@ -3550,7 +3550,7 @@ const { mergeCss: Vi, assignCss: FC } = LE(qi), An = {
   status: e,
   children: t,
   ...r
-}) => e === "damaged" || e === "imported with failures" || e === "validated with failures" || e === "serializer validation failed" || e === "validation failed" || e === "import failed" ? /* @__PURE__ */ s.createElement(j, { color: "red", ...r }, /* @__PURE__ */ s.createElement(_, { name: "warning sign" }), t) : e === "success" || e === "validated" || e === "created" ? /* @__PURE__ */ s.createElement(j, { color: "green", ...r }, /* @__PURE__ */ s.createElement(_, { name: "check circle" }), t) : e === "importing" || e === "validating" ? /* @__PURE__ */ s.createElement(j, { color: "blue", ...r }, /* @__PURE__ */ s.createElement(_, { name: "spinner", loading: !0 }), t) : /* @__PURE__ */ s.createElement(j, { ...r }, t), Be = (e) => (e == null ? void 0 : e.charAt(0).toUpperCase()) + (e == null ? void 0 : e.slice(1)) || "";
+}) => e === "damaged" || e === "imported with failures" || e === "validated with failures" || e === "serializer validation failed" || e === "validation failed" || e === "import failed" ? /* @__PURE__ */ s.createElement(j, { color: "red", ...r }, /* @__PURE__ */ s.createElement(_, { name: "warning sign" }), t) : e === "success" || e === "validated" || e === "created" ? /* @__PURE__ */ s.createElement(j, { color: "green", ...r }, /* @__PURE__ */ s.createElement(_, { name: "check circle" }), t) : e === "importing" || e === "validating" ? /* @__PURE__ */ s.createElement(j, { color: "blue", ...r }, /* @__PURE__ */ s.createElement(_, { name: "spinner", loading: !0 }), t) : /* @__PURE__ */ s.createElement(j, { ...r }, t), Ue = (e) => (e == null ? void 0 : e.charAt(0).toUpperCase()) + (e == null ? void 0 : e.slice(1)) || "";
 var Ki = { exports: {} };
 /*!
 	Copyright (c) 2018 Jed Watson.
@@ -3835,7 +3835,7 @@ const es = async (e, t) => {
   } catch (t) {
     throw console.error("Error fetching serializers:", t), new Error("Failed to fetch serializers");
   }
-}, Ue = async (e) => {
+}, ze = async (e) => {
   try {
     const t = await V.put(
       `/api/importer-tasks/${e}/status`,
@@ -3903,8 +3903,8 @@ const es = async (e, t) => {
   const { autoExecute: r = !1, onProgress: n, onError: a } = t;
   try {
     n == null || n("Validating", 0), await rs(e), n == null || n("Validating", 50);
-    let i = await Ue(e);
-    return n == null || n("Validating", 100), r && (i.status === "validated" || i.status === "validated with failures") && (n == null || n("Executing", 0), await ts(e), n == null || n("Executing", 50), i = await Ue(e), n == null || n("Executing", 100)), i;
+    let i = await ze(e);
+    return n == null || n("Validating", 100), r && (i.status === "validated" || i.status === "validated with failures") && (n == null || n("Executing", 0), await ts(e), n == null || n("Executing", 50), i = await ze(e), n == null || n("Executing", 100)), i;
   } catch (i) {
     const o = i instanceof Error ? i : new Error("Unknown error during workflow execution");
     throw a == null || a(o, "Executing"), o;
@@ -4018,7 +4018,7 @@ const es = async (e, t) => {
       const g = await rs(e);
       if (!g)
         throw new Error(`Validation failed for task ${e}`);
-      return o == null || o(g), await Ue(e), g;
+      return o == null || o(g), await ze(e), g;
     } catch (g) {
       const S = g instanceof Error ? g : new Error("Unknown error");
       throw n((A) => ({ ...A, error: S })), l == null || l(S), S;
@@ -4031,7 +4031,7 @@ const es = async (e, t) => {
       const g = await ts(e);
       if (!g)
         throw new Error(`Failed to execute bulk import for task ${e}`);
-      return c == null || c(g), await Ue(e), g;
+      return c == null || c(g), await ze(e), g;
     } catch (g) {
       const S = g instanceof Error ? g : new Error("Unknown error");
       throw n((A) => ({ ...A, error: S })), u == null || u(S), S;
@@ -4041,7 +4041,7 @@ const es = async (e, t) => {
   }, [e, c, u]), E = R(async () => {
     n((g) => ({ ...g, isGettingStatus: !0, error: null }));
     try {
-      const g = await Ue(e);
+      const g = await ze(e);
       if (!g)
         throw new Error(`Failed to retrieve status for task ${e}`);
       return n((S) => ({ ...S, error: null })), d == null || d(g), g;
@@ -4066,9 +4066,10 @@ const es = async (e, t) => {
     getStatus: E,
     clearError: f
   };
-}, Ze = {
+}, ke = {
   actionsCell: b({
-    inlineSize: "15rem"
+    inlineSize: "15rem",
+    whiteSpace: "nowrap"
   }),
   errorContainer: b({
     display: "flex",
@@ -4085,11 +4086,16 @@ const es = async (e, t) => {
   actionsContainer: b({
     display: "flex",
     alignItems: "center",
-    gap: "0.625rem"
+    gap: "0.8rem",
+    flexWrap: "nowrap",
+    minWidth: 0
+  }),
+  statusCell: b({
+    whiteSpace: "nowrap"
   })
 }, yS = ({ result: e, index: t }) => {
   var y;
-  const { config: r, refreshSearch: n } = Ye(), {
+  const { config: r, refreshSearch: n } = We(), {
     deleteTask: a,
     runBulkImport: i,
     getStatus: o,
@@ -4113,19 +4119,19 @@ const es = async (e, t) => {
   if (!e)
     return null;
   const h = l || c || u || d;
-  return /* @__PURE__ */ s.createElement(ht, { key: t }, /* @__PURE__ */ s.createElement(H, null, /* @__PURE__ */ s.createElement("a", { href: `${r.resultPath}/${e.id}` }, e.title || "No title")), /* @__PURE__ */ s.createElement(H, null, Kt(e.created)), /* @__PURE__ */ s.createElement(H, null, /* @__PURE__ */ s.createElement(Wi, { status: e.status }, Be(e.status))), /* @__PURE__ */ s.createElement(H, null, /* @__PURE__ */ s.createElement(j, null, Be(e.record_type))), /* @__PURE__ */ s.createElement(H, null, ((y = e.records_status) == null ? void 0 : y.total_records) ?? 0), /* @__PURE__ */ s.createElement(H, null, e.serializer), /* @__PURE__ */ s.createElement(H, null, Be(e.mode)), /* @__PURE__ */ s.createElement(H, { className: Ze.actionsCell }, p && /* @__PURE__ */ s.createElement("div", { className: Ze.errorContainer }, p.message, /* @__PURE__ */ s.createElement(
+  return /* @__PURE__ */ s.createElement(ht, { key: t }, /* @__PURE__ */ s.createElement(H, null, /* @__PURE__ */ s.createElement("a", { href: `${r.resultPath}/${e.id}` }, e.title || "No title")), /* @__PURE__ */ s.createElement(H, null, Kt(e.created)), /* @__PURE__ */ s.createElement(H, { className: ke.statusCell }, /* @__PURE__ */ s.createElement(Wi, { status: e.status }, Ue(e.status))), /* @__PURE__ */ s.createElement(H, null, /* @__PURE__ */ s.createElement(j, null, Ue(e.record_type))), /* @__PURE__ */ s.createElement(H, null, ((y = e.records_status) == null ? void 0 : y.total_records) ?? 0), /* @__PURE__ */ s.createElement(H, null, e.serializer), /* @__PURE__ */ s.createElement(H, null, Ue(e.mode)), /* @__PURE__ */ s.createElement(H, { className: ke.actionsCell }, p && /* @__PURE__ */ s.createElement("div", { className: ke.errorContainer }, p.message, /* @__PURE__ */ s.createElement(
     z,
     {
       onClick: f,
-      className: Ze.clearErrorButton,
+      className: ke.clearErrorButton,
       size: "mini",
       basic: !0
     },
     "Clear"
-  )), /* @__PURE__ */ s.createElement("div", { className: Ze.actionsContainer }, /* @__PURE__ */ s.createElement(
+  )), /* @__PURE__ */ s.createElement("div", { className: ke.actionsContainer }, /* @__PURE__ */ s.createElement(
     ce,
     {
-      text: h ? "Processing..." : "Select Action",
+      text: h ? "Processing..." : "Actions",
       floating: !0,
       labeled: !0,
       className: "icon",
@@ -4267,7 +4273,7 @@ const es = async (e, t) => {
     flex: 1,
     minInlineSize: 0
   })
-}, ke = {
+}, Pe = {
   fileInput: b({
     marginBlockStart: "0.5rem"
   }),
@@ -4305,7 +4311,7 @@ const es = async (e, t) => {
   }, p = (f) => {
     c("files", f);
   };
-  return Me(() => {
+  return je(() => {
     u();
   }, [u]), {
     configs: e,
@@ -4384,9 +4390,9 @@ const es = async (e, t) => {
       type: "file",
       accept: ".csv",
       onChange: a,
-      className: ke.fileInput
+      className: Pe.fileInput
     }
-  ), o.metadata && /* @__PURE__ */ s.createElement("p", { className: ke.helpText }, "Selected: ", o.metadata.name), /* @__PURE__ */ s.createElement("p", { className: ke.helpText }, "Upload a CSV file containing the records metadata to be imported or deleted.")), /* @__PURE__ */ s.createElement(_e.Field, null, /* @__PURE__ */ s.createElement(
+  ), o.metadata && /* @__PURE__ */ s.createElement("p", { className: Pe.helpText }, "Selected: ", o.metadata.name), /* @__PURE__ */ s.createElement("p", { className: Pe.helpText }, "Upload a CSV file containing the records metadata to be imported or deleted.")), /* @__PURE__ */ s.createElement(_e.Field, null, /* @__PURE__ */ s.createElement(
     Ys,
     {
       value: o.files || [],
@@ -4396,7 +4402,7 @@ const es = async (e, t) => {
       maxTotalSize: 10 * 1024 * 1024 * 1024,
       maxFiles: 100
     }
-  ), /* @__PURE__ */ s.createElement("p", { className: ke.helpText }, "Upload files related to the records. You can upload multiple files, and they will be associated with the import task.")), /* @__PURE__ */ s.createElement(
+  ), /* @__PURE__ */ s.createElement("p", { className: Pe.helpText }, "Upload files related to the records. You can upload multiple files, and they will be associated with the import task.")), /* @__PURE__ */ s.createElement(
     mo,
     {
       fieldPath: "task.description",
@@ -4404,7 +4410,7 @@ const es = async (e, t) => {
       placeholder: "Enter a description for the import task",
       rows: 3
     }
-  ), /* @__PURE__ */ s.createElement("div", { className: ke.buttonContainer }, e && /* @__PURE__ */ s.createElement(Hi, { progress: e }), /* @__PURE__ */ s.createElement(
+  ), /* @__PURE__ */ s.createElement("div", { className: Pe.buttonContainer }, e && /* @__PURE__ */ s.createElement(Hi, { progress: e }), /* @__PURE__ */ s.createElement(
     z,
     {
       type: "button",
@@ -4477,7 +4483,7 @@ function Pn(e, t = !1) {
   const n = wS.call(e).slice(8, -1);
   return n === "Date" ? isNaN(e.getTime()) ? "" + e : e.toISOString(e) : n === "Error" || e instanceof Error ? "[" + TS.call(e) + "]" : n === "RegExp" ? IS.call(e) : null;
 }
-function ze(e, t) {
+function Me(e, t) {
   let r = Pn(e, t);
   return r !== null ? r : JSON.stringify(e, function(n, a) {
     let i = Pn(this[n], t);
@@ -4495,7 +4501,7 @@ let me = {
     value: r,
     originalValue: n
   }) => {
-    let a = n != null && n !== r, i = `${e} must be a \`${t}\` type, but the final value was: \`${ze(r, !0)}\`` + (a ? ` (cast from the value \`${ze(n, !0)}\`).` : ".");
+    let a = n != null && n !== r, i = `${e} must be a \`${t}\` type, but the final value was: \`${Me(r, !0)}\`` + (a ? ` (cast from the value \`${Me(n, !0)}\`).` : ".");
     return r === null && (i += '\n If "null" is intended as an empty value be sure to mark the schema as `.nullable()`'), i;
   },
   defined: "${path} must be defined"
@@ -4598,7 +4604,7 @@ class Q extends Error {
     const n = r.label || r.path || "this";
     return n !== r.path && (r = rr({}, r, {
       path: n
-    })), typeof t == "string" ? t.replace(qS, (a, i) => ze(r[i])) : typeof t == "function" ? t(r) : t;
+    })), typeof t == "string" ? t.replace(qS, (a, i) => Me(r[i])) : typeof t == "function" ? t(r) : t;
   }
   static isError(t) {
     return t && t.name === "ValidationError";
@@ -4658,7 +4664,7 @@ function GS(e) {
     return t;
   };
 }
-var HS = GS, YS = HS, WS = YS(), KS = WS, XS = KS, ZS = Ge;
+var HS = GS, YS = HS, WS = YS(), KS = WS, XS = KS, ZS = He;
 function JS(e, t) {
   return e && XS(e, t, ZS);
 }
@@ -4805,7 +4811,7 @@ function V0(e, t, r, n, a, i) {
   }
   return i.delete(e), i.delete(t), m;
 }
-var G0 = V0, Nt = $r, H0 = us, Y0 = M0, W0 = G0, Un = je, zn = q, Mn = bt, K0 = fr, X0 = 1, jn = "[object Arguments]", Qn = "[object Array]", Je = "[object Object]", Z0 = Object.prototype, qn = Z0.hasOwnProperty;
+var G0 = V0, Nt = $r, H0 = us, Y0 = M0, W0 = G0, Un = Qe, zn = q, Mn = bt, K0 = fr, X0 = 1, jn = "[object Arguments]", Qn = "[object Array]", Je = "[object Object]", Z0 = Object.prototype, qn = Z0.hasOwnProperty;
 function J0(e, t, r, n, a, i) {
   var o = zn(e), l = zn(t), c = o ? Qn : Un(e), u = l ? Qn : Un(t);
   c = c == jn ? Je : c, u = u == jn ? Je : u;
@@ -4860,7 +4866,7 @@ var o_ = s_, l_ = se;
 function c_(e) {
   return e === e && !l_(e);
 }
-var fs = c_, u_ = fs, d_ = Ge;
+var fs = c_, u_ = fs, d_ = He;
 function p_(e) {
   for (var t = d_(e), r = t.length; r--; ) {
     var n = t[r], a = e[n];
@@ -4881,7 +4887,7 @@ function b_(e) {
     return r === e || m_(r, e, t);
   };
 }
-var v_ = b_, E_ = ps, S_ = ba, __ = vr, $_ = mr, x_ = fs, C_ = hs, w_ = qe, T_ = 1, I_ = 2;
+var v_ = b_, E_ = ps, S_ = ba, __ = vr, $_ = mr, x_ = fs, C_ = hs, w_ = Ve, T_ = 1, I_ = 2;
 function F_(e, t) {
   return $_(e) && x_(t) ? C_(w_(e), t) : function(r) {
     var n = S_(r, e);
@@ -4900,7 +4906,7 @@ function P_(e) {
     return k_(t, e);
   };
 }
-var D_ = P_, L_ = R_, N_ = D_, B_ = mr, U_ = qe;
+var D_ = P_, L_ = R_, N_ = D_, B_ = mr, U_ = Ve;
 function z_(e) {
   return B_(e) ? L_(U_(e)) : N_(e);
 }
@@ -5085,8 +5091,8 @@ function tt(e) {
         originalValue: c,
         label: o,
         path: O.path || i
-      }, h, O.params), g), We = new Q(Q.formatError(O.message || y, fe), a, fe.path, O.type || p);
-      return We.params = fe, We;
+      }, h, O.params), g), Ke = new Q(Q.formatError(O.message || y, fe), a, fe.path, O.type || p);
+      return Ke.params = fe, Ke;
     }
     let A = pt({
       path: i,
@@ -5282,7 +5288,7 @@ class M {
       value: t
     }, r)), a = n._cast(t, r);
     if (t !== void 0 && r.assert !== !1 && n.isType(a) !== !0) {
-      let i = ze(t), o = ze(a);
+      let i = Me(t), o = Me(a);
       throw new TypeError(`The value of ${r.path || "field"} could not be cast to a value that satisfies the schema type: "${n._type}". 
 
 attempted value: ${i} 
@@ -5564,7 +5570,7 @@ const u$ = M;
 u$.prototype;
 const J = (e) => e == null;
 let d$ = /^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))$/i, p$ = /^((https?|ftp):)?\/\/(((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:)*@)?(((\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5]))|((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?)(:\d*)?)(\/((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)+(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*)?)?(\?((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|[\uE000-\uF8FF]|\/|\?)*)?(\#((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|\/|\?)*)?$/i, f$ = /^(?:[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}|00000000-0000-0000-0000-000000000000)$/i, h$ = (e) => J(e) || e === e.trim(), m$ = {}.toString();
-function Ne() {
+function Be() {
   return new bs();
 }
 class bs extends M {
@@ -5689,7 +5695,7 @@ class bs extends M {
     });
   }
 }
-Ne.prototype = bs.prototype;
+Be.prototype = bs.prototype;
 var g$ = /^(\d{4}|[+\-]\d{6})(?:-?(\d{2})(?:-?(\d{2}))?)?(?:[ T]?(\d{2}):?(\d{2})(?::?(\d{2})(?:[,\.](\d{1,}))?)?(?:(Z)|([+\-])(\d{2})(?::?(\d{2}))?)?)?$/;
 function y$(e) {
   var t = [1, 4, 5, 6, 7, 10, 11], r = 0, n, a;
@@ -5963,7 +5969,7 @@ var _$ = S$, $$ = _$, x$ = {
   œ: "oe",
   ŉ: "'n",
   ſ: "s"
-}, C$ = $$(x$), w$ = C$, T$ = w$, I$ = Qe, F$ = /[\xc0-\xd6\xd8-\xf6\xf8-\xff\u0100-\u017f]/g, A$ = "\\u0300-\\u036f", O$ = "\\ufe20-\\ufe2f", R$ = "\\u20d0-\\u20ff", k$ = A$ + O$ + R$, P$ = "[" + k$ + "]", D$ = RegExp(P$, "g");
+}, C$ = $$(x$), w$ = C$, T$ = w$, I$ = qe, F$ = /[\xc0-\xd6\xd8-\xf6\xf8-\xff\u0100-\u017f]/g, A$ = "\\u0300-\\u036f", O$ = "\\ufe20-\\ufe2f", R$ = "\\u20d0-\\u20ff", k$ = A$ + O$ + R$, P$ = "[" + k$ + "]", D$ = RegExp(P$, "g");
 function L$(e) {
   return e = I$(e), e && e.replace(F$, T$).replace(D$, "");
 }
@@ -5988,7 +5994,7 @@ var Q$ = j$, Ss = "\\ud800-\\udfff", q$ = "\\u0300-\\u036f", V$ = "\\ufe20-\\ufe
 function p1(e) {
   return e.match(d1) || [];
 }
-var f1 = p1, h1 = z$, m1 = Q$, g1 = Qe, y1 = f1;
+var f1 = p1, h1 = z$, m1 = Q$, g1 = qe, y1 = f1;
 function b1(e, t, r) {
   return e = g1(e), t = r ? void 0 : t, t === void 0 ? m1(e) ? y1(e) : h1(e) : e.match(t) || [];
 }
@@ -6030,7 +6036,7 @@ var ax = nx, ix = q1, sx = Ds, ox = ax;
 function lx(e) {
   return sx(e) ? ox(e) : ix(e);
 }
-var cx = lx, ux = k1, dx = Ds, px = cx, fx = Qe;
+var cx = lx, ux = k1, dx = Ds, px = cx, fx = qe;
 function hx(e) {
   return function(t) {
     t = fx(t);
@@ -6038,7 +6044,7 @@ function hx(e) {
     return n[e]() + a;
   };
 }
-var mx = hx, gx = mx, yx = gx("toUpperCase"), bx = yx, vx = Qe, Ex = bx;
+var mx = hx, gx = mx, yx = gx("toUpperCase"), bx = yx, vx = qe, Ex = bx;
 function Sx(e) {
   return Ex(vx(e).toLowerCase());
 }
@@ -6370,10 +6376,10 @@ const jx = {
   files: []
 }, Qx = at({
   task: at({
-    title: Ne().required("Title is required"),
-    recordType: Ne().required("Record type is required"),
-    serializer: Ne().required("Serializer is required"),
-    mode: Ne().required("Mode is required")
+    title: Be().required("Title is required"),
+    recordType: Be().required("Record type is required"),
+    serializer: Be().required("Serializer is required"),
+    mode: Be().required("Mode is required")
   }),
   metadata: at().nullable()
 }), qx = ({ onSubmit: e }) => {
@@ -6403,7 +6409,7 @@ const jx = {
     /* @__PURE__ */ s.createElement(CS, { progress: t })
   );
 }, Vx = () => {
-  const [e, t] = N(!1), { refreshSearch: r } = Ye(), n = R(() => {
+  const [e, t] = N(!1), { refreshSearch: r } = We(), n = R(() => {
     r(), t(!1);
   }, [r]);
   return /* @__PURE__ */ s.createElement(
@@ -6440,7 +6446,7 @@ const jx = {
 }, Gx = ({
   appId: e = "search"
 }) => {
-  const { showImportModal: t } = Ye().config;
+  const { showImportModal: t } = We().config;
   return /* @__PURE__ */ s.createElement(v, { id: `${e}.SearchBarRow` }, /* @__PURE__ */ s.createElement(
     "section",
     {
@@ -6482,7 +6488,7 @@ const jx = {
     flex: 0
   })
 }, Wx = (e) => {
-  const { config: t } = Ye(), { availableAggregations: r, formatTitle: n } = Hx(e);
+  const { config: t } = We(), { availableAggregations: r, formatTitle: n } = Hx(e);
   return !t.showFacets || r.length === 0 ? null : /* @__PURE__ */ s.createElement("aside", { className: Yx.container, "aria-label": "Search Facets" }, r.map((a) => /* @__PURE__ */ s.createElement(
     zv,
     {
@@ -6495,7 +6501,7 @@ const jx = {
     }
   )));
 }, Kx = kr(Wx), Xx = () => {
-  const { config: e } = Ye();
+  const { config: e } = We();
   return /* @__PURE__ */ s.createElement(W, null, /* @__PURE__ */ s.createElement(W.Row, { verticalAlign: "middle" }, /* @__PURE__ */ s.createElement(W.Column, { width: 14, textAlign: "center" }, /* @__PURE__ */ s.createElement(Kv, { options: { size: "mini" } })), /* @__PURE__ */ s.createElement(W.Column, { width: 2, textAlign: "right" }, /* @__PURE__ */ s.createElement(
     oE,
     {
@@ -6709,7 +6715,7 @@ const jx = {
   initialTab: n = 0
 }) => {
   const [a, i] = N(n);
-  Me(() => {
+  je(() => {
     t && i(n);
   }, [t, n]);
   const o = (u, d) => {
@@ -6762,7 +6768,7 @@ const jx = {
     )),
     /* @__PURE__ */ s.createElement(le.Actions, null, /* @__PURE__ */ s.createElement(z, { onClick: r }, /* @__PURE__ */ s.createElement(_, { name: "close" }), "Close"))
   );
-}, Pe = {
+}, De = {
   idContainer: b({
     display: "flex",
     alignItems: "center",
@@ -6836,7 +6842,7 @@ const jx = {
       }
     }
   ];
-  return /* @__PURE__ */ s.createElement(ht, { key: t }, /* @__PURE__ */ s.createElement(H, null, /* @__PURE__ */ s.createElement("div", { className: Pe.idContainer }, /* @__PURE__ */ s.createElement("code", { className: Pe.codeElement }, e.id.length > 20 ? `${e.id.substring(0, 20)}…` : e.id), /* @__PURE__ */ s.createElement(
+  return /* @__PURE__ */ s.createElement(ht, { key: t }, /* @__PURE__ */ s.createElement(H, null, /* @__PURE__ */ s.createElement("div", { className: De.idContainer }, /* @__PURE__ */ s.createElement("code", { className: De.codeElement }, e.id.length > 20 ? `${e.id.substring(0, 20)}…` : e.id), /* @__PURE__ */ s.createElement(
     zr,
     {
       content: r === "copied" ? "Copied!" : "Copy ID",
@@ -6855,7 +6861,7 @@ const jx = {
       position: "top center",
       size: "mini"
     }
-  ))), /* @__PURE__ */ s.createElement(H, null, /* @__PURE__ */ s.createElement("div", { className: Pe.titleContainer }, ((y = e.src_data) == null ? void 0 : y.title) || /* @__PURE__ */ s.createElement("em", { className: Pe.noTitle }, "No Title Available"))), /* @__PURE__ */ s.createElement(H, null, /* @__PURE__ */ s.createElement(j, { color: d, size: "small" }, /* @__PURE__ */ s.createElement(_, { name: f(d) }), Be(e.status)), u && /* @__PURE__ */ s.createElement(
+  ))), /* @__PURE__ */ s.createElement(H, null, /* @__PURE__ */ s.createElement("div", { className: De.titleContainer }, ((y = e.src_data) == null ? void 0 : y.title) || /* @__PURE__ */ s.createElement("em", { className: De.noTitle }, "No Title Available"))), /* @__PURE__ */ s.createElement(H, null, /* @__PURE__ */ s.createElement(j, { color: d, size: "small" }, /* @__PURE__ */ s.createElement(_, { name: f(d) }), Ue(e.status)), u && /* @__PURE__ */ s.createElement(
     zr,
     {
       content: `${e.errors.length} error${e.errors.length > 1 ? "s" : ""} found`,
@@ -6864,7 +6870,7 @@ const jx = {
         {
           name: "exclamation triangle",
           color: "red",
-          className: Pe.errorIcon
+          className: De.errorIcon
         }
       ),
       position: "top center",
@@ -7060,7 +7066,7 @@ const jx = {
     removeFile: o,
     clearFiles: l
   };
-}, De = {
+}, Le = {
   headerContainer: b({
     display: "flex",
     justifyContent: "space-between",
@@ -7088,7 +7094,7 @@ const jx = {
   isUploading: t,
   handleRemoveFile: r,
   handleClearFiles: n
-}) => /* @__PURE__ */ s.createElement(K, null, /* @__PURE__ */ s.createElement("div", { className: De.headerContainer }, /* @__PURE__ */ s.createElement("strong", null, "Selected Files (", e.length, ") •", " ", Zi(e)), /* @__PURE__ */ s.createElement(
+}) => /* @__PURE__ */ s.createElement(K, null, /* @__PURE__ */ s.createElement("div", { className: Le.headerContainer }, /* @__PURE__ */ s.createElement("strong", null, "Selected Files (", e.length, ") •", " ", Zi(e)), /* @__PURE__ */ s.createElement(
   z,
   {
     size: "mini",
@@ -7098,12 +7104,12 @@ const jx = {
     onClick: n,
     disabled: t
   }
-)), /* @__PURE__ */ s.createElement($, { divided: !0 }, e.map((a) => /* @__PURE__ */ s.createElement($.Item, { key: a.id }, /* @__PURE__ */ s.createElement($.Content, null, /* @__PURE__ */ s.createElement("div", { className: De.listItemContainer }, /* @__PURE__ */ s.createElement("div", { className: De.fileContentContainer }, /* @__PURE__ */ s.createElement("div", { className: De.fileInfoContainer }, /* @__PURE__ */ s.createElement(_, { name: "file" }), /* @__PURE__ */ s.createElement("span", null, a.file.name), /* @__PURE__ */ s.createElement(j, { size: "mini", basic: !0 }, Lr(a.file.size))), a.error && /* @__PURE__ */ s.createElement(
+)), /* @__PURE__ */ s.createElement($, { divided: !0 }, e.map((a) => /* @__PURE__ */ s.createElement($.Item, { key: a.id }, /* @__PURE__ */ s.createElement($.Content, null, /* @__PURE__ */ s.createElement("div", { className: Le.listItemContainer }, /* @__PURE__ */ s.createElement("div", { className: Le.fileContentContainer }, /* @__PURE__ */ s.createElement("div", { className: Le.fileInfoContainer }, /* @__PURE__ */ s.createElement(_, { name: "file" }), /* @__PURE__ */ s.createElement("span", null, a.file.name), /* @__PURE__ */ s.createElement(j, { size: "mini", basic: !0 }, Lr(a.file.size))), a.error && /* @__PURE__ */ s.createElement(
   U,
   {
     negative: !0,
     size: "mini",
-    className: De.errorMessage
+    className: Le.errorMessage
   },
   a.error
 )), /* @__PURE__ */ s.createElement(
@@ -7187,7 +7193,7 @@ const jx = {
       e(At);
     },
     [m, f, e]
-  ), We = R(() => {
+  ), Ke = R(() => {
     E(), p(null), e([]);
   }, [E, e]);
   return /* @__PURE__ */ s.createElement("div", null, /* @__PURE__ */ s.createElement(
@@ -7212,7 +7218,7 @@ const jx = {
       uploadFiles: f,
       isUploading: h,
       handleRemoveFile: fe,
-      handleClearFiles: We
+      handleClearFiles: Ke
     }
   ));
 }, jt = {
@@ -7313,14 +7319,14 @@ const jx = {
 }, yC = ({ taskId: e }) => {
   var f, h, y, m, E, g;
   const [t, r] = N(null), { getStatus: n, isGettingStatus: a, runBulkImport: i, isBulkImporting: o, error: l } = is(e, { onStatusChangeSuccess: r });
-  if (Me(() => {
+  if (je(() => {
     n();
   }, [n]), a || o)
     return /* @__PURE__ */ s.createElement(Yi, null);
   if (!t)
     return /* @__PURE__ */ s.createElement(U, { warning: !0, icon: !0 }, /* @__PURE__ */ s.createElement(_, { name: "search" }), /* @__PURE__ */ s.createElement(U.Content, null, /* @__PURE__ */ s.createElement(U.Header, null, "Task Not Found"), "The requested task could not be found."));
   const c = ((f = t.records_status) == null ? void 0 : f.total_records) || 0, u = ((h = t.records_status) == null ? void 0 : h.validated) || 0, d = ((y = t.records_status) == null ? void 0 : y.success) || 0, p = (((m = t.records_status) == null ? void 0 : m["import failed"]) || 0) + (((E = t.records_status) == null ? void 0 : E["validation failed"]) || 0) + (((g = t.records_status) == null ? void 0 : g["serializer validation failed"]) || 0);
-  return /* @__PURE__ */ s.createElement(tC, { taskId: e }, /* @__PURE__ */ s.createElement(oo, { fluid: !0, verticalAlign: "top" }, l && /* @__PURE__ */ s.createElement(U, { negative: !0, icon: !0 }, /* @__PURE__ */ s.createElement(_, { name: "exclamation triangle" }), /* @__PURE__ */ s.createElement(U.Content, null, /* @__PURE__ */ s.createElement(U.Header, null, "Error"), (l == null ? void 0 : l.message) || "An unknown error occurred")), /* @__PURE__ */ s.createElement(W, null, /* @__PURE__ */ s.createElement(W.Row, { verticalAlign: "top" }, /* @__PURE__ */ s.createElement(W.Column, { width: 8, verticalAlign: "middle" }, /* @__PURE__ */ s.createElement("div", { className: Mt.headerContainer }, /* @__PURE__ */ s.createElement(_, { name: "tasks", circular: !0, size: "big" }), /* @__PURE__ */ s.createElement("div", { className: Mt.headerContent }, /* @__PURE__ */ s.createElement(de, { as: "h2" }, /* @__PURE__ */ s.createElement(de.Content, null, t.title)), t.status && /* @__PURE__ */ s.createElement(Wi, { size: "large", status: t.status }, Be(t.status))))), /* @__PURE__ */ s.createElement(W.Column, { width: 8, textAlign: "right" }, /* @__PURE__ */ s.createElement("div", { className: Mt.actionsContainer }, /* @__PURE__ */ s.createElement("div", null, /* @__PURE__ */ s.createElement(
+  return /* @__PURE__ */ s.createElement(tC, { taskId: e }, /* @__PURE__ */ s.createElement(oo, { fluid: !0, verticalAlign: "top" }, l && /* @__PURE__ */ s.createElement(U, { negative: !0, icon: !0 }, /* @__PURE__ */ s.createElement(_, { name: "exclamation triangle" }), /* @__PURE__ */ s.createElement(U.Content, null, /* @__PURE__ */ s.createElement(U.Header, null, "Error"), (l == null ? void 0 : l.message) || "An unknown error occurred")), /* @__PURE__ */ s.createElement(W, null, /* @__PURE__ */ s.createElement(W.Row, { verticalAlign: "top" }, /* @__PURE__ */ s.createElement(W.Column, { width: 8, verticalAlign: "middle" }, /* @__PURE__ */ s.createElement("div", { className: Mt.headerContainer }, /* @__PURE__ */ s.createElement(_, { name: "tasks", circular: !0, size: "big" }), /* @__PURE__ */ s.createElement("div", { className: Mt.headerContent }, /* @__PURE__ */ s.createElement(de, { as: "h2" }, /* @__PURE__ */ s.createElement(de.Content, null, t.title)), t.status && /* @__PURE__ */ s.createElement(Wi, { size: "large", status: t.status }, Ue(t.status))))), /* @__PURE__ */ s.createElement(W.Column, { width: 8, textAlign: "right" }, /* @__PURE__ */ s.createElement("div", { className: Mt.actionsContainer }, /* @__PURE__ */ s.createElement("div", null, /* @__PURE__ */ s.createElement(
     z,
     {
       size: "tiny",
@@ -7395,7 +7401,7 @@ export {
   Wi as StatusLabel,
   yC as TaskDetails,
   dC as TaskRecordItem,
-  Be as capitalizeFirstLetter,
+  Ue as capitalizeFirstLetter,
   rS as cn,
   AC as createSearchApi,
   OC as createSearchApiConfig,

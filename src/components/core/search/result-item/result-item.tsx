@@ -60,7 +60,7 @@ export const ResultItem: React.FC<ResultItemProps> = ({ result, index }) => {
         </a>
       </TableCell>
       <TableCell>{formatDate(result.created)}</TableCell>
-      <TableCell>
+      <TableCell className={styles.statusCell}>
         <StatusLabel status={result.status}>
           {capitalizeFirstLetter(result.status)}
         </StatusLabel>
@@ -87,7 +87,7 @@ export const ResultItem: React.FC<ResultItemProps> = ({ result, index }) => {
         )}
         <div className={styles.actionsContainer}>
           <Dropdown
-            text={isAnyOperationLoading ? 'Processing...' : 'Select Action'}
+            text={isAnyOperationLoading ? 'Processing...' : 'Actions'}
             floating
             labeled
             className='icon'

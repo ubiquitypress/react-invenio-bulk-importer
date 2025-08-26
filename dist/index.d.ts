@@ -4,6 +4,47 @@ import { FC } from 'react';
 import { Icon } from 'semantic-ui-react';
 import { Label } from 'semantic-ui-react';
 
+/**
+ * Represents an individual bucket in an aggregation.
+ * This is the base bucket data from the API.
+ */
+export declare interface AggregationBucket {
+    key: string;
+    doc_count: number;
+}
+
+/**
+ * Represents the configuration for an aggregation.
+ */
+export declare interface AggregationConfig {
+    field: string;
+    aggName: string;
+    childAgg?: AggregationConfig;
+}
+
+/**
+ * Represents aggregation data structure from the API.
+ */
+export declare interface AggregationData {
+    buckets: AggregationBucket[];
+}
+
+/**
+ * Map of aggregation results from the API.
+ */
+export declare interface Aggregations {
+    [key: string]: AggregationData;
+}
+
+/**
+ * Extended bucket with UI state information.
+ * Used by aggregation components for display and interaction.
+ */
+export declare interface Bucket extends AggregationBucket {
+    label: string;
+    is_selected: boolean;
+}
+
 export declare const BulkImporter: {
     Search: FC<SearchProps>;
     TaskDetails: FC<TaskDetailsProps>;
@@ -60,6 +101,15 @@ export declare interface FileUploadProgress {
     loaded: number;
     total: number;
     percentage: number;
+}
+
+/**
+ * Represents a filter value in the search.
+ */
+export declare interface FilterValue {
+    field: string;
+    value: string;
+    label?: string;
 }
 
 export declare const formatDate: (dateString: string) => string;
@@ -465,6 +515,13 @@ declare interface ProgressLoadingProps {
     showPercentage?: boolean;
 }
 
+/**
+ * Represents the query filters applied to the search.
+ */
+export declare interface QueryFilters {
+    [fieldName: string]: FilterValue[] | FilterValue;
+}
+
 export declare interface ResultsPerPageOption {
     text: string;
     value: number;
@@ -502,6 +559,15 @@ export declare interface SearchConfig {
 export declare interface SearchProps {
     config?: Partial<SearchConfig>;
     overriddenComponents?: OverridableComponents;
+}
+
+/**
+ * Search results data structure from the API.
+ */
+export declare interface SearchResultsData {
+    aggregations?: Aggregations;
+    hits?: unknown[];
+    total?: number;
 }
 
 export declare interface SortOption {

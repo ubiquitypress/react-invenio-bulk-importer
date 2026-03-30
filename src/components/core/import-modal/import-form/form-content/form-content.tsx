@@ -1,8 +1,14 @@
 import { FileUploader } from '@/components/core';
 import { ProgressLoading, Spinner } from '@/components/ui';
 import type { OrchestrationSteps } from '@/types';
+import { formatOptionLabel } from '@/utils';
 import React, { Fragment } from 'react';
-import { SelectField, TextAreaField, TextField } from 'react-invenio-forms';
+import {
+  BooleanField,
+  SelectField,
+  TextAreaField,
+  TextField
+} from 'react-invenio-forms';
 import { Button, Form } from 'semantic-ui-react';
 import { styles } from './form-content.styles';
 import { useFormContent } from './hooks';
@@ -22,6 +28,9 @@ export const FormContent: React.FC<FormContentProps> = ({ progress }) => {
     isSubmitting,
     isValid
   } = useFormContent();
+  const selectedOptions = values.task.recordType
+    ? configs[values.task.recordType]?.options || {}
+    : {};
 
   if (isLoading) {
     return <Spinner />;
@@ -82,6 +91,19 @@ export const FormContent: React.FC<FormContentProps> = ({ progress }) => {
           required
         />
       </Form.Group>
+
+      {Object.keys(selectedOptions).length > 0 && (
+        <Form.Field className={styles.optionsSection}>
+          <label>Options</label>
+          {Object.keys(selectedOptions).map(optionKey => (
+            <BooleanField
+              key={optionKey}
+              fieldPath={`task.options.${optionKey}`}
+              label={formatOptionLabel(optionKey)}
+            />
+          ))}
+        </Form.Field>
+      )}
 
       <Form.Field>
         <label htmlFor={'file-input'}>Metadata File</label>

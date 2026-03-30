@@ -20,6 +20,7 @@ export const createImporterTask = async (
     status: task.status,
     record_type: task.recordType,
     serializer: task.serializer,
+    options: task.options,
     start_time: task.startTime,
     end_time: task.endTime
   };

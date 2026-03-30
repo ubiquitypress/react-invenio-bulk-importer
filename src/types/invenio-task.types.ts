@@ -30,10 +30,7 @@ export interface InvenioTask {
     username: string | null;
     email: string;
   };
-  options: {
-    doi_minting: boolean;
-    publish: boolean;
-  };
+  options: Record<string, boolean>;
 }
 
 export const ImporterTaskStates = {

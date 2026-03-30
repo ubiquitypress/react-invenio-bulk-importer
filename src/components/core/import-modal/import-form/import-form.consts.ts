@@ -10,7 +10,8 @@ export const INITIAL_FORM_VALUES: ImportFormValues = {
     startTime: null,
     endTime: null,
     recordType: '',
-    serializer: ''
+    serializer: '',
+    options: {}
   },
   metadata: null,
   files: []

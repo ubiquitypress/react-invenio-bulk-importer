@@ -1,7 +1,7 @@
 import { getRecordTypes, getSerializers } from '@/services';
 import type { ImporterTaskConfig } from '@/types';
 import { useFormikContext } from 'formik';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import type { ImportFormValues } from '../../import-form.types';
 
 /**
@@ -14,6 +14,7 @@ export const useFormContent = () => {
     {}
   );
   const [isLoading, setIsLoading] = useState(true);
+  const previousRecordTypeRef = useRef('');
   const { values, submitForm, isSubmitting, isValid, setFieldValue } =
     useFormikContext<ImportFormValues>();
 
@@ -75,6 +76,26 @@ export const useFormContent = () => {
   useEffect(() => {
     fetchRecordTypes();
   }, [fetchRecordTypes]);
+
+  useEffect(() => {
+    const currentRecordType = values.task.recordType;
+
+    if (currentRecordType === previousRecordTypeRef.current) {
+      return;
+    }
+
+    previousRecordTypeRef.current = currentRecordType;
+    setFieldValue('task.serializer', '');
+
+    if (!currentRecordType) {
+      setFieldValue('task.options', {});
+      return;
+    }
+
+    setFieldValue('task.options', {
+      ...(configs[currentRecordType]?.options || {})
+    });
+  }, [configs, setFieldValue, values.task.recordType]);
 
   return {
     configs,

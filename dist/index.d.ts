@@ -122,6 +122,8 @@ export declare const formatDate: (dateString: string) => string;
  */
 export declare const formatFileSize: (bytes: number) => string;
 
+export declare const formatOptionLabel: (optionKey: string) => string;
+
 /**
  * Retrieves the CSRF token from browser cookies.
  *
@@ -142,10 +144,7 @@ export declare const getTotalSizeFormatted: (uploadedFiles: UploadableFile[]) =>
 
 export declare interface ImporterTaskConfig {
     serializers: string[];
-    options: {
-        doi_minting: boolean;
-        publish: boolean;
-    };
+    options: Record<string, boolean>;
 }
 
 export declare const ImporterTaskStates: {
@@ -434,6 +433,7 @@ export declare interface InvenioNewImportTask {
     endTime?: null;
     recordType: string;
     serializer: string;
+    options: Record<string, boolean>;
 }
 
 export declare interface InvenioTask {
@@ -466,10 +466,7 @@ export declare interface InvenioTask {
         username: string | null;
         email: string;
     };
-    options: {
-        doi_minting: boolean;
-        publish: boolean;
-    };
+    options: Record<string, boolean>;
 }
 
 declare interface LabelProps extends default_2.ComponentProps<typeof Label> {

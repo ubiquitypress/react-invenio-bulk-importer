@@ -1,7 +1,7 @@
 import { Spinner, StatusLabel } from '@/components/ui';
 import { useImporterTask } from '@/hooks';
 import type { InvenioTask } from '@/types';
-import { capitalizeFirstLetter } from '@/utils';
+import { capitalizeFirstLetter, formatOptionLabel } from '@/utils';
 import React, { useEffect, useState } from 'react';
 import {
   Button,
@@ -9,6 +9,7 @@ import {
   Grid,
   Header,
   Icon,
+  Label,
   Message,
   Segment
 } from 'semantic-ui-react';
@@ -57,6 +58,9 @@ export const TaskDetails: React.FC<TaskDetailsProps> = ({ taskId }) => {
     (task.records_status?.['import failed'] || 0) +
     (task.records_status?.['validation failed'] || 0) +
     (task.records_status?.['serializer validation failed'] || 0);
+  const enabledOptions = Object.entries(task.options || {}).filter(
+    ([, isEnabled]) => isEnabled
+  );
 
   return (
     <TaskDetailsProvider taskId={taskId}>
@@ -86,6 +90,21 @@ export const TaskDetails: React.FC<TaskDetailsProps> = ({ taskId }) => {
                     <StatusLabel size='large' status={task.status}>
                       {capitalizeFirstLetter(task.status)}
                     </StatusLabel>
+                  )}
+                  {enabledOptions.length > 0 && (
+                    <Segment compact className={styles.optionsSummary}>
+                      <div className={styles.optionsHeading}>
+                        <Icon name='setting' />
+                        <span>Enabled options</span>
+                      </div>
+                      <div className={styles.optionsList}>
+                        {enabledOptions.map(([optionKey]) => (
+                          <Label key={optionKey} basic color='green' size='small'>
+                            {formatOptionLabel(optionKey)}
+                          </Label>
+                        ))}
+                      </div>
+                    </Segment>
                   )}
                 </div>
               </div>

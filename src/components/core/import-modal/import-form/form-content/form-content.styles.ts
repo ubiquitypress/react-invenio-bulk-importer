@@ -1,6 +1,9 @@
 import { css } from '@/styled-system/css';
 
 export const styles = {
+  optionsSection: css({
+    marginBlockEnd: '1rem'
+  }),
   fileInput: css({
     marginBlockStart: '0.5rem'
   }),

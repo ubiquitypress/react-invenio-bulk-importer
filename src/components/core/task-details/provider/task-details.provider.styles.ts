@@ -5,6 +5,6 @@ export const styles = {
     paddingBlockStart: '1rem',
     display: 'flex',
     flexDirection: 'column',
-    gap: '1rem'
+    gap: '2rem'
   })
 };

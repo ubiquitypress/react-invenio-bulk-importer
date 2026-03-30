@@ -3,7 +3,7 @@ import { ProgressLoading } from '@/components/ui';
 import { executeTaskWorkflow, updateTaskContent } from '@/services';
 import type { OrchestrationSteps } from '@/types';
 import React, { useState } from 'react';
-import { Button, Form, Header, Icon, Modal } from 'semantic-ui-react';
+import { Button, Form, Header, Icon, Modal, Popup } from 'semantic-ui-react';
 import { useTaskDetails } from '../provider';
 import { styles } from './upload-metadata-modal.styles';
 
@@ -88,7 +88,16 @@ export const UploadMetadataModal = () => {
       onClose={handleCloseModal}
       size='small'
       closeIcon
-      trigger={<Button icon='upload' size='tiny' content='Upload Content' />}
+      trigger={
+        <Popup
+          content='Upload metadata or supporting files for this task.'
+          position='left center'
+          size='small'
+          trigger={
+            <Button icon='upload' size='tiny' content='Upload Content' />
+          }
+        />
+      }
     >
       <Header icon>
         <Icon name='upload' />

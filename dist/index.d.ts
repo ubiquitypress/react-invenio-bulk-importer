@@ -582,10 +582,30 @@ declare interface StatusIconProps extends default_2.ComponentProps<typeof Icon> 
 
 export declare const StatusLabel: default_2.FC<LabelProps>;
 
+export declare const TaskConfiguration: default_2.FC<TaskConfigurationProps>;
+
+declare interface TaskConfigurationProps {
+    task: InvenioTask;
+}
+
 export declare const TaskDetails: default_2.FC<TaskDetailsProps>;
 
 export declare interface TaskDetailsProps {
     taskId: string;
+}
+
+export declare const TaskHeader: default_2.FC<TaskHeaderProps>;
+
+declare interface TaskHeaderProps {
+    task: InvenioTask;
+    totalRecords: number;
+    validatedRecords: number;
+    errorRecords: number;
+    successRecords: number;
+    isRefreshing: boolean;
+    isRunningTask: boolean;
+    onRefresh: () => void;
+    onRunTask: () => Promise<void>;
 }
 
 export declare interface TaskOrchestrationOptions {

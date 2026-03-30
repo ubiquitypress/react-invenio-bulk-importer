@@ -93,8 +93,8 @@ export const FormContent: React.FC<FormContentProps> = ({ progress }) => {
       </Form.Group>
 
       {Object.keys(selectedOptions).length > 0 && (
-        <Form.Field className={styles.optionsSection}>
-          <label>Options</label>
+        <Form.Field as='fieldset' className={styles.optionsSection}>
+          <legend className={styles.optionsLegend}>Options</legend>
           {Object.keys(selectedOptions).map(optionKey => (
             <BooleanField
               key={optionKey}

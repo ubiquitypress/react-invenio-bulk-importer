@@ -122,6 +122,12 @@ export declare const formatDate: (dateString: string) => string;
  */
 export declare const formatFileSize: (bytes: number) => string;
 
+/**
+ * Formats an internal task option key into a human-readable label.
+ *
+ * @param optionKey - The raw option key, typically snake_case.
+ * @returns A UI-friendly label for the option.
+ */
 export declare const formatOptionLabel: (optionKey: string) => string;
 
 /**
@@ -433,7 +439,7 @@ export declare interface InvenioNewImportTask {
     endTime?: null;
     recordType: string;
     serializer: string;
-    options: Record<string, boolean>;
+    options?: Record<string, boolean>;
 }
 
 export declare interface InvenioTask {

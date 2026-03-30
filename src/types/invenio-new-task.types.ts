@@ -7,5 +7,5 @@ export interface InvenioNewImportTask {
   endTime?: null;
   recordType: string;
   serializer: string;
-  options: Record<string, boolean>;
+  options?: Record<string, boolean>;
 }

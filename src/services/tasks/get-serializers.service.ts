@@ -1,5 +1,6 @@
 import { apiClient } from '@/api';
 import type { ImporterTaskConfig } from '@/types';
+import { sanitizeTaskOptions } from '@/utils';
 
 /**
  * Fetches serializer configuration for a specific record type from the API.
@@ -17,7 +18,10 @@ export const getSerializers = async (
     );
 
     if (response.status === 200) {
-      return response.data;
+      return {
+        ...response.data,
+        options: sanitizeTaskOptions(response.data.options)
+      };
     } else {
       throw new Error(`Unexpected response status: ${response.status}`);
     }

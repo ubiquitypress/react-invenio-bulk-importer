@@ -1,5 +1,6 @@
 import { getRecordTypes, getSerializers } from '@/services';
 import type { ImporterTaskConfig } from '@/types';
+import { sanitizeTaskOptions } from '@/utils';
 import { useFormikContext } from 'formik';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import type { ImportFormValues } from '../../import-form.types';
@@ -92,9 +93,10 @@ export const useFormContent = () => {
       return;
     }
 
-    setFieldValue('task.options', {
-      ...(configs[currentRecordType]?.options || {})
-    });
+    setFieldValue(
+      'task.options',
+      sanitizeTaskOptions(configs[currentRecordType]?.options)
+    );
   }, [configs, setFieldValue, values.task.recordType]);
 
   return {

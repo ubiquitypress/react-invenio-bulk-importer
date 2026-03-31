@@ -4,6 +4,15 @@ export const styles = {
   wrapper: css({
     width: '100%'
   }),
+  emptyState: css({
+    padding: '1rem 1.15rem',
+    borderRadius: '1.15rem',
+    background: 'rgba(255, 255, 255, 0.82)',
+    border: '1px dashed rgba(74, 104, 148, 0.3)',
+    color: '#4a6894',
+    fontSize: '0.92rem',
+    fontWeight: '600'
+  }),
   grid: css({
     display: 'grid',
     gridTemplateColumns: 'repeat(auto-fit, minmax(13rem, 1fr))',

@@ -1,5 +1,10 @@
 import type { InvenioTask } from '@/types';
-import { capitalizeFirstLetter, formatDate, formatOptionLabel } from '@/utils';
+import {
+  capitalizeFirstLetter,
+  formatDate,
+  formatDetailValue,
+  formatOptionLabel
+} from '@/utils';
 import React, { useState } from 'react';
 import { Accordion, Icon } from 'semantic-ui-react';
 import { styles } from './task-configuration.styles';
@@ -7,31 +12,6 @@ import { styles } from './task-configuration.styles';
 interface TaskConfigurationProps {
   task: InvenioTask;
 }
-
-/**
- * Normalizes task field values for display inside the configuration accordion.
- *
- * @param value - The raw task value to render.
- * @param formatter - Optional formatter for string-like values.
- * @returns A human-readable string suitable for UI display.
- */
-const formatDetailValue = (
-  value?: string | number | boolean | null,
-  formatter?: (value: string) => string
-) => {
-  // Convert boolean task flags into explicit UI labels.
-  if (typeof value === 'boolean') {
-    return value ? 'Enabled' : 'Disabled';
-  }
-
-  // Normalize missing values so the accordion never renders an empty field.
-  if (value === undefined || value === null || value === '') {
-    return 'Not available';
-  }
-
-  // Apply an optional formatter for date-like or enum-like strings.
-  return formatter ? formatter(String(value)) : String(value);
-};
 
 export const TaskConfiguration: React.FC<TaskConfigurationProps> = ({
   task

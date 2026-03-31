@@ -96,12 +96,7 @@ export const UploadMetadataModal = () => {
           />
         }
       />
-      <Modal
-        open={openModal}
-        onClose={handleCloseModal}
-        size='small'
-        closeIcon
-      >
+      <Modal open={openModal} onClose={handleCloseModal} size='small' closeIcon>
         <Header icon>
           <Icon name='upload' />
           Upload Metadata & Files
@@ -125,7 +120,9 @@ export const UploadMetadataModal = () => {
             </Form.Field>
 
             <Form.Field>
-              <div className={styles.fieldLabel}>Additional Files (Optional)</div>
+              <div className={styles.fieldLabel}>
+                Additional Files (Optional)
+              </div>
               <FileUploader
                 value={uploadFiles}
                 onChange={handleFilesChange}
@@ -140,7 +137,11 @@ export const UploadMetadataModal = () => {
         <Modal.Actions>
           <div className={styles.actionsContainer}>
             {progress && <ProgressLoading progress={progress} />}
-            <Button onClick={handleCloseModal} color='grey' disabled={!!progress}>
+            <Button
+              onClick={handleCloseModal}
+              color='grey'
+              disabled={!!progress}
+            >
               <Icon name='cancel' />
               Cancel
             </Button>

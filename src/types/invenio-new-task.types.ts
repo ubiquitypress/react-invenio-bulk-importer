@@ -1,3 +1,5 @@
+import type { TaskOptions } from './task-options.types';
+
 export interface InvenioNewImportTask {
   title: string;
   description: string;
@@ -7,5 +9,5 @@ export interface InvenioNewImportTask {
   endTime?: null;
   recordType: string;
   serializer: string;
-  options?: Record<string, boolean>;
+  options?: TaskOptions;
 }

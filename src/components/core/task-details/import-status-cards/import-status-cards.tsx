@@ -36,9 +36,25 @@ export const ImportStatusCards: React.FC<ImportStatusCardsProps> = ({
     errorRecords,
     successRecords
   });
+  const hasActivity =
+    totalRecords > 0 ||
+    validatedRecords > 0 ||
+    errorRecords > 0 ||
+    successRecords > 0;
 
-  if (totalRecords === 0 && !showWhenEmpty) {
+  if (!hasActivity && !showWhenEmpty) {
     return null;
+  }
+
+  if (!hasActivity) {
+    return (
+      <div className={cn(styles.wrapper, className)} style={style}>
+        <div className={styles.emptyState}>
+          No record activity yet. Status metrics will appear after validation
+          starts.
+        </div>
+      </div>
+    );
   }
 
   return (

@@ -1,6 +1,10 @@
 import { StatusLabel } from '@/components/ui';
-import type { InvenioTask } from '@/types';
-import { capitalizeFirstLetter, formatOptionLabel } from '@/utils';
+import type { InvenioTask, TaskOptionKey } from '@/types';
+import {
+  capitalizeFirstLetter,
+  formatOptionLabel,
+  getTaskOptionEntries
+} from '@/utils';
 import React from 'react';
 import { Button, Header, Icon, Label, Popup } from 'semantic-ui-react';
 import { ImportStatusCards } from '../import-status-cards';
@@ -20,46 +24,19 @@ interface TaskHeaderProps {
 }
 
 /**
- * Normalizes task field values for display in the header summary.
- *
- * @param value - The raw task value to render.
- * @param formatter - Optional formatter for string-like values.
- * @returns A human-readable string suitable for UI display.
- */
-const formatDetailValue = (
-  value?: string | number | boolean | null,
-  formatter?: (value: string) => string
-) => {
-  // Convert boolean task flags into explicit UI labels.
-  if (typeof value === 'boolean') {
-    return value ? 'Enabled' : 'Disabled';
-  }
-
-  // Normalize missing values so the UI never renders an empty cell.
-  if (value === undefined || value === null || value === '') {
-    return 'Not available';
-  }
-
-  // Apply an optional formatter for date-like or enum-like strings.
-  return formatter ? formatter(String(value)) : String(value);
-};
-
-/**
  * Builds short popup copy for task option badges.
  *
  * @param optionKey - The internal task option key.
  * @param isEnabled - Whether the option is currently enabled.
  * @returns A short sentence describing the option state.
  */
-const getOptionDescription = (optionKey: string, isEnabled: boolean) => {
+const getOptionDescription = (optionKey: TaskOptionKey, isEnabled: boolean) => {
   switch (optionKey) {
-    // Keep the highest-visibility task options readable and explicit.
     case 'doi_minting':
       return `DOI minting is ${isEnabled ? 'active' : 'not active'}.`;
-    case 'publishing':
+    case 'publish':
       return `Publishing is ${isEnabled ? 'active' : 'not active'}.`;
     default: {
-      // Fall back to a formatted option label for any other task option.
       const label = formatOptionLabel(optionKey);
       return `${label} is ${isEnabled ? 'active' : 'not active'}.`;
     }
@@ -77,7 +54,7 @@ export const TaskHeader: React.FC<TaskHeaderProps> = ({
   onRefresh,
   onRunTask
 }) => {
-  const optionEntries = Object.entries(task.options || {});
+  const optionEntries = getTaskOptionEntries(task.options);
 
   return (
     <div className={styles.heroSection}>

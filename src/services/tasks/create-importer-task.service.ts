@@ -1,5 +1,6 @@
 import { apiClient } from '@/api';
 import type { InvenioNewImportTask, InvenioTask } from '@/types';
+import { sanitizeTaskOptions } from '@/utils';
 
 /**
  * Creates a new importer task in the Invenio system.
@@ -20,7 +21,7 @@ export const createImporterTask = async (
     status: task.status,
     record_type: task.recordType,
     serializer: task.serializer,
-    options: task.options ?? {},
+    options: sanitizeTaskOptions(task.options),
     start_time: task.startTime,
     end_time: task.endTime
   };

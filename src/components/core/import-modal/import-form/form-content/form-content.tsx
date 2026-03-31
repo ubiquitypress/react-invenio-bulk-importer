@@ -1,7 +1,7 @@
 import { FileUploader } from '@/components/core';
 import { ProgressLoading, Spinner } from '@/components/ui';
 import type { OrchestrationSteps } from '@/types';
-import { formatOptionLabel } from '@/utils';
+import { formatOptionLabel, getTaskOptionEntries } from '@/utils';
 import React, { Fragment } from 'react';
 import {
   BooleanField,
@@ -31,6 +31,7 @@ export const FormContent: React.FC<FormContentProps> = ({ progress }) => {
   const selectedOptions = values.task.recordType
     ? configs[values.task.recordType]?.options || {}
     : {};
+  const selectedOptionEntries = getTaskOptionEntries(selectedOptions);
 
   if (isLoading) {
     return <Spinner />;
@@ -92,10 +93,10 @@ export const FormContent: React.FC<FormContentProps> = ({ progress }) => {
         />
       </Form.Group>
 
-      {Object.keys(selectedOptions).length > 0 && (
+      {selectedOptionEntries.length > 0 && (
         <Form.Field as='fieldset' className={styles.optionsSection}>
           <legend className={styles.optionsLegend}>Options</legend>
-          {Object.keys(selectedOptions).map(optionKey => (
+          {selectedOptionEntries.map(([optionKey]) => (
             <BooleanField
               key={optionKey}
               fieldPath={`task.options.${optionKey}`}

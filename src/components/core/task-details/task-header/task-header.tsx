@@ -1,5 +1,5 @@
 import { StatusLabel } from '@/components/ui';
-import type { InvenioTask, TaskOptionKey } from '@/types';
+import type { InvenioTask } from '@/types';
 import {
   capitalizeFirstLetter,
   formatOptionLabel,
@@ -23,24 +23,9 @@ interface TaskHeaderProps {
   onRunTask: () => Promise<void>;
 }
 
-/**
- * Builds short popup copy for task option badges.
- *
- * @param optionKey - The internal task option key.
- * @param isEnabled - Whether the option is currently enabled.
- * @returns A short sentence describing the option state.
- */
-const getOptionDescription = (optionKey: TaskOptionKey, isEnabled: boolean) => {
-  switch (optionKey) {
-    case 'doi_minting':
-      return `DOI minting is ${isEnabled ? 'active' : 'not active'}.`;
-    case 'publish':
-      return `Publishing is ${isEnabled ? 'active' : 'not active'}.`;
-    default: {
-      const label = formatOptionLabel(optionKey);
-      return `${label} is ${isEnabled ? 'active' : 'not active'}.`;
-    }
-  }
+const getOptionDescription = (optionKey: string, isEnabled: boolean) => {
+  const label = formatOptionLabel(optionKey);
+  return `${label} is ${isEnabled ? 'active' : 'not active'}.`;
 };
 
 export const TaskHeader: React.FC<TaskHeaderProps> = ({

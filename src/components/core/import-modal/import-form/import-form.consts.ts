@@ -1,4 +1,4 @@
-import { object, string } from 'yup';
+import { boolean, object, string } from 'yup';
 import type { ImportFormValues } from './import-form.types';
 
 export const INITIAL_FORM_VALUES: ImportFormValues = {
@@ -22,7 +22,11 @@ export const FORM_VALIDATION_SCHEMA = object({
     title: string().required('Title is required'),
     recordType: string().required('Record type is required'),
     serializer: string().required('Serializer is required'),
-    mode: string().required('Mode is required')
+    mode: string().required('Mode is required'),
+    options: object({
+      doi_minting: boolean(),
+      publish: boolean()
+    })
   }),
   metadata: object().nullable()
 });

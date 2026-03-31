@@ -5,6 +5,10 @@
  * @returns A UI-friendly label for the option.
  */
 export const formatOptionLabel = (optionKey: string): string => {
+  if (optionKey === 'publish') {
+    return 'Publishing';
+  }
+
   return (
     optionKey
       // Break snake_case option keys into individual label parts.

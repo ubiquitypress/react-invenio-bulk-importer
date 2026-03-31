@@ -74,9 +74,7 @@ export const TaskDetails: React.FC<TaskDetailsProps> = ({ taskId }) => {
           }}
         />
 
-        <div className={styles.detailsGrid}>
-          <TaskConfiguration task={task} />
-        </div>
+        <TaskConfiguration task={task} />
       </Container>
       <TaskDetailsRecords />
     </TaskDetailsProvider>

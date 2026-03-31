@@ -13,6 +13,7 @@ const TASK_OPTION_KEY_ALIASES: Record<string, TaskOptionKey> = {
 };
 
 const taskOptionKeySet = new Set<string>(TASK_OPTION_KEYS);
+const warnedTaskOptionKeys = new Set<string>();
 
 /**
  * Converts a raw API option key into a supported canonical task option key.
@@ -50,6 +51,14 @@ export const sanitizeTaskOptions = (options: unknown): TaskOptions => {
     options as Record<string, unknown>
   )) {
     const normalizedOptionKey = normalizeTaskOptionKey(optionKey);
+
+    if (import.meta.env.DEV && !normalizedOptionKey) {
+      if (!warnedTaskOptionKeys.has(optionKey)) {
+        console.warn(`Unknown task option key received: "${optionKey}"`);
+        warnedTaskOptionKeys.add(optionKey);
+      }
+      continue;
+    }
 
     // Only preserve explicitly supported boolean flags.
     if (!normalizedOptionKey || typeof optionValue !== 'boolean') {

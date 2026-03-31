@@ -1,3 +1,4 @@
+import { TASK_OPTION_KEYS } from '@/types';
 import { boolean, object, string } from 'yup';
 import type { ImportFormValues } from './import-form.types';
 
@@ -23,10 +24,11 @@ export const FORM_VALIDATION_SCHEMA = object({
     recordType: string().required('Record type is required'),
     serializer: string().required('Serializer is required'),
     mode: string().required('Mode is required'),
-    options: object({
-      doi_minting: boolean(),
-      publish: boolean()
-    })
+    options: object(
+      Object.fromEntries(
+        TASK_OPTION_KEYS.map(optionKey => [optionKey, boolean()])
+      )
+    )
   }),
   metadata: object().nullable()
 });

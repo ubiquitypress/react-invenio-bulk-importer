@@ -3,8 +3,7 @@ import type { InvenioTask } from '@/types';
 import {
   capitalizeFirstLetter,
   formatOptionLabel,
-  getTaskOptionEntries,
-  sanitizeTaskOptions
+  getTaskOptionEntries
 } from '@/utils';
 import React from 'react';
 import { Button, Header, Icon, Label, Popup } from 'semantic-ui-react';
@@ -40,7 +39,7 @@ export const TaskHeader: React.FC<TaskHeaderProps> = ({
   onRefresh,
   onRunTask
 }) => {
-  const optionEntries = getTaskOptionEntries(sanitizeTaskOptions(task.options));
+  const optionEntries = getTaskOptionEntries(task.options);
 
   return (
     <div className={styles.heroSection}>

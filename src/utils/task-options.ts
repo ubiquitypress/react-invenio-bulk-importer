@@ -52,8 +52,8 @@ export const sanitizeTaskOptions = (options: unknown): TaskOptions => {
   )) {
     const normalizedOptionKey = normalizeTaskOptionKey(optionKey);
 
-    if (import.meta.env.DEV && !normalizedOptionKey) {
-      if (!warnedTaskOptionKeys.has(optionKey)) {
+    if (!normalizedOptionKey) {
+      if (import.meta.env.DEV && !warnedTaskOptionKeys.has(optionKey)) {
         console.warn(`Unknown task option key received: "${optionKey}"`);
         warnedTaskOptionKeys.add(optionKey);
       }
@@ -61,7 +61,7 @@ export const sanitizeTaskOptions = (options: unknown): TaskOptions => {
     }
 
     // Only preserve explicitly supported boolean flags.
-    if (!normalizedOptionKey || typeof optionValue !== 'boolean') {
+    if (typeof optionValue !== 'boolean') {
       continue;
     }
 

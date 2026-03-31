@@ -6,4 +6,5 @@ export * from './invenio-task.types';
 export * from './invenio-task-config.types';
 export * from './overridable.types';
 export * from './search-config.types';
+export * from './task-options.types';
 export * from './task-orchestrator.types';

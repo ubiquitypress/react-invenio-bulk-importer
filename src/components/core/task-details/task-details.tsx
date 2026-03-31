@@ -1,22 +1,13 @@
-import { Spinner, StatusLabel } from '@/components/ui';
+import { Spinner } from '@/components/ui';
 import { useImporterTask } from '@/hooks';
 import type { InvenioTask } from '@/types';
-import { capitalizeFirstLetter } from '@/utils';
 import React, { useEffect, useState } from 'react';
-import {
-  Button,
-  Container,
-  Grid,
-  Header,
-  Icon,
-  Message,
-  Segment
-} from 'semantic-ui-react';
-import { ImportStatusCards } from './import-status-cards';
+import { Container, Icon, Message } from 'semantic-ui-react';
 import { TaskDetailsProvider } from './provider';
+import { TaskConfiguration } from './task-configuration';
 import { styles } from './task-details.styles';
 import { TaskDetailsRecords } from './task-details-records';
-import { UploadMetadataModal } from './upload-metadata-modal';
+import { TaskHeader } from './task-header';
 
 export interface TaskDetailsProps {
   taskId: string;
@@ -28,16 +19,13 @@ export const TaskDetails: React.FC<TaskDetailsProps> = ({ taskId }) => {
     useImporterTask(taskId, { onStatusChangeSuccess: setTask });
 
   useEffect(() => {
-    // Fetch task status when component mounts
     getStatus();
   }, [getStatus]);
 
-  // Loading state
   if (isGettingStatus || isBulkImporting) {
     return <Spinner />;
   }
 
-  // No task found
   if (!task) {
     return (
       <Message warning icon>
@@ -60,8 +48,7 @@ export const TaskDetails: React.FC<TaskDetailsProps> = ({ taskId }) => {
 
   return (
     <TaskDetailsProvider taskId={taskId}>
-      <Container fluid verticalAlign='top'>
-        {/* Error Message */}
+      <Container fluid className={styles.page}>
         {error && (
           <Message negative icon>
             <Icon name='exclamation triangle' />
@@ -72,79 +59,22 @@ export const TaskDetails: React.FC<TaskDetailsProps> = ({ taskId }) => {
           </Message>
         )}
 
-        {/* Task Header Section */}
-        <Grid>
-          <Grid.Row verticalAlign='top'>
-            <Grid.Column width={8} verticalAlign='middle'>
-              <div className={styles.headerContainer}>
-                <Icon name='tasks' circular size='big' />
-                <div className={styles.headerContent}>
-                  <Header as='h2'>
-                    <Header.Content>{task.title}</Header.Content>
-                  </Header>
-                  {task.status && (
-                    <StatusLabel size='large' status={task.status}>
-                      {capitalizeFirstLetter(task.status)}
-                    </StatusLabel>
-                  )}
-                </div>
-              </div>
-            </Grid.Column>
-            <Grid.Column width={8} textAlign='right'>
-              <div className={styles.actionsContainer}>
-                <div>
-                  <Button
-                    size='tiny'
-                    color='blue'
-                    icon='refresh'
-                    content='Refresh'
-                    onClick={() => getStatus()}
-                    loading={isGettingStatus}
-                  />
-                  <UploadMetadataModal />
-                  <Button
-                    size='tiny'
-                    color='green'
-                    icon='play'
-                    onClick={async () => {
-                      await runBulkImport();
-                      await getStatus();
-                    }}
-                    loading={isBulkImporting}
-                    content='Run Task'
-                  />
-                </div>
-              </div>
-            </Grid.Column>
-          </Grid.Row>
+        <TaskHeader
+          task={task}
+          totalRecords={totalRecords}
+          validatedRecords={validatedRecords}
+          errorRecords={errorRecords}
+          successRecords={successRecords}
+          isRefreshing={isGettingStatus}
+          isRunningTask={isBulkImporting}
+          onRefresh={() => getStatus()}
+          onRunTask={async () => {
+            await runBulkImport();
+            await getStatus();
+          }}
+        />
 
-          {/* Description Section - Only show if description exists */}
-          {task.description && (
-            <Grid.Row>
-              <Grid.Column width={16}>
-                <Message info icon size='small'>
-                  <Icon name='info circle' />
-                  <Message.Content>
-                    <Message.Header>Notes</Message.Header>
-                    {task.description}
-                  </Message.Content>
-                </Message>
-              </Grid.Column>
-            </Grid.Row>
-          )}
-        </Grid>
-
-        {/* Statistics Section */}
-        {totalRecords > 0 && (
-          <Segment basic>
-            <ImportStatusCards
-              totalRecords={totalRecords}
-              validatedRecords={validatedRecords}
-              errorRecords={errorRecords}
-              successRecords={successRecords}
-            />
-          </Segment>
-        )}
+        <TaskConfiguration task={task} />
       </Container>
       <TaskDetailsRecords />
     </TaskDetailsProvider>

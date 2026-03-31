@@ -1,5 +1,6 @@
 import { apiClient } from '@/api';
 import type { InvenioTask } from '@/types';
+import { sanitizeTaskOptions } from '@/utils';
 
 /**
  * Gets the status of an importer task by its ID.
@@ -14,7 +15,10 @@ export const getTaskStatus = async (taskId: string) => {
     );
 
     if (response.status === 200) {
-      return response.data;
+      return {
+        ...response.data,
+        options: sanitizeTaskOptions(response.data.options)
+      };
     } else {
       throw new Error(
         `Failed to get status of importer task: ${response.statusText}`

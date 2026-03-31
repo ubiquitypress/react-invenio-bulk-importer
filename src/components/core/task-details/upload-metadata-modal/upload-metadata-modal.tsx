@@ -3,7 +3,7 @@ import { ProgressLoading } from '@/components/ui';
 import { executeTaskWorkflow, updateTaskContent } from '@/services';
 import type { OrchestrationSteps } from '@/types';
 import React, { useState } from 'react';
-import { Button, Form, Header, Icon, Modal } from 'semantic-ui-react';
+import { Button, Form, Header, Icon, Modal, Popup } from 'semantic-ui-react';
 import { useTaskDetails } from '../provider';
 import { styles } from './upload-metadata-modal.styles';
 
@@ -82,67 +82,81 @@ export const UploadMetadataModal = () => {
   };
 
   return (
-    <Modal
-      open={openModal}
-      onOpen={() => setOpenModal(true)}
-      onClose={handleCloseModal}
-      size='small'
-      closeIcon
-      trigger={<Button icon='upload' size='tiny' content='Upload Content' />}
-    >
-      <Header icon>
-        <Icon name='upload' />
-        Upload Metadata & Files
-      </Header>
-
-      <Modal.Content>
-        <Form onSubmit={handleUpload}>
-          <Form.Field>
-            <label htmlFor='fileInput'>Select Metadata File (Optional)</label>
-            <input
-              id={'fileInput'}
-              type='file'
-              onChange={handleFileChange}
-              accept='.csv'
-            />
-            {uploadFile && (
-              <div className={styles.selectedFileInfo}>
-                Selected: {uploadFile.name}
-              </div>
-            )}
-          </Form.Field>
-
-          <Form.Field>
-            <div className={styles.fieldLabel}>Additional Files (Optional)</div>
-            <FileUploader
-              value={uploadFiles}
-              onChange={handleFilesChange}
-              accept='*'
-              maxTotalSize={10 * 1024 * 1024 * 1024}
-              maxFiles={100}
-            />
-          </Form.Field>
-        </Form>
-      </Modal.Content>
-
-      <Modal.Actions>
-        <div className={styles.actionsContainer}>
-          {progress && <ProgressLoading progress={progress} />}
-          <Button onClick={handleCloseModal} color='grey' disabled={!!progress}>
-            <Icon name='cancel' />
-            Cancel
-          </Button>
+    <React.Fragment>
+      <Popup
+        content='Upload metadata or supporting files for this task.'
+        position='left center'
+        size='small'
+        trigger={
           <Button
-            onClick={handleUpload}
-            color='blue'
-            loading={!!progress}
-            disabled={!uploadFile && uploadFiles.length === 0}
-          >
-            <Icon name='upload' />
-            Upload
-          </Button>
-        </div>
-      </Modal.Actions>
-    </Modal>
+            icon='upload'
+            size='tiny'
+            content='Upload Content'
+            onClick={() => setOpenModal(true)}
+          />
+        }
+      />
+      <Modal open={openModal} onClose={handleCloseModal} size='small' closeIcon>
+        <Header icon>
+          <Icon name='upload' />
+          Upload Metadata & Files
+        </Header>
+
+        <Modal.Content>
+          <Form onSubmit={handleUpload}>
+            <Form.Field>
+              <label htmlFor='fileInput'>Select Metadata File (Optional)</label>
+              <input
+                id={'fileInput'}
+                type='file'
+                onChange={handleFileChange}
+                accept='.csv'
+              />
+              {uploadFile && (
+                <div className={styles.selectedFileInfo}>
+                  Selected: {uploadFile.name}
+                </div>
+              )}
+            </Form.Field>
+
+            <Form.Field>
+              <div className={styles.fieldLabel}>
+                Additional Files (Optional)
+              </div>
+              <FileUploader
+                value={uploadFiles}
+                onChange={handleFilesChange}
+                accept='*'
+                maxTotalSize={10 * 1024 * 1024 * 1024}
+                maxFiles={100}
+              />
+            </Form.Field>
+          </Form>
+        </Modal.Content>
+
+        <Modal.Actions>
+          <div className={styles.actionsContainer}>
+            {progress && <ProgressLoading progress={progress} />}
+            <Button
+              onClick={handleCloseModal}
+              color='grey'
+              disabled={!!progress}
+            >
+              <Icon name='cancel' />
+              Cancel
+            </Button>
+            <Button
+              onClick={handleUpload}
+              color='blue'
+              loading={!!progress}
+              disabled={!uploadFile && uploadFiles.length === 0}
+            >
+              <Icon name='upload' />
+              Upload
+            </Button>
+          </div>
+        </Modal.Actions>
+      </Modal>
+    </React.Fragment>
   );
 };

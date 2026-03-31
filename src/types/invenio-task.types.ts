@@ -1,4 +1,5 @@
 import type { InvenioImporterRecordStates } from './invenio-importer-record.types';
+import type { TaskOptions } from './task-options.types';
 
 export interface InvenioTask {
   id: string;
@@ -30,10 +31,7 @@ export interface InvenioTask {
     username: string | null;
     email: string;
   };
-  options: {
-    doi_minting: boolean;
-    publish: boolean;
-  };
+  options: TaskOptions;
 }
 
 export const ImporterTaskStates = {

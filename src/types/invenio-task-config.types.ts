@@ -1,7 +1,6 @@
+import type { TaskOptions } from './task-options.types';
+
 export interface ImporterTaskConfig {
   serializers: string[];
-  options: {
-    doi_minting: boolean;
-    publish: boolean;
-  };
+  options: TaskOptions;
 }

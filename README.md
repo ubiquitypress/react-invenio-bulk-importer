@@ -19,10 +19,10 @@ This library provides a comprehensive set of React components for managing bulk 
 
 ```bash
 # Using yarn (recommended)
-yarn add react-invenio-bulk-importer
+yarn add @ubiquitypress/react-invenio-bulk-importer
 
 # Using npm
-npm install react-invenio-bulk-importer
+npm install @ubiquitypress/react-invenio-bulk-importer
 ```
 
 ## Peer Dependencies
@@ -40,8 +40,8 @@ yarn add react react-dom semantic-ui-react semantic-ui-css react-invenio-forms
 ```jsx
 import React from "react";
 import ReactDOM from "react-dom";
-import { BulkImporter } from "react-invenio-bulk-importer";
-import "react-invenio-bulk-importer/style.css";
+import { BulkImporter } from "@ubiquitypress/react-invenio-bulk-importer";
+import "@ubiquitypress/react-invenio-bulk-importer/style.css";
 
 const BulkImporterSearchApp = () => {
   return <BulkImporter.Search />;
@@ -66,8 +66,8 @@ initializeBulkImporter();
 ```jsx
 import React from "react";
 import ReactDOM from "react-dom";
-import { BulkImporter } from "react-invenio-bulk-importer";
-import "react-invenio-bulk-importer/style.css";
+import { BulkImporter } from "@ubiquitypress/react-invenio-bulk-importer";
+import "@ubiquitypress/react-invenio-bulk-importer/style.css";
 
 const BulkImporterDetailsApp = ({ taskId }) => {
   return <BulkImporter.TaskDetails taskId={taskId} />;
@@ -106,7 +106,7 @@ The library exposes components through the `BulkImporter` namespace:
 Complete search interface with task listing, filtering, and management capabilities.
 
 ```jsx
-import { BulkImporter } from 'react-invenio-bulk-importer';
+import { BulkImporter } from '@ubiquitypress/react-invenio-bulk-importer';
 
 <BulkImporter.Search />
 ```
@@ -115,7 +115,7 @@ import { BulkImporter } from 'react-invenio-bulk-importer';
 Detailed view component for individual import tasks with records, status, and management.
 
 ```jsx
-import { BulkImporter } from 'react-invenio-bulk-importer';
+import { BulkImporter } from '@ubiquitypress/react-invenio-bulk-importer';
 
 <BulkImporter.TaskDetails taskId="task-123" />
 ```
@@ -187,5 +187,4 @@ This project uses:
 - **TypeScript** for type safety
 - **PandaCSS** for styling
 - **Semantic UI React** for base components
-
 
